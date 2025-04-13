@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import type { Server, EvaluationSummary } from '../services/api';
-import { getServers, evaluateServers } from '../services/api';
+import type { Server, EvaluationSummary } from '../types';
+import { getServers, evaluateServers, getStatus } from '../services/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Loader2 } from 'lucide-react';
@@ -18,9 +18,23 @@ const Dashboard: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        setError(null);
         
-        console.log('Fetching dashboard data from API...');
+        console.log('Checking API status...');
+        try {
+          const statusResponse = await getStatus();
+          if (!statusResponse.has_evaluation) {
+            setError('Data is still being processed. Please wait...');
+            return;
+          }
+        } catch (err) {
+          console.error('Error checking API status:', err);
+          setError('Could not connect to the server. Please try again later.');
+          setLoading(false);
+          return;
+        }
         
+        console.log('Fetching dashboard data...');
         const serversData = await getServers({ limit: 1000 });
         setServers(serversData.servers);
         
@@ -36,6 +50,10 @@ const Dashboard: React.FC = () => {
     };
 
     fetchData();
+    
+    // 设置定期检查
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const prepareScoreDistributionData = () => {

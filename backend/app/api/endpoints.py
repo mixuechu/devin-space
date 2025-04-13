@@ -5,14 +5,14 @@ import json
 
 from app.models.server import ServerMetrics
 from app.services.data_processor.processor import DataProcessor
-from app.services.clustering.entity_linking import EntityLinkingService
+from app.services.clustering.optimized_clustering import OptimizedClusteringService
 from app.services.evaluation.evaluation import EvaluationService
 from app.services.recommendation.recommendation import RecommendationService
 
 router = APIRouter()
 
 processed_servers = []
-clustering_service = EntityLinkingService()
+clustering_service = OptimizedClusteringService(os.path.join(os.path.dirname(__file__), "..", "..", "data"))
 evaluation_service = EvaluationService()
 recommendation_service = RecommendationService()
 
@@ -76,6 +76,19 @@ async def process_data(data_path: str = "data/mcp_with_detailed_content.json"):
         print(f"Error processing data: {str(e)}\n{error_details}")
         raise HTTPException(status_code=500, detail=f"Error processing data: {str(e)}")
 
+@router.get("/status")
+async def get_status():
+    """获取数据处理状态"""
+    if not processed_servers:
+        raise HTTPException(status_code=503, detail="Data processing not completed")
+    
+    return {
+        "status": "ready",
+        "server_count": len(processed_servers),
+        "has_clustering": any(server.cluster_id is not None for server in processed_servers),
+        "has_evaluation": any(server.overall_score is not None for server in processed_servers)
+    }
+
 @router.get("/servers")
 async def get_servers(
     skip: int = 0, 
@@ -83,13 +96,11 @@ async def get_servers(
     search: Optional[str] = None,
     cluster_id: Optional[int] = None
 ):
-    """
-    Get a list of processed servers with optional filtering.
-    """
+    """获取服务器列表"""
     global processed_servers
     
     if not processed_servers:
-        raise HTTPException(status_code=404, detail="No processed data available")
+        raise HTTPException(status_code=503, detail="Data processing not completed")
     
     filtered_servers = processed_servers
     
@@ -110,33 +121,9 @@ async def get_servers(
     
     paginated_servers = filtered_servers[skip:skip + limit]
     
-    server_data = []
-    for server in paginated_servers:
-        server_dict = {
-            "id": server.server_id,
-            "title": server.title,
-            "author": server.author,
-            "description": server.description,
-            "tags": server.tags,
-            "word_count": server.word_count,
-            "documentation_length": server.documentation_length,
-            "feature_count": server.feature_count,
-            "tool_count": server.tool_count,
-            "has_github": server.has_github,
-            "has_faq": server.has_faq,
-            "cluster_id": server.cluster_id,
-            "code_quality_score": server.code_quality_score,
-            "tool_completeness_score": server.tool_completeness_score,
-            "documentation_quality_score": server.documentation_quality_score,
-            "runtime_stability_score": server.runtime_stability_score,
-            "business_value_score": server.business_value_score,
-            "overall_score": server.overall_score
-        }
-        server_data.append(server_dict)
-    
     return {
         "total": len(filtered_servers),
-        "servers": server_data
+        "servers": paginated_servers
     }
 
 @router.get("/servers/{server_id}")

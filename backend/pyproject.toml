@@ -3,9 +3,11 @@ name = "mcp-analysis-system"
 version = "0.1.0"
 description = "A system for analyzing MCP server data"
 authors = ["Devin AI"]
-
+packages = [
+    {include = "mcp_analysis_system", from = "src"}
+]
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<=3.13"
 fastapi = "^0.115.0"
 uvicorn = "^0.34.0"
 pandas = "^2.2.0"
@@ -13,9 +15,9 @@ scikit-learn = "^1.6.0"
 numpy = "^2.2.0"
 spacy = "^3.8.0"
 sentence-transformers = "^4.0.0"
-pytest = "^8.3.0"
+fuzzywuzzy = "^0.18.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^8.3.0"
 
 [build-system]
