@@ -35,7 +35,10 @@ const Dashboard: React.FC = () => {
         }
         
         console.log('Fetching dashboard data...');
-        const serversData = await getServers({ limit: 1000 });
+        const serversData = await getServers({
+          limit: undefined,  // 不限制数量
+          offset: undefined  // 不设置偏移
+        });
         setServers(serversData.servers);
         
         const evaluationData = await evaluateServers();
@@ -50,11 +53,7 @@ const Dashboard: React.FC = () => {
     };
 
     fetchData();
-    
-    // 设置定期检查
-    const interval = setInterval(fetchData, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  }, []); // 只在组件挂载时执行一次
 
   const prepareScoreDistributionData = () => {
     if (!evaluationSummary) return [];

@@ -304,11 +304,21 @@ class OptimizedClusteringService:
             self.desc_vectorizer.vocabulary_ = vectorizer_data['desc_vocabulary']
             self.desc_vectorizer.idf_ = np.array(vectorizer_data['desc_idf'])
         else:
+            print("拟合新的向量化器...")
             # 预处理所有文本数据并拟合向量化器
             all_titles = [self.preprocess_text(s.title) for s in servers]
             all_descriptions = [self.preprocess_text(s.description) for s in servers]
             self.title_vectorizer.fit(all_titles)
             self.desc_vectorizer.fit(all_descriptions)
+            
+            # 保存向量化器数据
+            vectorizer_data = {
+                'title_vocabulary': self.title_vectorizer.vocabulary_,
+                'title_idf': self.title_vectorizer.idf_.tolist(),
+                'desc_vocabulary': self.desc_vectorizer.vocabulary_,
+                'desc_idf': self.desc_vectorizer.idf_.tolist()
+            }
+            self.progress_manager.save_intermediate_result('vectorizers', vectorizer_data)
         
         # 计算聚类中心
         cluster_centers = {}
@@ -403,4 +413,121 @@ class OptimizedClusteringService:
         print("生成新的可视化数据...")
         visualization_data = self._generate_visualization_data_internal(servers)
         self.progress_manager.save_intermediate_result('visualization', visualization_data)
-        return visualization_data 
+        return visualization_data
+
+    def get_similar_servers(self, server_id: str, servers: List[ServerMetrics], top_n: int = 3) -> List[Dict[str, Any]]:
+        """
+        查找与给定服务器相似的服务器。
+        
+        Args:
+            server_id: 要查找相似服务器的服务器 ID。
+            servers: ServerMetrics 对象列表。
+            top_n: 要返回的相似服务器数量。
+            
+        Returns:
+            包含相似服务器信息的字典列表。
+        """
+        # 找到目标服务器
+        target_server = next((server for server in servers if server.server_id == server_id), None)
+        if not target_server:
+            raise ValueError(f"未找到 ID 为 {server_id} 的服务器。")
+
+        # 确保所有服务器都已分配聚类
+        if any(server.cluster_id is None for server in servers):
+            self.cluster_servers(servers)
+
+        # 加载或重新拟合向量化器
+        vectorizer_data = self.progress_manager.load_intermediate_result('vectorizers')
+        if vectorizer_data:
+            print("使用缓存的向量化器数据")
+            self.title_vectorizer.vocabulary_ = vectorizer_data['title_vocabulary']
+            self.title_vectorizer.idf_ = np.array(vectorizer_data['title_idf'])
+            self.desc_vectorizer.vocabulary_ = vectorizer_data['desc_vocabulary']
+            self.desc_vectorizer.idf_ = np.array(vectorizer_data['desc_idf'])
+        else:
+            print("拟合新的向量化器...")
+            # 预处理所有文本数据并拟合向量化器
+            all_titles = [self.preprocess_text(s.title) for s in servers]
+            all_descriptions = [self.preprocess_text(s.description) for s in servers]
+            self.title_vectorizer.fit(all_titles)
+            self.desc_vectorizer.fit(all_descriptions)
+            
+            # 保存向量化器数据
+            vectorizer_data = {
+                'title_vocabulary': self.title_vectorizer.vocabulary_,
+                'title_idf': self.title_vectorizer.idf_.tolist(),
+                'desc_vocabulary': self.desc_vectorizer.vocabulary_,
+                'desc_idf': self.desc_vectorizer.idf_.tolist()
+            }
+            self.progress_manager.save_intermediate_result('vectorizers', vectorizer_data)
+
+        # 获取同一聚类中的其他服务器
+        cluster_servers = [
+            server for server in servers 
+            if server.cluster_id == target_server.cluster_id and server.server_id != server_id
+        ]
+
+        # 如果没有同聚类的服务器，则从所有服务器中查找相似的
+        if not cluster_servers:
+            # 准备目标服务器的文本
+            target_title = self.preprocess_text(target_server.title)
+            target_desc = self.preprocess_text(target_server.description)
+
+            # 计算与所有其他服务器的相似度
+            similarities = []
+            for server in servers:
+                if server.server_id != server_id:
+                    server_title = self.preprocess_text(server.title)
+                    server_desc = self.preprocess_text(server.description)
+
+                    # 计算标题和描述的相似度
+                    title_vectors = self.title_vectorizer.transform([target_title, server_title])
+                    desc_vectors = self.desc_vectorizer.transform([target_desc, server_desc])
+
+                    title_similarity = cosine_similarity(title_vectors)[0][1]
+                    desc_similarity = cosine_similarity(desc_vectors)[0][1]
+
+                    # 综合相似度分数
+                    similarity = 0.6 * title_similarity + 0.4 * desc_similarity
+                    similarities.append((server, similarity))
+
+            # 按相似度排序并返回前 top_n 个
+            similarities.sort(key=lambda x: x[1], reverse=True)
+            return [
+                {
+                    "server_id": server.server_id,
+                    "title": server.title,
+                    "description": server.description,
+                    "similarity_score": float(similarity)
+                }
+                for server, similarity in similarities[:top_n]
+            ]
+        else:
+            # 如果有同聚类的服务器，优先从同聚类中查找
+            target_title = self.preprocess_text(target_server.title)
+            target_desc = self.preprocess_text(target_server.description)
+
+            similarities = []
+            for server in cluster_servers:
+                server_title = self.preprocess_text(server.title)
+                server_desc = self.preprocess_text(server.description)
+
+                title_vectors = self.title_vectorizer.transform([target_title, server_title])
+                desc_vectors = self.desc_vectorizer.transform([target_desc, server_desc])
+
+                title_similarity = cosine_similarity(title_vectors)[0][1]
+                desc_similarity = cosine_similarity(desc_vectors)[0][1]
+
+                similarity = 0.6 * title_similarity + 0.4 * desc_similarity
+                similarities.append((server, similarity))
+
+            similarities.sort(key=lambda x: x[1], reverse=True)
+            return [
+                {
+                    "server_id": server.server_id,
+                    "title": server.title,
+                    "description": server.description,
+                    "similarity_score": float(similarity)
+                }
+                for server, similarity in similarities[:top_n]
+            ] 

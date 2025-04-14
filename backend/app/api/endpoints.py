@@ -91,39 +91,49 @@ async def get_status():
 
 @router.get("/servers")
 async def get_servers(
-    skip: int = 0, 
-    limit: int = 100,
+    limit: Optional[int] = None,
+    offset: Optional[int] = None,
     search: Optional[str] = None,
     cluster_id: Optional[int] = None
 ):
-    """获取服务器列表"""
+    """
+    获取服务器列表，支持分页和搜索
+    如果不提供limit，则返回所有数据
+    """
     global processed_servers
     
     if not processed_servers:
-        raise HTTPException(status_code=503, detail="Data processing not completed")
+        raise HTTPException(status_code=404, detail="No processed data available")
     
     filtered_servers = processed_servers
     
-    if search:
-        search = search.lower()
-        filtered_servers = [
-            server for server in filtered_servers
-            if search in server.title.lower() or 
-               search in server.description.lower() or
-               any(search in tag.lower() for tag in server.tags)
-        ]
-    
+    # 应用过滤条件
     if cluster_id is not None:
+        filtered_servers = [s for s in filtered_servers if s.cluster_id == cluster_id]
+    
+    if search:
+        search_lower = search.lower()
         filtered_servers = [
-            server for server in filtered_servers
-            if server.cluster_id == cluster_id
+            s for s in filtered_servers 
+            if (
+                search_lower in s.title.lower() or
+                search_lower in s.description.lower() or
+                any(search_lower in tag.lower() for tag in s.tags)
+            )
         ]
     
-    paginated_servers = filtered_servers[skip:skip + limit]
+    total = len(filtered_servers)
+    
+    # 应用分页
+    if offset is not None:
+        filtered_servers = filtered_servers[offset:]
+    
+    if limit is not None:
+        filtered_servers = filtered_servers[:limit]
     
     return {
-        "total": len(filtered_servers),
-        "servers": paginated_servers
+        "servers": filtered_servers,
+        "total": total
     }
 
 @router.get("/servers/{server_id}")

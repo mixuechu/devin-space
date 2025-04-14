@@ -1,5 +1,5 @@
 export interface Server {
-  id: string;
+  server_id: string;
   title: string;
   author: string;
   description: string;
@@ -19,7 +19,7 @@ export interface Server {
   overall_score?: number;
   raw_data?: Record<string, any>;
   similar_servers?: Array<{
-    id: string;
+    server_id: string;
     title: string;
     description: string;
     similarity_score?: number;

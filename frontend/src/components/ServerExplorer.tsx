@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Server } from '../services/api';
+import type { Server } from '../types';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -93,7 +93,7 @@ function ServerExplorer() {
   const handleViewDetails = async (server: Server) => {
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-      const serverDetails = await fetch(`${apiUrl}/servers/${server.id}`, {
+      const serverDetails = await fetch(`${apiUrl}/servers/${server.server_id}`, {
         headers: {
           'Authorization': 'Basic ' + btoa('user:9447d682f523e92d92e6fce76fa26e93')
         }
@@ -171,7 +171,7 @@ function ServerExplorer() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {servers.length > 0 ? (
           servers.map(server => (
-            <Card key={server.id} className="flex flex-col h-full">
+            <Card key={server.server_id} className="flex flex-col h-full">
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-lg">{server.title}</CardTitle>
@@ -192,7 +192,7 @@ function ServerExplorer() {
               
               <CardContent className="flex-grow">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {server.tags.map((tag, index) => (
+                  {server.tags.map((tag: string, index: number) => (
                     <Badge key={index} variant="secondary" className="flex items-center gap-1">
                       <Tag className="h-3 w-3" />
                       {tag.replace(/^#\s*/, '')}
@@ -315,8 +315,9 @@ function ServerExplorer() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Tags</h3>
                   <div className="flex flex-wrap gap-2">
-                    {selectedServer.tags.map((tag, index) => (
-                      <Badge key={index} variant="secondary">
+                    {selectedServer.tags.map((tag: string, index: number) => (
+                      <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                        <Tag className="h-3 w-3" />
                         {tag.replace(/^#\s*/, '')}
                       </Badge>
                     ))}
@@ -362,7 +363,7 @@ function ServerExplorer() {
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Similar Servers</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {selectedServer.similar_servers.map((similar, index) => (
+                      {selectedServer.similar_servers.map((similar: { server_id: string; title: string; description: string }, index: number) => (
                         <div key={index} className="border rounded-md p-2">
                           <div className="font-medium">{similar.title}</div>
                           <div className="text-sm text-muted-foreground truncate">{similar.description}</div>
