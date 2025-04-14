@@ -62,6 +62,12 @@ async def startup_event():
         
         # 检查是否需要处理数据
         progress_manager = ProgressManager(os.path.join(os.path.dirname(__file__), "..", "data"))
+        
+        # 验证缓存完整性
+        if not progress_manager.verify_cache_integrity():
+            print("缓存完整性验证失败，重置进度...")
+            progress_manager.reset_progress()
+        
         progress = progress_manager.get_progress()
         
         if len(progress['completed_stages']) == len(ProgressManager.STAGES):

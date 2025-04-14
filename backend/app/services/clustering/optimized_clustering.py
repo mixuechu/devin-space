@@ -137,6 +137,15 @@ class OptimizedClusteringService:
         self.title_vectorizer.fit(titles)
         self.desc_vectorizer.fit(descriptions)
         
+        # 保存向量化器的词汇表
+        vectorizer_data = {
+            'title_vocabulary': self.title_vectorizer.vocabulary_,
+            'title_idf': self.title_vectorizer.idf_.tolist(),
+            'desc_vocabulary': self.desc_vectorizer.vocabulary_,
+            'desc_idf': self.desc_vectorizer.idf_.tolist()
+        }
+        self.progress_manager.save_intermediate_result('vectorizers', vectorizer_data)
+        
         # 3. 初始化聚类
         print("正在初始化聚类...")
         title_vectors = self.title_vectorizer.transform(titles)
@@ -209,13 +218,22 @@ class OptimizedClusteringService:
         })
         self.progress_manager.complete_stage('clustering')
         
+        # 8. 预先计算并缓存可视化数据和摘要
+        print("正在生成并缓存可视化数据...")
+        visualization_data = self._generate_visualization_data_internal(servers)
+        self.progress_manager.save_intermediate_result('visualization', visualization_data)
+        
+        print("正在生成并缓存聚类摘要...")
+        cluster_summaries = self._get_cluster_summary_internal(servers)
+        self.progress_manager.save_intermediate_result('summaries', cluster_summaries)
+        
         print(f"聚类完成! 用时: {time.time() - start_time:.2f}秒")
         print(f"共生成 {len(self.cluster_data)} 个聚类")
         
         return servers
     
-    def get_cluster_summary(self, servers: List[ServerMetrics]) -> List[Dict[str, Any]]:
-        """获取聚类摘要信息"""
+    def _get_cluster_summary_internal(self, servers: List[ServerMetrics]) -> List[Dict[str, Any]]:
+        """内部方法：生成聚类摘要"""
         summaries = []
         
         for cluster_id, cluster_info in self.cluster_data.items():
@@ -259,27 +277,38 @@ class OptimizedClusteringService:
         
         return summaries
 
-    def generate_visualization_data(self, servers: List[ServerMetrics]) -> Dict[str, Any]:
-        """
-        生成聚类可视化数据
+    def get_cluster_summary(self, servers: List[ServerMetrics]) -> List[Dict[str, Any]]:
+        """获取聚类摘要信息（优先使用缓存）"""
+        cached_summaries = self.progress_manager.load_intermediate_result('summaries')
+        if cached_summaries:
+            print("使用缓存的聚类摘要")
+            return cached_summaries
         
-        Args:
-            servers: 服务器列表
-            
-        Returns:
-            包含可视化数据的字典
-        """
+        print("生成新的聚类摘要...")
+        summaries = self._get_cluster_summary_internal(servers)
+        self.progress_manager.save_intermediate_result('summaries', summaries)
+        return summaries
+
+    def _generate_visualization_data_internal(self, servers: List[ServerMetrics]) -> Dict[str, Any]:
+        """内部方法：生成可视化数据"""
         # 确保所有服务器都已分配聚类
         if any(server.cluster_id is None for server in servers):
             self.cluster_servers(servers)
         
-        # 预处理所有文本数据
-        all_titles = [self.preprocess_text(s.title) for s in servers]
-        all_descriptions = [self.preprocess_text(s.description) for s in servers]
-        
-        # 拟合并转换所有数据
-        self.title_vectorizer.fit(all_titles)
-        self.desc_vectorizer.fit(all_descriptions)
+        # 加载或重新拟合向量化器
+        vectorizer_data = self.progress_manager.load_intermediate_result('vectorizers')
+        if vectorizer_data:
+            print("使用缓存的向量化器数据")
+            self.title_vectorizer.vocabulary_ = vectorizer_data['title_vocabulary']
+            self.title_vectorizer.idf_ = np.array(vectorizer_data['title_idf'])
+            self.desc_vectorizer.vocabulary_ = vectorizer_data['desc_vocabulary']
+            self.desc_vectorizer.idf_ = np.array(vectorizer_data['desc_idf'])
+        else:
+            # 预处理所有文本数据并拟合向量化器
+            all_titles = [self.preprocess_text(s.title) for s in servers]
+            all_descriptions = [self.preprocess_text(s.description) for s in servers]
+            self.title_vectorizer.fit(all_titles)
+            self.desc_vectorizer.fit(all_descriptions)
         
         # 计算聚类中心
         cluster_centers = {}
@@ -362,4 +391,16 @@ class OptimizedClusteringService:
             }
         }
         
+        return visualization_data
+
+    def generate_visualization_data(self, servers: List[ServerMetrics]) -> Dict[str, Any]:
+        """获取可视化数据（优先使用缓存）"""
+        cached_visualization = self.progress_manager.load_intermediate_result('visualization')
+        if cached_visualization:
+            print("使用缓存的可视化数据")
+            return cached_visualization
+        
+        print("生成新的可视化数据...")
+        visualization_data = self._generate_visualization_data_internal(servers)
+        self.progress_manager.save_intermediate_result('visualization', visualization_data)
         return visualization_data 
