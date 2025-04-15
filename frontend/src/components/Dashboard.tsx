@@ -4,9 +4,16 @@ import type { Server, EvaluationSummary } from '../types';
 import { getServers, evaluateServers, getStatus } from '../services/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Loader2 } from 'lucide-react';
+import { Loader2, RefreshCw } from 'lucide-react';
+import { Button } from './ui/button';
+import { staticData } from '../store/dataCache';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+
+interface GetServersResponse {
+  servers: Server[];
+  total: number;
+}
 
 const Dashboard: React.FC = () => {
   const [servers, setServers] = useState<Server[]>([]);
@@ -14,46 +21,53 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  const fetchDashboardData = async (forceRefresh = false) => {
+    try {
+      // 如果不是强制刷新且有有效缓存，直接使用缓存数据
+      if (!forceRefresh && staticData.hasValidCache()) {
+        const cachedServers = staticData.getServers();
+        const cachedEvaluation = staticData.getEvaluation();
         
-        console.log('Checking API status...');
-        try {
-          const statusResponse = await getStatus();
-          if (!statusResponse.has_evaluation) {
-            setError('Data is still being processed. Please wait...');
-            return;
-          }
-        } catch (err) {
-          console.error('Error checking API status:', err);
-          setError('Could not connect to the server. Please try again later.');
+        if (cachedServers && cachedEvaluation) {
+          setServers(cachedServers.servers);
+          setEvaluationSummary(cachedEvaluation);
           setLoading(false);
           return;
         }
-        
-        console.log('Fetching dashboard data...');
-        const serversData = await getServers({
-          limit: undefined,  // 不限制数量
-          offset: undefined  // 不设置偏移
-        });
-        setServers(serversData.servers);
-        
-        const evaluationData = await evaluateServers();
-        setEvaluationSummary(evaluationData.evaluation_summary);
-        
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching dashboard data:', err);
-        setError('Failed to load dashboard data. Please try again later.');
-        setLoading(false);
       }
-    };
 
-    fetchData();
-  }, []); // 只在组件挂载时执行一次
+      setLoading(true);
+      setError(null);
+      console.log('Fetching dashboard data from API...');
+
+      const [serversResponse, evaluationResponse] = await Promise.all([
+        getServers(),
+        evaluateServers()
+      ]);
+
+      if (serversResponse) {
+        const serverData = serversResponse as GetServersResponse;
+        staticData.setServers(serverData);
+        setServers(serverData.servers);
+      }
+
+      if (evaluationResponse?.evaluation_summary) {
+        const evaluationData = evaluationResponse.evaluation_summary;
+        staticData.setEvaluation(evaluationData);
+        setEvaluationSummary(evaluationData);
+      }
+
+      setLoading(false);
+    } catch (err) {
+      console.error('Error fetching dashboard data:', err);
+      setError('Failed to fetch dashboard data. Please try again later.');
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
 
   const prepareScoreDistributionData = () => {
     if (!evaluationSummary) return [];
@@ -89,64 +103,91 @@ const Dashboard: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <span className="ml-2">Loading dashboard data...</span>
+      <div className="flex items-center justify-center h-[200px]">
+        <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 p-4 rounded-md text-red-800">
-        <p>{error}</p>
+      <div className="text-red-500 text-center p-4">
+        {error}
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <h2 className="text-2xl font-bold">Dashboard</h2>
+        
+        {process.env.NODE_ENV === 'development' && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              staticData.clearAll();
+              fetchDashboardData(true);
+            }}
+            disabled={loading}
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            Force Refresh
+          </Button>
+        )}
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader>
             <CardTitle>Total Servers</CardTitle>
-            <CardDescription>Number of MCP servers analyzed</CardDescription>
+            <CardDescription>Number of servers in the system</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold">{servers.length}</div>
+            <p className="text-2xl font-bold">{servers.length}</p>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Average Quality Score</CardTitle>
-            <CardDescription>Overall quality of MCP servers</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-bold">
-              {evaluationSummary ? evaluationSummary.average_scores.overall.toFixed(1) : 'N/A'}
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Server</CardTitle>
-            <CardDescription>Highest rated MCP server</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl font-semibold">
-              {evaluationSummary && evaluationSummary.top_servers.length > 0
-                ? evaluationSummary.top_servers[0].title
-                : 'N/A'}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Score: {evaluationSummary && evaluationSummary.top_servers.length > 0
-                ? evaluationSummary.top_servers[0].score.toFixed(1)
-                : 'N/A'}
-            </div>
-          </CardContent>
-        </Card>
+
+        {evaluationSummary && (
+          <>
+            <Card>
+              <CardHeader>
+                <CardTitle>Average Score</CardTitle>
+                <CardDescription>Mean performance score</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-bold">
+                  {evaluationSummary.average_scores.overall.toFixed(2)}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>High Performers</CardTitle>
+                <CardDescription>Servers with score {'>'} 0.8</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-bold">
+                  {evaluationSummary.top_servers.length}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Low Performers</CardTitle>
+                <CardDescription>Servers with score {'<'} 0.5</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-bold">
+                  {servers.filter(server => (server.overall_score || 0) < 0.5).length}
+                </p>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
 
       <Tabs defaultValue="scores">

@@ -11,6 +11,8 @@ export interface Server {
   has_github: boolean;
   has_faq: boolean;
   cluster_id?: number;
+  cluster_name?: string;
+  cluster_info?: ClusterSummary;
   code_quality_score?: number;
   tool_completeness_score?: number;
   documentation_quality_score?: number;
@@ -51,6 +53,7 @@ export interface EvaluationSummary {
 
 export interface ClusterSummary {
   cluster_id: number;
+  cluster_name: string;
   size: number;
   servers: Array<{
     id: string;
