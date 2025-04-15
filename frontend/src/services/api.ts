@@ -1,23 +1,26 @@
 import axios from 'axios';
-import { Server, EvaluationSummary, ClusterSummary, VisualizationData } from '../types';
+import type { Server, VisualizationData, ClusterSummary, EvaluationSummary } from '../types';
 
 const getBaseUrl = () => {
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
   
-  if (apiUrl.startsWith('/')) {
-    return apiUrl;
+  // Remove any trailing slashes
+  const cleanUrl = apiUrl.replace(/\/+$/, '');
+  
+  if (cleanUrl.startsWith('/')) {
+    return cleanUrl;
   }
   
   try {
-    new URL(apiUrl);
-    return apiUrl;
+    new URL(cleanUrl);
+    return cleanUrl;
   } catch (e) {
     console.error('Invalid API URL format:', e);
-    return apiUrl;
+    return cleanUrl;
   }
 };
 
-const API_URL = getBaseUrl();
+export const API_URL = getBaseUrl();
 
 const api = axios.create({
   baseURL: API_URL,
@@ -45,6 +48,13 @@ if (!API_URL.startsWith('/')) {
   api.defaults.headers.common['Authorization'] = 'Basic ' + btoa('user:367eb335b64dc1a69dde4066af477585');
 }
 
+export interface StatusResponse {
+  status: string;
+  server_count: number;
+  has_clustering: boolean;
+  has_evaluation: boolean;
+}
+
 export interface GetServersParams {
   limit?: number;
   offset?: number;
@@ -55,13 +65,8 @@ export interface GetServersParams {
 export interface GetServersResponse {
   servers: Server[];
   total: number;
-}
-
-export interface StatusResponse {
-  status: string;
-  server_count: number;
-  has_clustering: boolean;
-  has_evaluation: boolean;
+  page: number;
+  page_size: number;
 }
 
 export interface SearchResult {
@@ -71,26 +76,33 @@ export interface SearchResult {
   tags: string[];
   relevance_score: number;
   quality_score?: number;
-  is_ai_recommendation?: boolean;
-  personalized_score?: number;
-  quality_scores?: {
-    code_quality: number;
-    tool_completeness: number;
-    documentation_quality: number;
-    runtime_stability: number;
-    business_value: number;
-  };
 }
 
-export interface UserPreferences {
-  weights: {
-    code_quality: number;
-    tool_completeness: number;
-    documentation_quality: number;
-    runtime_stability: number;
-    business_value: number;
-  };
-  preferred_tags: string[];
+export interface ClusteringResponse {
+  message: string;
+  cluster_count: number;
+  visualization_data: VisualizationData;
+  cluster_summaries: ClusterSummary[];
+}
+
+export interface EvaluationResponse {
+  message: string;
+  evaluation_summary: EvaluationSummary;
+}
+
+export interface SearchResponse {
+  query: string;
+  results: SearchResult[];
+}
+
+export interface RecommendationResponse {
+  query: string;
+  recommendations: SearchResult[];
+}
+
+export interface PersonalizedRecommendationResponse {
+  preferences: Record<string, any>;
+  recommendations: SearchResult[];
 }
 
 async function handleResponse<T>(response: Response): Promise<T> {
@@ -109,84 +121,74 @@ export async function getStatus(): Promise<StatusResponse> {
   return handleResponse<StatusResponse>(response);
 }
 
-export async function getServers(params: GetServersParams = {}): Promise<GetServersResponse> {
-  const queryParams = new URLSearchParams();
-  if (params.limit) queryParams.append('limit', params.limit.toString());
-  if (params.offset) queryParams.append('offset', params.offset.toString());
-  if (params.search) queryParams.append('search', params.search);
-  if (params.cluster_id !== undefined) queryParams.append('cluster_id', params.cluster_id.toString());
+export async function getServers(page: number = 1, pageSize: number = 30, clusterId?: string): Promise<GetServersResponse> {
+  const queryParams = new URLSearchParams({
+    page: page.toString(),
+    page_size: pageSize.toString(),
+  });
   
-  const response = await fetch(`${API_URL}/servers?${queryParams}`);
-  return handleResponse<GetServersResponse>(response);
+  if (clusterId) {
+    queryParams.append('cluster_id', clusterId);
+  }
+  
+  const response = await fetch(`${API_URL}/api/servers?${queryParams}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch servers');
+  }
+  return response.json();
 }
 
-export const getServerDetails = async (serverId: string): Promise<Server> => {
-  const response = await fetch(`${API_URL}/servers/${serverId}`);
-  return handleResponse<Server>(response);
-};
+export async function getServerDetails(serverId: string): Promise<Server> {
+  const response = await fetch(`${API_URL}/api/servers/${serverId}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch server details');
+  }
+  return response.json();
+}
 
-export const clusterServers = async (similarityThreshold: number = 0.7): Promise<{
-  message: string;
-  cluster_count: number;
-  visualization_data: VisualizationData;
-  cluster_summaries: ClusterSummary[];
-}> => {
-  const response = await fetch(`${API_URL}/cluster`, {
+export async function clusterServers(similarityThreshold: number = 0.7): Promise<ClusteringResponse> {
+  const response = await fetch(`${API_URL}/api/cluster`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ similarity_threshold: similarityThreshold })
+    body: JSON.stringify({ similarity_threshold: similarityThreshold }),
   });
-  return handleResponse<{
-    message: string;
-    cluster_count: number;
-    visualization_data: VisualizationData;
-    cluster_summaries: ClusterSummary[];
-  }>(response);
-};
-
-export async function evaluateServers(): Promise<{ evaluation_summary: EvaluationSummary }> {
-  const response = await fetch(`${API_URL}/evaluate`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  return handleResponse<{ evaluation_summary: EvaluationSummary }>(response);
+  return handleResponse<ClusteringResponse>(response);
 }
 
-export const searchServers = async (query: string, topN: number = 5): Promise<{
-  query: string;
-  results: SearchResult[];
-}> => {
+export async function evaluateServers(): Promise<EvaluationResponse> {
+  const response = await fetch(`${API_URL}/api/evaluate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return handleResponse<EvaluationResponse>(response);
+}
+
+export async function searchServers(query: string, topN: number = 5): Promise<SearchResponse> {
   const response = await fetch(`${API_URL}/search?query=${encodeURIComponent(query)}&top_n=${topN}`);
-  return handleResponse<{ query: string; results: SearchResult[] }>(response);
-};
+  return handleResponse<SearchResponse>(response);
+}
 
-export const recommendServers = async (query: string, topN: number = 3): Promise<{
-  query: string;
-  recommendations: SearchResult[];
-}> => {
+export async function getRecommendations(query: string, topN: number = 3): Promise<RecommendationResponse> {
   const response = await fetch(`${API_URL}/recommend?query=${encodeURIComponent(query)}&top_n=${topN}`);
-  return handleResponse<{ query: string; recommendations: SearchResult[] }>(response);
-};
+  return handleResponse<RecommendationResponse>(response);
+}
 
-export const getPersonalizedRecommendations = async (
-  userPreferences: UserPreferences,
+export async function getPersonalizedRecommendations(
+  preferences: Record<string, any>,
   topN: number = 3
-): Promise<{
-  preferences: UserPreferences;
-  recommendations: SearchResult[];
-}> => {
+): Promise<PersonalizedRecommendationResponse> {
   const response = await fetch(`${API_URL}/personalized-recommendations?top_n=${topN}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(userPreferences),
+    body: JSON.stringify({ preferences }),
   });
-  return handleResponse<{ preferences: UserPreferences; recommendations: SearchResult[] }>(response);
-};
+  return handleResponse<PersonalizedRecommendationResponse>(response);
+}
 
 export default api;

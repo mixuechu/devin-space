@@ -23,7 +23,15 @@ export default defineConfig({
       'localhost',
       '.devinapps.com'
     ],
-    cors: true
+    cors: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
 })
 

@@ -8,10 +8,13 @@ from app.services.data_processor.processor import DataProcessor
 from app.services.clustering.optimized_clustering import OptimizedClusteringService
 from app.services.evaluation.evaluation import EvaluationService
 from app.services.recommendation.recommendation import RecommendationService
+from app.services.search_service import search_service
 
 router = APIRouter()
 
-processed_servers = []
+# Make processed_servers accessible from outside
+processed_servers: List[ServerMetrics] = []
+
 clustering_service = OptimizedClusteringService(os.path.join(os.path.dirname(__file__), "..", "..", "data"))
 evaluation_service = EvaluationService()
 recommendation_service = RecommendationService()
@@ -57,8 +60,14 @@ async def process_data(data_path: str = "data/mcp_with_detailed_content.json"):
         processor.load_data()
         processed_servers = processor.process_data()
         
-        clustering_service.cluster_servers(processed_servers)
+        # 执行集群分析
+        clustered_servers = clustering_service.cluster_servers(processed_servers)
         
+        # 获取集群摘要并构建搜索索引
+        cluster_summaries = clustering_service.get_cluster_summary(clustered_servers)
+        search_service.build_index(cluster_summaries)
+        
+        # 执行评估
         evaluation_service.evaluate_servers(processed_servers)
         
         output_dir = os.path.dirname(absolute_path)
@@ -91,14 +100,13 @@ async def get_status():
 
 @router.get("/servers")
 async def get_servers(
-    limit: Optional[int] = None,
-    offset: Optional[int] = None,
+    page: Optional[int] = 1,
+    page_size: Optional[int] = 30,
     search: Optional[str] = None,
     cluster_id: Optional[int] = None
 ):
     """
     获取服务器列表，支持分页和搜索
-    如果不提供limit，则返回所有数据
     """
     global processed_servers
     
@@ -125,15 +133,16 @@ async def get_servers(
     total = len(filtered_servers)
     
     # 应用分页
-    if offset is not None:
-        filtered_servers = filtered_servers[offset:]
+    start_idx = (page - 1) * page_size
+    end_idx = start_idx + page_size
     
-    if limit is not None:
-        filtered_servers = filtered_servers[:limit]
+    filtered_servers = filtered_servers[start_idx:end_idx]
     
     return {
         "servers": filtered_servers,
-        "total": total
+        "total": total,
+        "page": page,
+        "page_size": page_size
     }
 
 @router.get("/servers/{server_id}")
@@ -294,3 +303,29 @@ async def get_personalized_recommendations(user_preferences: Dict[str, Any], top
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting personalized recommendations: {str(e)}")
+
+@router.get("/clusters/search")
+async def search_clusters(
+    query: Optional[str] = Query(None, description="搜索关键词"),
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(15, ge=1, le=100, description="每页数量")
+):
+    """
+    搜索集群
+    
+    参数:
+    - query: 搜索关键词
+    - page: 页码（从1开始）
+    - page_size: 每页显示数量
+    
+    返回:
+    - items: 集群列表
+    - total: 总数
+    - page: 当前页码
+    - page_size: 每页数量
+    """
+    return search_service.search(
+        query=query or '',
+        page=page,
+        page_size=page_size
+    )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { SearchResult, UserPreferences, searchServers, recommendServers, getPersonalizedRecommendations, getServerDetails } from '../services/api';
+import { SearchResult, UserPreferences, searchServers, getRecommendations, getPersonalizedRecommendations, getServerDetails } from '../services/api';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -94,7 +94,7 @@ const RecommendationView: React.FC = () => {
         if (searchResponse.results && searchResponse.results.length > 0) {
           setRecommendations(searchResponse.results);
         } else {
-          const recommendResponse = await recommendServers(debouncedQuery, 5);
+          const recommendResponse = await getRecommendations(debouncedQuery, 5);
           
           if (recommendResponse.recommendations && recommendResponse.recommendations.length > 0) {
             setRecommendations(recommendResponse.recommendations.map((rec: any) => ({
@@ -175,6 +175,7 @@ const RecommendationView: React.FC = () => {
       console.log('Fetching details for server:', serverId);
       
       const serverDetails = await getServerDetails(serverId);
+      console.log('Server details received:', serverDetails);
       
       setSelectedServer(serverDetails);
       setDetailsOpen(true);
@@ -545,7 +546,7 @@ const RecommendationView: React.FC = () => {
                       )}
                       {selectedServer.tool_count !== undefined && (
                         <div className="flex justify-between items-center">
-                          <span>Tool Count:</span>
+                          <span>Tools:</span>
                           <span className="font-medium">{selectedServer.tool_count}</span>
                         </div>
                       )}

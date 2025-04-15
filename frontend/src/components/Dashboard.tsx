@@ -40,6 +40,9 @@ const Dashboard: React.FC = () => {
       setError(null);
       console.log('Fetching dashboard data from API...');
 
+      // 获取集群数据
+      const clusteringData = staticData.getClustering();
+      
       const [serversResponse, evaluationResponse] = await Promise.all([
         getServers(),
         evaluateServers()
@@ -47,8 +50,28 @@ const Dashboard: React.FC = () => {
 
       if (serversResponse) {
         const serverData = serversResponse as GetServersResponse;
-        staticData.setServers(serverData);
-        setServers(serverData.servers);
+        
+        // 如果有集群数据，保留服务器的集群信息
+        if (clusteringData?.cluster_summaries) {
+          const clusterMap = new Map(
+            clusteringData.cluster_summaries.map(c => [c.cluster_id, c])
+          );
+          
+          const serversWithClusterInfo = serverData.servers.map(server => ({
+            ...server,
+            cluster_info: server.cluster_id != null ? clusterMap.get(server.cluster_id) : undefined
+          }));
+          
+          staticData.setServers({
+            servers: serversWithClusterInfo,
+            total: serverData.total
+          });
+          setServers(serversWithClusterInfo);
+        } else {
+          // 如果没有集群数据，直接保存服务器数据
+          staticData.setServers(serverData);
+          setServers(serverData.servers);
+        }
       }
 
       if (evaluationResponse?.evaluation_summary) {

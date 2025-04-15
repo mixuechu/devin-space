@@ -1,31 +1,20 @@
 export interface Server {
   server_id: string;
   title: string;
-  author: string;
   description: string;
   tags: string[];
-  word_count: number;
-  documentation_length: number;
-  feature_count: number;
   tool_count: number;
-  has_github: boolean;
-  has_faq: boolean;
-  cluster_id?: number;
-  cluster_name?: string;
-  cluster_info?: ClusterSummary;
+  cluster_info?: {
+    cluster_id: string;
+    name: string;
+    common_tags: string[];
+  };
+  overall_score: number;
   code_quality_score?: number;
   tool_completeness_score?: number;
   documentation_quality_score?: number;
   runtime_stability_score?: number;
   business_value_score?: number;
-  overall_score?: number;
-  raw_data?: Record<string, any>;
-  similar_servers?: Array<{
-    server_id: string;
-    title: string;
-    description: string;
-    similarity_score?: number;
-  }>;
 }
 
 export interface EvaluationSummary {
@@ -63,6 +52,7 @@ export interface ClusterSummary {
   avg_feature_count: number;
   avg_tool_count: number;
   common_tags: string[];
+  tools?: string[];
 }
 
 export interface VisualizationData {

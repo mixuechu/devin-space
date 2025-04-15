@@ -1,105 +1,171 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { getServers, getServerDetails } from '../services/api';
-import type { Server, ClusterSummary } from '../types';
+import type { Server } from '../types';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { Loader2, Search, Tag, Github, FileText, Wrench, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Loader2, Search, Tag, Github, FileText, Wrench, ChevronLeft, ChevronRight, Check, ChevronsUpDown } from 'lucide-react';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from './ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
 import { staticData } from '../store/dataCache';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { cn } from '../lib/utils';
-
-interface ClusterInfo {
-  cluster_id: number;
-  cluster_name: string;
-  description?: string;
-  common_tags: string[];
-}
-
-interface ServerWithExtras extends Omit<Server, 'cluster_info'> {
-  tools?: string[];
-  cluster_info?: ClusterInfo;
-}
+import { ServerWithExtras, ClusterInfo } from '../types/server';
+import { API_URL } from '../services/api';
 
 interface ClusterOption {
   value: string;
   label: string;
-  serverCount: number;
-  description?: string;
+  count: number;
   common_tags: string[];
-  servers: ServerWithExtras[];
+  serverCount: number;
+}
+
+interface ClusterSearchResult {
+  items: ClusterOption[];
+  total: number;
 }
 
 const ServerExplorer: React.FC = () => {
-  const [servers, setServers] = useState<ServerWithExtras[]>([]);
+  const [servers, setServers] = useState<Server[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [clusterFilter, setClusterFilter] = useState<string>('all');
-  const [loading, setLoading] = useState<boolean>(true);
+  const [clusterFilter, setClusterFilter] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [clusters, setClusters] = useState<ClusterSummary[]>([]);
-  const [allServers, setAllServers] = useState<ServerWithExtras[]>([]);
-  const [filteredServers, setFilteredServers] = useState<ServerWithExtras[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [totalServers, setTotalServers] = useState<number>(0);
   const [selectedServer, setSelectedServer] = useState<ServerWithExtras | null>(null);
   const [showDetails, setShowDetails] = useState<boolean>(false);
-  const pageSize = 30;
   const [clusterSearchOpen, setClusterSearchOpen] = useState(false);
   const [clusterSearchValue, setClusterSearchValue] = useState('');
-  const [clusterDropdownPage, setClusterDropdownPage] = useState(1);
-  const clusterDropdownPageSize = 15;
-  const [debouncedSearchValue, setDebouncedSearchValue] = useState(clusterSearchValue);
-  const [searchResults, setSearchResults] = useState<{
-    items: any[];
-    total: number;
-    page: number;
-    page_size: number;
-  } | null>(null);
   const [isSearching, setIsSearching] = useState(false);
+  const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
+  const [searchResults, setSearchResults] = useState<ClusterSearchResult>({ items: [], total: 0 });
+  const [clusterDropdownPage, setClusterDropdownPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const pageSize = 30;
+  const clusterDropdownPageSize = 15;
+  const [totalServers, setTotalServers] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
-  // 优化集群选项计算
+  const parentRef = useRef<HTMLDivElement | null>(null);
+
+  const transformServerToExtras = (server: Server): ServerWithExtras => {
+    return {
+      ...server,
+      cluster_info: server.cluster_info ? {
+        cluster_id: server.cluster_info.cluster_id,
+        name: server.cluster_info.name,
+        common_tags: server.cluster_info.common_tags,
+        server_count: 1 // 默认值，实际应该从API获取
+      } : undefined
+    };
+  };
+
+  const serversData = staticData.getServers();
+  const allServers = useMemo(() => {
+    return (serversData?.servers || []).map(transformServerToExtras);
+  }, [serversData]);
+
   const clusterOptions = useMemo(() => {
-    if (!allServers.length) return { all: { value: 'all', label: 'All Clusters', serverCount: 0 }, options: [], total: 0 };
-
-    const clusterMap = new Map<string, ClusterOption>();
-    let totalServers = 0;
+    const clusterMap = new Map<string, { name: string; count: number }>();
     
-    // 收集集群信息和服务器数量
     allServers.forEach(server => {
       if (server.cluster_info) {
-        const clusterId = server.cluster_info.cluster_id.toString();
+        const { cluster_id, name } = server.cluster_info;
+        const existing = clusterMap.get(cluster_id);
+        if (existing) {
+          existing.count++;
+        } else {
+          clusterMap.set(cluster_id, { name, count: 1 });
+        }
+      }
+    });
+
+    return Array.from(clusterMap.entries())
+      .map(([value, { name, count }]) => ({
+        value,
+        label: `${name} (${count})`,
+        count,
+        common_tags: [],
+        serverCount: count
+      }))
+      .sort((a, b) => b.count - a.count);
+  }, [allServers]);
+
+  const filteredServers = useMemo(() => {
+    return allServers.filter(server => {
+      if (!clusterFilter) return true;
+      return server.cluster_info?.cluster_id === clusterFilter;
+    });
+  }, [allServers, clusterFilter]);
+
+  const handleClusterFilterChange = useCallback((value: string | null) => {
+    setClusterFilter(value);
+    setPage(1); // Reset to first page when changing filter
+    setOpen(false);
+  }, []);
+
+  const rowVirtualizer = useVirtualizer({
+    count: filteredServers?.length ?? 0,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 100,
+    overscan: 5
+  });
+
+  const processServers = (servers: Server[]) => {
+    const clusterMap = new Map<string, ClusterOption>();
+    let totalServerCount = 0;
+
+    servers.forEach((server: Server) => {
+      if (server.cluster_info) {
+        const clusterId = String(server.cluster_info.cluster_id);
         if (!clusterMap.has(clusterId)) {
           clusterMap.set(clusterId, {
             value: clusterId,
-            label: server.cluster_info.cluster_name,
-            serverCount: 1,
-            description: server.cluster_info.description,
-            common_tags: server.cluster_info.common_tags || [],
-            servers: [server]
+            label: server.cluster_info.name,
+            count: 1,
+            common_tags: server.cluster_info.common_tags,
+            serverCount: 1
           });
         } else {
           const cluster = clusterMap.get(clusterId)!;
+          cluster.count++;
           cluster.serverCount++;
-          cluster.servers.push(server);
         }
-        totalServers++;
+        totalServerCount++;
       }
     });
+
+    // Update pagination info
+    const totalPages = Math.ceil(totalServerCount / pageSize);
+    setTotalPages(totalPages);
+    setCurrentPage(1);
     
-    // 转换为数组并排序
-    const sortedOptions = Array.from(clusterMap.values())
-      .sort((a, b) => b.serverCount - a.serverCount);
-    
-    return {
-      all: { value: 'all', label: 'All Clusters', serverCount: allServers.length },
-      options: sortedOptions,
-      total: sortedOptions.length
+    setTotalServers(totalServerCount);
+    setServers(servers.map(transformServerToExtras));
+  };
+
+  useEffect(() => {
+    const fetchServers = async () => {
+      try {
+        setLoading(true);
+        const response = await getServers(page, pageSize, clusterFilter || undefined);
+        setServers(response.servers);
+        setTotalServers(response.total);
+      } catch (err) {
+        console.error('Error fetching servers:', err);
+        setError('Failed to load servers');
+      } finally {
+        setLoading(false);
+      }
     };
-  }, [allServers]);
+
+    fetchServers();
+  }, [page, clusterFilter]);
 
   // 优化搜索逻辑
   const searchClusters = useCallback(async (query: string, page: number) => {
@@ -107,18 +173,16 @@ const ServerExplorer: React.FC = () => {
     
     if (!normalizedQuery) {
       return {
-        items: clusterOptions.options.slice(
+        items: clusterOptions.slice(
           (page - 1) * clusterDropdownPageSize,
           page * clusterDropdownPageSize
         ),
-        total: clusterOptions.options.length
+        total: clusterOptions.length
       };
     }
     
-    const matchedClusters = clusterOptions.options.filter(option => 
-      option.label.toLowerCase().includes(normalizedQuery) ||
-      option.description?.toLowerCase().includes(normalizedQuery) ||
-      option.common_tags?.some(tag => tag.toLowerCase().includes(normalizedQuery))
+    const matchedClusters = clusterOptions.filter(option => 
+      option.label.toLowerCase().includes(normalizedQuery)
     );
     
     return {
@@ -129,60 +193,6 @@ const ServerExplorer: React.FC = () => {
       total: matchedClusters.length
     };
   }, [clusterOptions, clusterDropdownPageSize]);
-
-  // 优化数据初始化
-  const initializeData = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const clusteringData = await staticData.getClustering();
-      if (!clusteringData?.cluster_summaries) {
-        throw new Error('Clustering data not available');
-      }
-      
-      setClusters(clusteringData.cluster_summaries);
-      
-      const cachedServers = staticData.getServers();
-      if (cachedServers?.servers) {
-        const clusterMap = new Map(
-          clusteringData.cluster_summaries.map(c => [c.cluster_id, c])
-        );
-        
-        const serversWithClusterInfo = cachedServers.servers.map(server => ({
-          ...server,
-          cluster_info: server.cluster_id != null ? clusterMap.get(server.cluster_id) : undefined
-        }));
-        
-        setAllServers(serversWithClusterInfo);
-        setFilteredServers(serversWithClusterInfo);
-        setServers(serversWithClusterInfo.slice(0, pageSize));
-        setTotalServers(serversWithClusterInfo.length);
-      } else {
-        await fetchServers(clusteringData.cluster_summaries);
-      }
-    } catch (err) {
-      console.error('Error initializing data:', err);
-      setError('Failed to initialize data. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  }, [pageSize]);
-
-  // 添加初始化effect
-  useEffect(() => {
-    initializeData();
-  }, [initializeData]);
-
-  // 使用虚拟滚动优化服务器列表渲染
-  const parentRef = React.useRef<HTMLDivElement>(null);
-  
-  const rowVirtualizer = useVirtualizer({
-    count: Math.ceil((filteredServers?.length ?? 0) / 3),
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 280,
-    overscan: 5,
-  });
 
   // 使用防抖处理搜索输入
   useEffect(() => {
@@ -199,7 +209,7 @@ const ServerExplorer: React.FC = () => {
       try {
         setIsSearching(true);
         const response = await fetch(
-          `/api/clusters/search?${new URLSearchParams({
+          `${API_URL}/api/clusters/search?${new URLSearchParams({
             query: debouncedSearchValue,
             page: clusterDropdownPage.toString(),
             page_size: clusterDropdownPageSize.toString()
@@ -207,37 +217,61 @@ const ServerExplorer: React.FC = () => {
         );
         
         if (!response.ok) {
-          throw new Error('Search failed');
+          console.error('Search failed:', await response.text());
+          // 如果搜索失败，回退到本地过滤
+          const normalizedQuery = debouncedSearchValue.trim().toLowerCase();
+          const filteredClusters = clusterOptions.filter(option => 
+            option.label.toLowerCase().includes(normalizedQuery)
+          );
+          
+          setSearchResults({
+            items: filteredClusters.slice(
+              (clusterDropdownPage - 1) * clusterDropdownPageSize,
+              clusterDropdownPage * clusterDropdownPageSize
+            ),
+            total: filteredClusters.length
+          });
+          return;
         }
         
         const data = await response.json();
         setSearchResults(data);
       } catch (error) {
         console.error('Search failed:', error);
-        setSearchResults(null);
+        // 如果发生错误，回退到本地过滤
+        const normalizedQuery = debouncedSearchValue.trim().toLowerCase();
+        const filteredClusters = clusterOptions.filter(option => 
+          option.label.toLowerCase().includes(normalizedQuery)
+        );
+        
+        setSearchResults({
+          items: filteredClusters.slice(
+            (clusterDropdownPage - 1) * clusterDropdownPageSize,
+            clusterDropdownPage * clusterDropdownPageSize
+          ),
+          total: filteredClusters.length
+        });
       } finally {
         setIsSearching(false);
       }
     };
 
     searchClusters();
-  }, [debouncedSearchValue, clusterDropdownPage]);
+  }, [debouncedSearchValue, clusterDropdownPage, clusterOptions, clusterDropdownPageSize]);
 
   // 处理搜索结果
   const filteredClusterOptions = useMemo(() => {
     if (!searchResults && !clusterSearchValue) {
       return {
-        items: clusterOptions.options.slice(0, clusterDropdownPageSize),
-        total: clusterOptions.total
+        items: clusterOptions.slice(0, clusterDropdownPageSize),
+        total: clusterOptions.length
       };
     }
 
     if (!searchResults) {
       const normalizedQuery = clusterSearchValue.toLowerCase().trim();
-      const filteredClusters = clusterOptions.options.filter(option =>
-        option.label.toLowerCase().includes(normalizedQuery) ||
-        option.description?.toLowerCase().includes(normalizedQuery) ||
-        option.common_tags.some(tag => tag.toLowerCase().includes(normalizedQuery))
+      const filteredClusters = clusterOptions.filter(option =>
+        option.label.toLowerCase().includes(normalizedQuery)
       );
 
       return {
@@ -252,107 +286,15 @@ const ServerExplorer: React.FC = () => {
     return searchResults;
   }, [searchResults, clusterSearchValue, clusterOptions, clusterDropdownPage, clusterDropdownPageSize]);
 
-  // 本地过滤和分页
-  useEffect(() => {
-    if (allServers.length === 0) return;
-
-    let filteredServers = [...allServers];
-
-    // 应用搜索过滤
-    if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase();
-      filteredServers = filteredServers.filter(server => 
-        server.title.toLowerCase().includes(searchLower) ||
-        server.description.toLowerCase().includes(searchLower) ||
-        server.tags.some(tag => tag.toLowerCase().includes(searchLower))
-      );
-    }
-
-    // 应用集群过滤
-    if (clusterFilter !== 'all') {
-      filteredServers = filteredServers.filter(
-        server => server.cluster_id === parseInt(clusterFilter)
-      );
-    }
-
-    // 更新总数和当前页数据
-    setTotalServers(filteredServers.length);
-    setFilteredServers(filteredServers);
-    const start = (page - 1) * pageSize;
-    setServers(filteredServers.slice(start, start + pageSize));
-  }, [allServers, searchTerm, clusterFilter, page]);
-
-  const fetchServers = async (clusterSummaries: ClusterSummary[]) => {
-    try {
-      // 获取第一页数据和总数
-      const response = await getServers({
-        limit: 100,
-        offset: 0
-      });
-      
-      if (!response?.servers) {
-        throw new Error('Failed to fetch servers data');
-      }
-      
-      // 获取所有服务器数据
-      const allServersData = [...response.servers];
-      const totalPages = Math.ceil(response.total / 100);
-      
-      // 如果有更多页，继续获取
-      if (totalPages > 1) {
-        const otherPagesPromises = Array.from({ length: totalPages - 1 }, (_, i) =>
-          getServers({ limit: 100, offset: (i + 1) * 100 })
-        );
-        
-        const otherPagesResults = await Promise.all(otherPagesPromises);
-        otherPagesResults.forEach(result => {
-          if (result?.servers) {
-            allServersData.push(...result.servers);
-          }
-        });
-      }
-
-      // 为每个服务器添加集群信息
-      const clusterMap = new Map(
-        clusterSummaries.map(c => [c.cluster_id, c])
-      );
-      
-      const serversWithClusterInfo = allServersData.map(server => ({
-        ...server,
-        cluster_info: server.cluster_id != null ? clusterMap.get(server.cluster_id) : undefined
-      }));
-      
-      setAllServers(serversWithClusterInfo);
-      setFilteredServers(serversWithClusterInfo);
-      setServers(serversWithClusterInfo.slice(0, pageSize));
-      setTotalServers(serversWithClusterInfo.length);
-      
-      // 缓存带有集群信息的服务器数据
-      staticData.setServers({
-        servers: serversWithClusterInfo,
-        total: serversWithClusterInfo.length
-      });
-    } catch (err) {
-      console.error('Error fetching servers:', err);
-      setError('Failed to load servers. Please try again later.');
-      throw err; // 重新抛出错误以便上层处理
-    }
-  };
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setPage(1); // 重置页码
   };
 
-  const handleClusterFilterChange = (value: string) => {
-    setClusterFilter(value);
-    setPage(1); // 重置页码
-  };
-  
   const handleViewDetails = async (server: ServerWithExtras) => {
     try {
       const serverDetails = await getServerDetails(server.server_id);
-      setSelectedServer(serverDetails);
+      setSelectedServer(transformServerToExtras(serverDetails));
       setShowDetails(true);
     } catch (err) {
       console.error('Error fetching server details:', err);
@@ -412,17 +354,15 @@ const ServerExplorer: React.FC = () => {
         </form>
         
         <div className="w-full md:w-72">
-          <Popover open={clusterSearchOpen} onOpenChange={setClusterSearchOpen}>
+          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 role="combobox"
-                aria-expanded={clusterSearchOpen}
+                aria-expanded={open}
                 className="w-full justify-between"
               >
-                {clusterFilter === 'all' 
-                  ? 'All Clusters'
-                  : clusterOptions.options.find(option => option.value === clusterFilter)?.label || 'Select Cluster'}
+                {clusterFilter === null ? 'All Clusters' : clusterOptions.find(option => option.value === clusterFilter)?.label || 'Select Cluster'}
                 <ChevronLeft className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -430,9 +370,9 @@ const ServerExplorer: React.FC = () => {
               <Command>
                 <CommandInput
                   placeholder="搜索集群（支持名称、标签，支持模糊匹配）..."
-                  value={clusterSearchValue}
+                  value={searchValue}
                   onValueChange={(value) => {
-                    setClusterSearchValue(value);
+                    setSearchValue(value);
                     setClusterDropdownPage(1);
                   }}
                 />
@@ -453,13 +393,13 @@ const ServerExplorer: React.FC = () => {
                         key="all"
                         value="all"
                         onSelect={() => {
-                          handleClusterFilterChange('all');
-                          setClusterSearchOpen(false);
+                          handleClusterFilterChange(null);
+                          setOpen(false);
                         }}
                       >
                         <div className="flex items-center justify-between w-full">
                           <span>All Clusters</span>
-                          <Badge variant="secondary">{clusterOptions.all.serverCount} servers</Badge>
+                          <Badge variant="secondary">{clusterOptions.length} servers</Badge>
                         </div>
                       </CommandItem>
                       {filteredClusterOptions.items.map((option: ClusterOption) => (
@@ -468,19 +408,13 @@ const ServerExplorer: React.FC = () => {
                           value={option.value}
                           onSelect={() => {
                             handleClusterFilterChange(option.value);
-                            setClusterSearchOpen(false);
+                            setOpen(false);
                           }}
                         >
                           <div className="flex items-center justify-between w-full">
                             <div className="flex flex-col">
                               <span>{option.label}</span>
-                              {option.common_tags.length > 0 && (
-                                <span className="text-xs text-muted-foreground">
-                                  {option.common_tags.slice(0, 3).join(', ')}
-                                </span>
-                              )}
                             </div>
-                            <Badge variant="secondary">{option.serverCount} servers</Badge>
                           </div>
                         </CommandItem>
                       ))}
@@ -522,7 +456,9 @@ const ServerExplorer: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        {servers.map((server) => (
+        {filteredServers
+          .slice((page - 1) * pageSize, page * pageSize)
+          .map((server) => (
           <ServerCard
             key={server.server_id}
             server={server}
@@ -536,7 +472,7 @@ const ServerExplorer: React.FC = () => {
       </div>
       
       {/* Pagination */}
-      {totalServers > pageSize && (
+      {filteredServers.length > pageSize && (
         <div className="flex justify-center py-4 border-t">
           <div className="flex items-center gap-2">
             <Button
@@ -550,14 +486,14 @@ const ServerExplorer: React.FC = () => {
             </Button>
             
             <div className="text-sm">
-              Page {page} of {Math.ceil(totalServers / pageSize)}
+              Page {page} of {Math.ceil(filteredServers.length / pageSize)}
             </div>
             
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(Math.min(Math.ceil(totalServers / pageSize), page + 1))}
-              disabled={page >= Math.ceil(totalServers / pageSize)}
+              onClick={() => handlePageChange(Math.min(Math.ceil(filteredServers.length / pageSize), page + 1))}
+              disabled={page >= Math.ceil(filteredServers.length / pageSize)}
             >
               <ChevronRight className="h-4 w-4" />
               <span className="sr-only">Next Page</span>
@@ -623,29 +559,6 @@ const ServerExplorer: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
-                {selectedServer.raw_data && (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Raw Data</h3>
-                    <div className="bg-muted p-3 rounded-md overflow-x-auto">
-                      <pre className="text-xs">{JSON.stringify(selectedServer.raw_data, null, 2)}</pre>
-                    </div>
-                  </div>
-                )}
-                
-                {selectedServer.similar_servers && selectedServer.similar_servers.length > 0 && (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Similar Servers</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {selectedServer.similar_servers.map((similar: { server_id: string; title: string; description: string }, index: number) => (
-                        <div key={index} className="border rounded-md p-2">
-                          <div className="font-medium">{similar.title}</div>
-                          <div className="text-sm text-muted-foreground truncate">{similar.description}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
               
               <DialogFooter>
@@ -706,11 +619,11 @@ const ServerCard: React.FC<ServerCardProps> = React.memo(
       <CardFooter className="px-4 py-3 flex justify-between text-sm text-muted-foreground border-t">
         <div className="flex items-center gap-2 truncate">
           <FileText className="h-4 w-4 shrink-0" />
-          <span className="truncate">{server.cluster_info?.cluster_name || 'Uncategorized'}</span>
+          <span className="truncate">{server.cluster_info?.name || 'Uncategorized'}</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <Wrench className="h-4 w-4" />
-          <span>Tools: {server.tools?.length || 0}</span>
+          <span>Tools: {server.tool_count}</span>
         </div>
       </CardFooter>
     </Card>

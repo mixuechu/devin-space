@@ -8,17 +8,17 @@ class SearchService:
         self._clusters_df: Optional[pd.DataFrame] = None
         self._search_index: Dict[str, List[int]] = {}
         
-    def build_index(self, clusters: List[ClusterSummary]):
+    def build_index(self, clusters: List[Dict[str, Any]]):
         """构建搜索索引"""
         # 将集群数据转换为DataFrame以便于处理
         clusters_data = []
         for cluster in clusters:
             clusters_data.append({
-                'cluster_id': cluster.cluster_id,
-                'cluster_name': cluster.cluster_name,
-                'description': cluster.description or '',
-                'common_tags': ' '.join(cluster.common_tags),
-                'server_count': len(cluster.servers),
+                'cluster_id': cluster.get('cluster_id') or cluster.get('id'),
+                'cluster_name': cluster.get('entity_name') or cluster.get('name', ''),
+                'description': cluster.get('description', ''),
+                'common_tags': ' '.join(cluster.get('common_tags', [])),
+                'server_count': cluster.get('size', 0),
                 'raw_data': cluster  # 保存原始数据
             })
         
@@ -27,9 +27,9 @@ class SearchService:
         # 构建搜索索引
         for idx, row in self._clusters_df.iterrows():
             # 为每个字段创建搜索索引
-            self._add_to_index(row['cluster_name'].lower(), idx)
-            self._add_to_index(row['description'].lower(), idx)
-            for tag in row['common_tags'].split():
+            self._add_to_index(str(row['cluster_name']).lower(), idx)
+            self._add_to_index(str(row['description']).lower(), idx)
+            for tag in str(row['common_tags']).split():
                 self._add_to_index(tag.lower(), idx)
     
     def _add_to_index(self, text: str, idx: int):
@@ -43,6 +43,14 @@ class SearchService:
     
     def search(self, query: str, page: int = 1, page_size: int = 15) -> Dict[str, Any]:
         """搜索集群"""
+        if self._clusters_df is None:
+            return {
+                'items': [],
+                'total': 0,
+                'page': page,
+                'page_size': page_size
+            }
+
         if not query:
             # 如果没有查询词，返回按服务器数量排序的结果
             sorted_clusters = self._clusters_df.sort_values('server_count', ascending=False)

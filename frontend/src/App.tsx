@@ -4,17 +4,20 @@ import ServerExplorer from './components/ServerExplorer';
 import ClusteringView from './components/ClusteringView';
 import RecommendationView from './components/RecommendationView';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
-import { Loader2, BarChart, Server, Network, Search, RefreshCw } from 'lucide-react';
+import { Loader2, BarChart, Server as ServerIcon, Network, Search, RefreshCw } from 'lucide-react';
 import { clusterServers, getServers } from './services/api';
 import { staticData } from './store/dataCache';
 import { Button } from './components/ui/button';
 import { generateClusterNames } from './utils/clusterUtils';
+import { ServerWithExtras } from './types/server';
+import { Server as ServerType } from './types';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [initError, setInitError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [allServers, setAllServers] = useState<ServerType[]>([]);
 
   const initializeApp = async (forceRefresh = false) => {
     try {
@@ -50,53 +53,7 @@ const App: React.FC = () => {
           });
 
           // 获取服务器数据
-          const serversResponse = await getServers({
-            limit: 100,  // 每页100条数据
-            offset: 0
-          });
-          
-          if (serversResponse.servers) {
-            // 获取所有服务器数据
-            const allServersData = [];
-            const totalPages = Math.ceil(serversResponse.total / 100);
-            
-            // 先添加第一页数据
-            allServersData.push(...serversResponse.servers);
-            
-            // 如果有更多页，继续获取
-            if (totalPages > 1) {
-              const otherPagesPromises = Array.from({ length: totalPages - 1 }, (_, i) =>
-                getServers({ limit: 100, offset: (i + 1) * 100 })
-              );
-              
-              const otherPagesResults = await Promise.all(otherPagesPromises);
-              otherPagesResults.forEach(result => {
-                if (result.servers) {
-                  allServersData.push(...result.servers);
-                }
-              });
-            }
-            
-            // 为服务器数据关联集群信息
-            const serversWithClusterInfo = allServersData.map(server => {
-              const cluster = serverClusterMap.get(server.server_id);
-              if (!cluster) {
-                console.warn(`No cluster found for server ${server.server_id}`);
-              }
-              return {
-                ...server,
-                cluster_id: cluster?.cluster_id,
-                cluster_name: cluster?.cluster_name,
-                cluster_info: cluster
-              };
-            });
-
-            // 保存服务器数据到静态存储
-            staticData.setServers({
-              servers: serversWithClusterInfo,
-              total: serversResponse.total
-            });
-          }
+          await fetchServers();
         }
       }
     } catch (err) {
@@ -105,6 +62,61 @@ const App: React.FC = () => {
     } finally {
       setLoading(false);
       setRefreshing(false);
+    }
+  };
+
+  const fetchServers = async () => {
+    try {
+      const limit = 100;
+      const firstPage = await getServers(1, limit);
+      const totalPages = Math.ceil(firstPage.total / limit);
+      
+      let allServers = [...firstPage.servers];
+      
+      // Fetch remaining pages if any
+      if (totalPages > 1) {
+        const remainingPages = await Promise.all(
+          Array.from({ length: totalPages - 1 }, (_, i) => 
+            getServers(i + 2, limit)
+          )
+        );
+        
+        remainingPages.forEach(page => {
+          allServers = [...allServers, ...page.servers];
+        });
+      }
+
+      // Get clustering data
+      const clusteringData = staticData.getClustering();
+      if (clusteringData) {
+        // Create a map of server ID to cluster info
+        const serverClusterMap = new Map();
+        clusteringData.cluster_summaries.forEach(cluster => {
+          const clusterInfo = {
+            cluster_id: cluster.cluster_id,
+            name: cluster.cluster_name,
+            common_tags: cluster.common_tags,
+            size: cluster.size
+          };
+          cluster.servers.forEach(server => {
+            serverClusterMap.set(server.id, clusterInfo);
+          });
+        });
+
+        // Enrich servers with cluster info
+        allServers = allServers.map(server => ({
+          ...server,
+          cluster_info: serverClusterMap.get(server.server_id) || server.cluster_info
+        }));
+      }
+
+      // Update static storage with all servers and total count
+      staticData.setServers({ servers: allServers, total: firstPage.total });
+      
+      // Update state
+      setAllServers(allServers);
+    } catch (error) {
+      console.error('Error fetching servers:', error);
     }
   };
 
@@ -176,7 +188,7 @@ const App: React.FC = () => {
                 Dashboard
               </TabsTrigger>
               <TabsTrigger value="servers" className="flex items-center gap-1">
-                <Server className="h-4 w-4" />
+                <ServerIcon className="h-4 w-4" />
                 Servers
               </TabsTrigger>
               <TabsTrigger value="clustering" className="flex items-center gap-1">
