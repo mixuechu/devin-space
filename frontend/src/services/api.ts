@@ -121,7 +121,12 @@ export async function getStatus(): Promise<StatusResponse> {
   return handleResponse<StatusResponse>(response);
 }
 
-export async function getServers(page: number = 1, pageSize: number = 30, clusterId?: string): Promise<GetServersResponse> {
+export async function getServers(
+  page: number = 1, 
+  pageSize: number = 30, 
+  clusterId?: string,
+  searchTerm?: string
+): Promise<GetServersResponse> {
   const queryParams = new URLSearchParams({
     page: page.toString(),
     page_size: pageSize.toString(),
@@ -129,6 +134,10 @@ export async function getServers(page: number = 1, pageSize: number = 30, cluste
   
   if (clusterId) {
     queryParams.append('cluster_id', clusterId);
+  }
+
+  if (searchTerm) {
+    queryParams.append('search', searchTerm);
   }
   
   const response = await fetch(`${API_URL}/api/servers?${queryParams}`);

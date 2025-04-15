@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { staticData } from '../store/dataCache';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { cn } from '../lib/utils';
-import { ServerWithExtras, ClusterInfo } from '../types/server';
+import { ServerWithExtras, ClusterInfo, APIServer } from '../types/server';
 import { API_URL } from '../services/api';
 
 interface ClusterOption {
@@ -29,7 +29,7 @@ interface ClusterSearchResult {
 }
 
 const ServerExplorer: React.FC = () => {
-  const [servers, setServers] = useState<Server[]>([]);
+  const [servers, setServers] = useState<ServerWithExtras[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [clusterFilter, setClusterFilter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -50,18 +50,29 @@ const ServerExplorer: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const parentRef = useRef<HTMLDivElement | null>(null);
 
   const transformServerToExtras = (server: Server): ServerWithExtras => {
+    if (!server.cluster_info) {
+      return {
+        ...server,
+        cluster_info: undefined
+      };
+    }
+
+    // 确保 cluster_info 包含所有必要的字段
+    const cluster_info: ClusterInfo = {
+      cluster_id: server.cluster_info.cluster_id,
+      name: server.cluster_info.name,
+      common_tags: server.cluster_info.common_tags || [],
+      server_count: (server.cluster_info as any).server_count || 1
+    };
+
     return {
       ...server,
-      cluster_info: server.cluster_info ? {
-        cluster_id: server.cluster_info.cluster_id,
-        name: server.cluster_info.name,
-        common_tags: server.cluster_info.common_tags,
-        server_count: 1 // 默认值，实际应该从API获取
-      } : undefined
+      cluster_info
     };
   };
 
@@ -109,53 +120,96 @@ const ServerExplorer: React.FC = () => {
     setOpen(false);
   }, []);
 
-  const rowVirtualizer = useVirtualizer({
-    count: filteredServers?.length ?? 0,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 100,
-    overscan: 5
-  });
-
-  const processServers = (servers: Server[]) => {
-    const clusterMap = new Map<string, ClusterOption>();
-    let totalServerCount = 0;
-
-    servers.forEach((server: Server) => {
-      if (server.cluster_info) {
-        const clusterId = String(server.cluster_info.cluster_id);
-        if (!clusterMap.has(clusterId)) {
-          clusterMap.set(clusterId, {
-            value: clusterId,
-            label: server.cluster_info.name,
-            count: 1,
-            common_tags: server.cluster_info.common_tags,
-            serverCount: 1
-          });
-        } else {
-          const cluster = clusterMap.get(clusterId)!;
-          cluster.count++;
-          cluster.serverCount++;
-        }
-        totalServerCount++;
-      }
-    });
-
-    // Update pagination info
-    const totalPages = Math.ceil(totalServerCount / pageSize);
-    setTotalPages(totalPages);
-    setCurrentPage(1);
+  // 处理搜索输入变化
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
     
-    setTotalServers(totalServerCount);
-    setServers(servers.map(transformServerToExtras));
+    // 清除之前的定时器
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    
+    // 设置新的定时器
+    searchTimeoutRef.current = setTimeout(() => {
+      setDebouncedSearchTerm(value);
+      setPage(1); // 重置页码
+    }, 500); // 500ms 延迟
   };
 
+  // 处理搜索按钮点击
+  const handleSearchClick = () => {
+    setDebouncedSearchTerm(searchTerm);
+    setPage(1);
+  };
+
+  // 处理回车键搜索
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchClick();
+    }
+  };
+
+  // 更新 useEffect 中的 fetchServers 函数
   useEffect(() => {
     const fetchServers = async () => {
       try {
         setLoading(true);
-        const response = await getServers(page, pageSize, clusterFilter || undefined);
-        setServers(response.servers);
+        setError(null);
+        
+        const response = await getServers(
+          page, 
+          pageSize, 
+          clusterFilter || undefined,
+          debouncedSearchTerm || undefined
+        );
+        
+        // 获取集群数据
+        const clusteringData = staticData.getClustering();
+        console.log('Clustering Data:', clusteringData);
+        
+        // 确保使用字符串类型的 cluster_id
+        const clusterMap = clusteringData?.cluster_summaries
+          ? new Map(clusteringData.cluster_summaries.map(c => [c.cluster_id.toString(), {
+              ...c,
+              name: c.cluster_name  // 直接使用 cluster_name 作为 name
+            }]))
+          : new Map();
+          
+        console.log('Cluster Map size:', clusterMap.size);
+        console.log('Cluster Map entries:', Array.from(clusterMap.entries()));
+        
+        // 转换 APIServer 到 ServerWithExtras
+        const transformedServers: ServerWithExtras[] = (response.servers as APIServer[]).map(server => {
+          const clusterIdStr = server.cluster_id?.toString();
+          const clusterData = clusterIdStr ? clusterMap.get(clusterIdStr) : undefined;
+          
+          console.log('Processing server:', {
+            server_id: server.server_id,
+            cluster_id: server.cluster_id,
+            cluster_id_str: clusterIdStr,
+            has_cluster_info: clusterIdStr ? clusterMap.has(clusterIdStr) : false,
+            cluster_info: clusterData
+          });
+          
+          const clusterInfo = clusterData
+            ? {
+                cluster_id: clusterIdStr!,
+                name: clusterData.name,
+                common_tags: clusterData.common_tags || [],
+                server_count: clusterData.server_count || 1
+              }
+            : undefined;
+
+          return {
+            ...server,
+            cluster_info: clusterInfo
+          };
+        });
+        
+        setServers(transformedServers);
         setTotalServers(response.total);
+        setTotalPages(Math.ceil(response.total / pageSize));
       } catch (err) {
         console.error('Error fetching servers:', err);
         setError('Failed to load servers');
@@ -165,7 +219,7 @@ const ServerExplorer: React.FC = () => {
     };
 
     fetchServers();
-  }, [page, clusterFilter]);
+  }, [page, clusterFilter, debouncedSearchTerm]);
 
   // 优化搜索逻辑
   const searchClusters = useCallback(async (query: string, page: number) => {
@@ -286,11 +340,6 @@ const ServerExplorer: React.FC = () => {
     return searchResults;
   }, [searchResults, clusterSearchValue, clusterOptions, clusterDropdownPage, clusterDropdownPageSize]);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setPage(1); // 重置页码
-  };
-
   const handleViewDetails = async (server: ServerWithExtras) => {
     try {
       const serverDetails = await getServerDetails(server.server_id);
@@ -349,6 +398,7 @@ const ServerExplorer: React.FC = () => {
               className="pl-8"
               value={searchTerm}
               onChange={handleSearchChange}
+              onKeyPress={handleKeyPress}
             />
           </div>
         </form>
@@ -456,23 +506,18 @@ const ServerExplorer: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        {filteredServers
-          .slice((page - 1) * pageSize, page * pageSize)
-          .map((server) => (
+        {servers.slice((page - 1) * pageSize, page * pageSize).map((server) => (
           <ServerCard
             key={server.server_id}
             server={server}
-            onClick={() => {
-              setSelectedServer(server);
-              setShowDetails(true);
-            }}
+            onClick={() => handleViewDetails(server)}
             score={server.overall_score ?? 0}
           />
         ))}
       </div>
       
       {/* Pagination */}
-      {filteredServers.length > pageSize && (
+      {totalServers > pageSize && (
         <div className="flex justify-center py-4 border-t">
           <div className="flex items-center gap-2">
             <Button
@@ -486,14 +531,14 @@ const ServerExplorer: React.FC = () => {
             </Button>
             
             <div className="text-sm">
-              Page {page} of {Math.ceil(filteredServers.length / pageSize)}
+              Page {page} of {totalPages}
             </div>
             
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(Math.min(Math.ceil(filteredServers.length / pageSize), page + 1))}
-              disabled={page >= Math.ceil(filteredServers.length / pageSize)}
+              onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
+              disabled={page >= totalPages}
             >
               <ChevronRight className="h-4 w-4" />
               <span className="sr-only">Next Page</span>
@@ -579,55 +624,59 @@ interface ServerCardProps {
 }
 
 const ServerCard: React.FC<ServerCardProps> = React.memo(
-  ({ server, onClick, score }) => (
-    <Card
-      className="cursor-pointer hover:shadow-lg transition-shadow bg-card"
-      onClick={onClick}
-    >
-      <CardHeader className="p-4 pb-2">
-        <div className="flex justify-between items-start gap-2">
-          <div className="flex-1 min-w-0">
-            <CardTitle className="text-lg font-semibold truncate">{server.title}</CardTitle>
-            <CardDescription className="mt-1 text-sm line-clamp-2">{server.description}</CardDescription>
-          </div>
-          <Badge className={cn(
-            "shrink-0",
-            score >= 90 ? "bg-green-500" :
-            score >= 80 ? "bg-green-400" :
-            score >= 70 ? "bg-yellow-400" :
-            score >= 60 ? "bg-yellow-500" :
-            "bg-red-500",
-            "text-white"
-          )}>
-            {score.toFixed(1)}
-          </Badge>
-        </div>
-      </CardHeader>
-      <CardContent className="px-4 pb-2">
-        <div className="flex flex-wrap gap-1.5">
-          {server.tags.slice(0, 5).map((tag: string) => (
-            <Badge key={tag} variant="outline" className="flex items-center gap-1 text-xs py-0 h-5">
-              <Tag className="h-3 w-3" />
-              {tag}
+  function ServerCard({ server, onClick, score }: ServerCardProps) {
+    return (
+      <Card
+        className="cursor-pointer hover:shadow-lg transition-shadow bg-card"
+        onClick={onClick}
+      >
+        <CardHeader className="p-4 pb-2">
+          <div className="flex justify-between items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <CardTitle className="text-lg font-semibold truncate">{server.title}</CardTitle>
+              <CardDescription className="mt-1 text-sm line-clamp-2">{server.description}</CardDescription>
+            </div>
+            <Badge className={cn(
+              "shrink-0",
+              score >= 90 ? "bg-green-500" :
+              score >= 80 ? "bg-green-400" :
+              score >= 70 ? "bg-yellow-400" :
+              score >= 60 ? "bg-yellow-500" :
+              "bg-red-500",
+              "text-white"
+            )}>
+              {score.toFixed(1)}
             </Badge>
-          ))}
-          {server.tags.length > 5 && (
-            <Badge variant="outline" className="text-xs py-0 h-5">+{server.tags.length - 5} more</Badge>
-          )}
-        </div>
-      </CardContent>
-      <CardFooter className="px-4 py-3 flex justify-between text-sm text-muted-foreground border-t">
-        <div className="flex items-center gap-2 truncate">
-          <FileText className="h-4 w-4 shrink-0" />
-          <span className="truncate">{server.cluster_info?.name || 'Uncategorized'}</span>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <Wrench className="h-4 w-4" />
-          <span>Tools: {server.tool_count}</span>
-        </div>
-      </CardFooter>
-    </Card>
-  )
+          </div>
+        </CardHeader>
+        <CardContent className="px-4 pb-2">
+          <div className="flex flex-wrap gap-1.5">
+            {server.tags.slice(0, 5).map((tag: string) => (
+              <Badge key={tag} variant="outline" className="flex items-center gap-1 text-xs py-0 h-5">
+                <Tag className="h-3 w-3" />
+                {tag}
+              </Badge>
+            ))}
+            {server.tags.length > 5 && (
+              <Badge variant="outline" className="text-xs py-0 h-5">+{server.tags.length - 5} more</Badge>
+            )}
+          </div>
+        </CardContent>
+        <CardFooter className="px-4 py-3 flex justify-between text-sm text-muted-foreground border-t">
+          <div className="flex items-center gap-2 truncate">
+            <FileText className="h-4 w-4 shrink-0" />
+            <span className="truncate">
+              {server.cluster_info?.name || 'Uncategorized'}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Wrench className="h-4 w-4" />
+            <span>Tools: {server.tool_count}</span>
+          </div>
+        </CardFooter>
+      </Card>
+    );
+  }
 );
 
 export default ServerExplorer;

@@ -23,46 +23,53 @@ const App: React.FC = () => {
     try {
       setLoading(true);
       
-      // 如果强制刷新或没有缓存的聚类数据，获取新数据
-      if (forceRefresh || !staticData.getClustering()) {
-        if (forceRefresh) {
-          console.log('Force refreshing all data...');
-          staticData.clearAll();
-        } else {
-          console.log('Preloading clustering data...');
-        }
+      // 检查是否需要重新获取数据
+      const needsRefresh = forceRefresh || 
+        !staticData.hasValidCache() || 
+        !staticData.getClustering() ||
+        !staticData.getServers() ||
+        !staticData.getEvaluation();
+      
+      if (needsRefresh) {
+        // 无论是强制刷新还是页面刷新导致的重新获取，都清理缓存
+        staticData.clearAll();
+        console.log(forceRefresh ? 'Force refreshing all data...' : 'Cache invalid or empty, fetching fresh data...');
         
-        // 并行获取所有需要的数据
-        const [clusteringData, evaluationData] = await Promise.all([
-          clusterServers(0.7),
-          evaluateServers()
-        ]);
+        try {
+          // 并行获取所有需要的数据
+          const [clusteringData, evaluationData] = await Promise.all([
+            clusterServers(0.7),
+            evaluateServers()
+          ]);
 
-        if (clusteringData && clusteringData.cluster_summaries) {
-          // 生成集群名称
-          const namedClusters = generateClusterNames(clusteringData.cluster_summaries);
-          
-          // 创建服务器ID到集群的映射
-          const serverClusterMap = new Map();
-          namedClusters.forEach(cluster => {
-            cluster.servers.forEach(server => {
-              serverClusterMap.set(server.id, cluster);
+          if (clusteringData?.cluster_summaries) {
+            // 生成集群名称
+            const namedClusters = generateClusterNames(clusteringData.cluster_summaries);
+            
+            // 保存集群数据到静态存储
+            staticData.setClustering({
+              visualization_data: clusteringData.visualization_data,
+              cluster_summaries: namedClusters
             });
-          });
-          
-          // 保存集群数据到静态存储
-          staticData.setClustering({
-            visualization_data: clusteringData.visualization_data,
-            cluster_summaries: namedClusters
-          });
 
-          // 获取服务器数据
-          await fetchServers();
+            // 获取并处理服务器数据
+            await fetchServers();
+          }
+
+          // 保存评估数据
+          if (evaluationData?.evaluation_summary) {
+            staticData.setEvaluation(evaluationData.evaluation_summary);
+          }
+        } catch (err) {
+          console.error('Error fetching data:', err);
+          throw new Error('Failed to fetch required data');
         }
-
-        // 保存评估数据
-        if (evaluationData?.evaluation_summary) {
-          staticData.setEvaluation(evaluationData.evaluation_summary);
+      } else {
+        console.log('Using cached data...');
+        // 使用缓存数据更新状态
+        const servers = staticData.getServers();
+        if (servers) {
+          setAllServers(servers.servers);
         }
       }
     } catch (err) {

@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import List, Dict, Any, Optional
 import os
 import json
+from thefuzz import fuzz  # 添加模糊匹配库
 
 from app.models.server import ServerMetrics
 from app.services.data_processor.processor import DataProcessor
@@ -107,6 +108,11 @@ async def get_servers(
 ):
     """
     获取服务器列表，支持分页和搜索
+    
+    改进:
+    1. 添加模糊匹配
+    2. 计算相关性得分
+    3. 按相关性排序
     """
     global processed_servers
     
@@ -115,20 +121,58 @@ async def get_servers(
     
     filtered_servers = processed_servers
     
-    # 应用过滤条件
+    # 应用集群过滤
     if cluster_id is not None:
         filtered_servers = [s for s in filtered_servers if s.cluster_id == cluster_id]
     
+    # 改进的搜索逻辑
     if search:
         search_lower = search.lower()
-        filtered_servers = [
-            s for s in filtered_servers 
-            if (
-                search_lower in s.title.lower() or
-                search_lower in s.description.lower() or
-                any(search_lower in tag.lower() for tag in s.tags)
+        search_words = search_lower.split()
+        
+        # 存储服务器和其搜索得分
+        scored_servers = []
+        
+        for server in filtered_servers:
+            total_score = 0
+            
+            # 计算标题的匹配得分
+            title_score = max(
+                fuzz.partial_ratio(search_lower, server.title.lower()),
+                max((fuzz.ratio(word, server.title.lower()) for word in search_words), default=0)
             )
-        ]
+            total_score += title_score * 2  # 标题匹配权重加倍
+            
+            # 计算描述的匹配得分
+            desc_score = max(
+                fuzz.partial_ratio(search_lower, server.description.lower()),
+                max((fuzz.ratio(word, server.description.lower()) for word in search_words), default=0)
+            )
+            total_score += desc_score
+            
+            # 计算标签的匹配得分
+            tag_scores = []
+            for tag in server.tags:
+                tag_score = max(
+                    fuzz.partial_ratio(search_lower, tag.lower()),
+                    max((fuzz.ratio(word, tag.lower()) for word in search_words), default=0)
+                )
+                tag_scores.append(tag_score)
+            
+            if tag_scores:
+                total_score += max(tag_scores) * 1.5  # 标签匹配权重提升
+            
+            # 如果有质量评分，将其纳入考虑
+            if hasattr(server, 'overall_score') and server.overall_score is not None:
+                total_score += (server.overall_score / 100.0) * 20  # 质量评分权重
+            
+            # 只保留相关性超过阈值的结果
+            if total_score > 50:  # 相关性阈值
+                scored_servers.append((server, total_score))
+        
+        # 按得分排序
+        scored_servers.sort(key=lambda x: x[1], reverse=True)
+        filtered_servers = [server for server, _ in scored_servers]
     
     total = len(filtered_servers)
     
@@ -136,10 +180,10 @@ async def get_servers(
     start_idx = (page - 1) * page_size
     end_idx = start_idx + page_size
     
-    filtered_servers = filtered_servers[start_idx:end_idx]
+    paginated_servers = filtered_servers[start_idx:end_idx]
     
     return {
-        "servers": filtered_servers,
+        "servers": paginated_servers,
         "total": total,
         "page": page,
         "page_size": page_size
