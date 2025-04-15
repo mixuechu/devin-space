@@ -5,7 +5,7 @@ import ClusteringView from './components/ClusteringView';
 import RecommendationView from './components/RecommendationView';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { Loader2, BarChart, Server as ServerIcon, Network, Search, RefreshCw } from 'lucide-react';
-import { clusterServers, getServers } from './services/api';
+import { clusterServers, getServers, evaluateServers } from './services/api';
 import { staticData } from './store/dataCache';
 import { Button } from './components/ui/button';
 import { generateClusterNames } from './utils/clusterUtils';
@@ -32,8 +32,12 @@ const App: React.FC = () => {
           console.log('Preloading clustering data...');
         }
         
-        // 获取并处理集群数据
-        const clusteringData = await clusterServers(0.7);
+        // 并行获取所有需要的数据
+        const [clusteringData, evaluationData] = await Promise.all([
+          clusterServers(0.7),
+          evaluateServers()
+        ]);
+
         if (clusteringData && clusteringData.cluster_summaries) {
           // 生成集群名称
           const namedClusters = generateClusterNames(clusteringData.cluster_summaries);
@@ -54,6 +58,11 @@ const App: React.FC = () => {
 
           // 获取服务器数据
           await fetchServers();
+        }
+
+        // 保存评估数据
+        if (evaluationData?.evaluation_summary) {
+          staticData.setEvaluation(evaluationData.evaluation_summary);
         }
       }
     } catch (err) {
