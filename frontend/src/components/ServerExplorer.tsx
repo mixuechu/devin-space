@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getServers, getServerDetails } from '../services/api';
 import type { Server } from '../types';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -8,7 +9,7 @@ import { Loader2, Search, Tag, Github, FileText, Wrench, ChevronLeft, ChevronRig
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
 
-function ServerExplorer() {
+function ServerExplorerNew() {
   const [servers, setServers] = useState<Server[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [clusterFilter, setClusterFilter] = useState<string>('all');
@@ -42,19 +43,14 @@ function ServerExplorer() {
       
       const skip = (page - 1) * pageSize;
       
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+      const params = {
+        skip: skip,
+        limit: pageSize,
+        search: searchTerm || undefined,
+        cluster_id: clusterFilter !== 'all' ? parseInt(clusterFilter) : undefined
+      };
       
-      const queryParams = new URLSearchParams();
-      queryParams.append('skip', skip.toString());
-      queryParams.append('limit', pageSize.toString());
-      if (searchTerm) queryParams.append('search', searchTerm);
-      if (clusterFilter !== 'all') queryParams.append('cluster_id', clusterFilter);
-      
-      const response = await fetch(`${apiUrl}/servers?${queryParams.toString()}`, {
-        headers: {
-          'Authorization': 'Basic ' + btoa('user:9447d682f523e92d92e6fce76fa26e93')
-        }
-      }).then(res => res.json());
+      const response = await getServers(params);
       
       setServers(response.servers);
       setTotalServers(response.total);
@@ -77,12 +73,13 @@ function ServerExplorer() {
       await fetchServers();
     };
     
-    handleFiltersChange();
-  }, [searchTerm, clusterFilter, page]);
+    if (clusterFilter) {
+      handleFiltersChange();
+    }
+  }, [clusterFilter, page]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    setPage(1);
   };
 
   const handleClusterFilterChange = (value: string) => {
@@ -92,12 +89,7 @@ function ServerExplorer() {
   
   const handleViewDetails = async (server: Server) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-      const serverDetails = await fetch(`${apiUrl}/servers/${server.server_id}`, {
-        headers: {
-          'Authorization': 'Basic ' + btoa('user:9447d682f523e92d92e6fce76fa26e93')
-        }
-      }).then(res => res.json());
+      const serverDetails = await getServerDetails(server.server_id);
       setSelectedServer(serverDetails);
       setShowDetails(true);
     } catch (err) {
@@ -141,15 +133,27 @@ function ServerExplorer() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="relative flex-grow">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search servers by name, description, or tags..."
-            className="pl-8"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-        </div>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          fetchServers();
+        }} className="flex flex-grow gap-2">
+          <div className="relative flex-grow">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="输入服务器名称、描述或标签进行搜索..."
+              className="pl-8"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              '搜索'
+            )}
+          </Button>
+        </form>
         
         <div className="w-full md:w-64">
           <Select value={clusterFilter} onValueChange={handleClusterFilterChange}>
@@ -383,6 +387,6 @@ function ServerExplorer() {
       </Dialog>
     </div>
   );
-};
+}
 
-export { ServerExplorer as default };
+export default ServerExplorerNew;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { SearchResult, UserPreferences, searchServers, recommendServers, getPersonalizedRecommendations, getServerDetails } from '../services/api';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -17,8 +17,24 @@ import {
   DialogFooter,
 } from './ui/dialog';
 
+// Debounce helper function
+const debounce = <F extends (...args: any[]) => any>(
+  func: F,
+  waitFor: number
+) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return (...args: Parameters<F>): void => {
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => func(...args), waitFor);
+  };
+};
+
 const RecommendationView: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [debouncedQuery, setDebouncedQuery] = useState<string>('');
   const [recommendations, setRecommendations] = useState<SearchResult[]>([]);
   const [personalizedRecommendations, setPersonalizedRecommendations] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,22 +57,44 @@ const RecommendationView: React.FC = () => {
   
   const [preferredTag, setPreferredTag] = useState<string>('');
 
+  // Debounced search handler
+  const debouncedSetSearch = useCallback(
+    debounce((value: string) => {
+      setDebouncedQuery(value);
+    }, 300),
+    []
+  );
+
+  // Handle input change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    debouncedSetSearch(value);
+  };
+
+  // Effect to handle search when debounced query changes
+  useEffect(() => {
+    if (debouncedQuery) {
+      handleSearch();
+    }
+  }, [debouncedQuery]);
+
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    if (!debouncedQuery.trim()) return;
     
     try {
       setLoading(true);
       setError(null);
       
-      console.log('Searching for recommendations with query:', searchQuery);
+      console.log('Searching for recommendations with query:', debouncedQuery);
       
       try {
-        const searchResponse = await searchServers(searchQuery, 5);
+        const searchResponse = await searchServers(debouncedQuery, 5);
         
         if (searchResponse.results && searchResponse.results.length > 0) {
           setRecommendations(searchResponse.results);
         } else {
-          const recommendResponse = await recommendServers(searchQuery, 5);
+          const recommendResponse = await recommendServers(debouncedQuery, 5);
           
           if (recommendResponse.recommendations && recommendResponse.recommendations.length > 0) {
             setRecommendations(recommendResponse.recommendations.map((rec: any) => ({
@@ -172,8 +210,7 @@ const RecommendationView: React.FC = () => {
                     placeholder="Search for servers..."
                     className="pl-8"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    onChange={handleSearchChange}
                   />
                 </div>
                 <Button onClick={handleSearch} disabled={loading}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
-import ServerExplorerNew from './components/ServerExplorerNew';
+import ServerExplorer from './components/ServerExplorer';
 import ClusteringView from './components/ClusteringView';
 import RecommendationView from './components/RecommendationView';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
@@ -65,7 +65,7 @@ const App: React.FC = () => {
             </TabsContent>
             
             <TabsContent value="servers">
-              <ServerExplorerNew />
+              <ServerExplorer />
             </TabsContent>
             
             <TabsContent value="clustering">
