@@ -1762,6 +1762,18 @@ files = [
 Levenshtein = "0.23.0"
 
 [[package]]
+name = "python-multipart"
+version = "0.0.20"
+description = "A streaming multipart parser for Python"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "python_multipart-0.0.20-py3-none-any.whl", hash = "sha256:8a62d3a8335e06589fe01f2a3e178cdcc632f3fbe0d492ad9ee0ec35aab1f104"},
+    {file = "python_multipart-0.0.20.tar.gz", hash = "sha256:8dd0cab45b8e23064ae09147625994d090fa46f5b0d1e13af944c331a7fa9d13"},
+]
+
+[[package]]
 name = "pytz"
 version = "2025.2"
 description = "World timezone definitions, modern and historical"
@@ -3088,4 +3100,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<=3.13"
-content-hash = "da2f4e31d9d52ca259d87e707d245a1a40c2b386d9276e5ab3e1620945670059"
+content-hash = "0d2fa3cfcb6863dc4af4c962a7c8d52dac9d0bf6678e13e2a189682a13ca11c4"

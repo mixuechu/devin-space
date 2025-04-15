@@ -2,6 +2,7 @@ from typing import List, Dict, Any, Optional
 import pandas as pd
 from fuzzywuzzy import fuzz
 from app.models.cluster import ClusterSummary
+from app.core.database import get_all_clusters
 
 class SearchService:
     def __init__(self):
@@ -10,27 +11,49 @@ class SearchService:
         
     def build_index(self, clusters: List[Dict[str, Any]]):
         """构建搜索索引"""
-        # 将集群数据转换为DataFrame以便于处理
-        clusters_data = []
-        for cluster in clusters:
-            clusters_data.append({
-                'cluster_id': cluster.get('cluster_id') or cluster.get('id'),
-                'cluster_name': cluster.get('entity_name') or cluster.get('name', ''),
-                'description': cluster.get('description', ''),
-                'common_tags': ' '.join(cluster.get('common_tags', [])),
-                'server_count': cluster.get('size', 0),
-                'raw_data': cluster  # 保存原始数据
-            })
-        
-        self._clusters_df = pd.DataFrame(clusters_data)
-        
-        # 构建搜索索引
-        for idx, row in self._clusters_df.iterrows():
-            # 为每个字段创建搜索索引
-            self._add_to_index(str(row['cluster_name']).lower(), idx)
-            self._add_to_index(str(row['description']).lower(), idx)
-            for tag in str(row['common_tags']).split():
-                self._add_to_index(tag.lower(), idx)
+        try:
+            # 从数据库获取所有集群信息
+            db_clusters = get_all_clusters()
+            print("[Search] Retrieved clusters from database")  # Debug log
+            
+            # 将集群数据转换为DataFrame以便于处理
+            clusters_data = []
+            for cluster in db_clusters:
+                cluster_data = {
+                    'cluster_id': cluster.get('cluster_id'),
+                    'cluster_name': cluster.get('cluster_name', ''),
+                    'description': cluster.get('description', ''),
+                    'common_tags': ' '.join(cluster.get('common_tags', [])),
+                    'server_count': cluster.get('size', 0),
+                    'raw_data': cluster
+                }
+                clusters_data.append(cluster_data)
+            
+            if not clusters_data:
+                print("[Search] No clusters data available")  # Debug log
+                return
+            
+            self._clusters_df = pd.DataFrame(clusters_data)
+            
+            # 验证DataFrame的列
+            print("[Search] Building search index with columns:", self._clusters_df.columns.tolist())  # Debug log
+            
+            # 构建搜索索引
+            for idx, row in self._clusters_df.iterrows():
+                # 为每个字段创建搜索索引
+                if pd.notna(row['cluster_name']):  # 检查是否为空
+                    self._add_to_index(str(row['cluster_name']).lower(), idx)
+                if pd.notna(row['description']):  # 检查是否为空
+                    self._add_to_index(str(row['description']).lower(), idx)
+                if pd.notna(row['common_tags']):  # 检查是否为空
+                    for tag in str(row['common_tags']).split():
+                        self._add_to_index(tag.lower(), idx)
+            
+            print(f"[Search] Index built successfully with {len(self._search_index)} terms")  # Debug log
+            
+        except Exception as e:
+            print(f"[Search] Error building search index: {str(e)}")  # Debug log
+            raise
     
     def _add_to_index(self, text: str, idx: int):
         """将文本添加到搜索索引中"""
@@ -106,8 +129,26 @@ class SearchService:
         total = len(sorted_clusters)
         page_data = sorted_clusters.iloc[(page-1)*page_size:page*page_size]
         
+        # 确保返回的数据包含正确的字段
+        items = []
+        for _, row in page_data.iterrows():
+            raw_data = row['raw_data']
+            if isinstance(raw_data, dict):
+                # 确保 cluster_name 字段存在
+                if 'cluster_name' not in raw_data:
+                    raw_data['cluster_name'] = row['cluster_name']
+                items.append(raw_data)
+            else:
+                items.append({
+                    'cluster_id': row['cluster_id'],
+                    'cluster_name': row['cluster_name'],
+                    'description': row['description'],
+                    'common_tags': row['common_tags'].split(),
+                    'server_count': row['server_count']
+                })
+        
         return {
-            'items': [row['raw_data'] for _, row in page_data.iterrows()],
+            'items': items,
             'total': total,
             'page': page,
             'page_size': page_size

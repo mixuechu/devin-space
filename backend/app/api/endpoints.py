@@ -3,20 +3,26 @@ from typing import List, Dict, Any, Optional
 import os
 import json
 from thefuzz import fuzz  # 添加模糊匹配库
+import logging
+import shutil
+from pymongo.errors import DuplicateKeyError
 
 from app.models.server import ServerMetrics
 from app.services.data_processor.processor import DataProcessor
-from app.services.clustering.optimized_clustering import OptimizedClusteringService
+from app.services.clustering.optimized_clustering import OptimizedClusteringService as ClusteringService
 from app.services.evaluation.evaluation import EvaluationService
 from app.services.recommendation.recommendation import RecommendationService
 from app.services.search_service import search_service
+from app.core.database import get_all_clusters, get_cluster, save_cluster, clusters_collection, servers_collection
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
 # Make processed_servers accessible from outside
 processed_servers: List[ServerMetrics] = []
 
-clustering_service = OptimizedClusteringService(os.path.join(os.path.dirname(__file__), "..", "..", "data"))
+clustering_service = ClusteringService(os.path.join(os.path.dirname(__file__), "..", "..", "data"))
 evaluation_service = EvaluationService()
 recommendation_service = RecommendationService()
 
@@ -30,6 +36,16 @@ async def process_data(data_path: str = "data/mcp_with_detailed_content.json"):
     
     try:
         print(f"Processing data from: {data_path}")
+        
+        # 重建索引以确保唯一性
+        try:
+            # 删除现有的cluster_name索引
+            clusters_collection.drop_index("cluster_name_1")
+        except Exception as e:
+            logger.info("No existing cluster_name index to drop")
+        
+        # 创建新的非唯一索引
+        clusters_collection.create_index([('cluster_name', 1)], unique=False, name="cluster_name_1")
         
         if not os.path.isabs(data_path):
             base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -58,27 +74,79 @@ async def process_data(data_path: str = "data/mcp_with_detailed_content.json"):
         
         processor = DataProcessor(absolute_path)
         
+        print("Loading data...")  # Debug log
         processor.load_data()
         processed_servers = processor.process_data()
+        print(f"Processed {len(processed_servers)} servers")  # Debug log
         
         # 执行集群分析
+        print("Starting initial clustering...")  # Debug log
         clustered_servers = clustering_service.cluster_servers(processed_servers)
+        print(f"Clustered {len(clustered_servers)} servers")  # Debug log
         
-        # 获取集群摘要并构建搜索索引
-        cluster_summaries = clustering_service.get_cluster_summary(clustered_servers)
-        search_service.build_index(cluster_summaries)
+        # 验证集群分配
+        cluster_count = len(set(server.cluster_id for server in clustered_servers if server.cluster_id is not None))
+        print(f"Created {cluster_count} clusters")  # Debug log
         
-        # 执行评估
-        evaluation_service.evaluate_servers(processed_servers)
+        # 生成并保存集群信息
+        cluster_servers_map = {}
+        for server in clustered_servers:
+            if server.cluster_id is not None:
+                if server.cluster_id not in cluster_servers_map:
+                    cluster_servers_map[server.cluster_id] = []
+                cluster_servers_map[server.cluster_id].append(server)
         
-        output_dir = os.path.dirname(absolute_path)
-        output_path = os.path.join(output_dir, "processed_data.json")
-        processor.save_processed_data(output_path)
+        for cluster_id, servers in cluster_servers_map.items():
+            # 获取集群中所有服务器的标题
+            titles = [server.title for server in servers]
+            cluster_name = clustering_service.extract_cluster_name(titles)
+            
+            # 计算统计信息
+            avg_word_count = sum(server.word_count for server in servers) / len(servers)
+            avg_feature_count = sum(server.feature_count for server in servers) / len(servers)
+            avg_tool_count = sum(server.tool_count for server in servers) / len(servers)
+            
+            # 收集标签
+            all_tags = []
+            for server in servers:
+                all_tags.extend(server.tags)
+            tag_counts = {}
+            for tag in all_tags:
+                tag_counts[tag] = tag_counts.get(tag, 0) + 1
+            common_tags = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+            common_tags = [tag for tag, _ in common_tags]
+            
+            cluster_data = {
+                "cluster_id": cluster_id,
+                "cluster_name": cluster_name,
+                "size": len(servers),
+                "servers": [{"id": server.server_id, "title": server.title} for server in servers],
+                "avg_word_count": float(avg_word_count),
+                "avg_feature_count": float(avg_feature_count),
+                "avg_tool_count": float(avg_tool_count),
+                "common_tags": common_tags
+            }
+            
+            try:
+                # 使用cluster_id作为唯一标识进行更新
+                result = clusters_collection.replace_one(
+                    {"cluster_id": cluster_id},
+                    cluster_data,
+                    upsert=True
+                )
+                logger.info(f"Saved cluster {cluster_id} with name '{cluster_name}'")
+            except Exception as e:
+                logger.error(f"保存集群 {cluster_id} ('{cluster_name}') 时出错: {str(e)}")
+                continue
+        
+        # 构建搜索索引
+        print("Building search index...")  # Debug log
+        search_service.build_index([])
         
         return {
-            "message": "Data processed successfully",
+            "message": "Data processing completed successfully",
             "server_count": len(processed_servers),
-            "output_path": output_path
+            "cluster_count": cluster_count
         }
     except Exception as e:
         import traceback
@@ -234,35 +302,47 @@ async def get_server(server_id: str):
 @router.post("/cluster")
 async def cluster_servers(similarity_threshold: float = 0.7):
     """
-    Cluster servers based on entity linking.
+    Cluster servers based on their features
     """
-    global processed_servers, clustering_service
-    
-    if not processed_servers:
-        raise HTTPException(status_code=404, detail="No processed data available")
-    
     try:
-        clustering_service.similarity_threshold = similarity_threshold
+        global processed_servers
         
-        clustered_servers = clustering_service.cluster_servers(processed_servers)
+        if not processed_servers:
+            raise HTTPException(status_code=404, detail="No processed data available")
+            
+        # 清理现有的集群数据
+        clusters_collection.drop()
+        clusters_collection.create_index('cluster_id', unique=True)
+        clusters_collection.create_index('cluster_name', unique=False)  # 确保不是唯一索引
         
-        visualization_data = clustering_service.generate_visualization_data(clustered_servers)
+        # 清理服务器的集群信息
+        servers_collection.update_many({}, {'$unset': {'cluster_id': "", 'cluster_name': ""}})
         
-        cluster_summaries = clustering_service.get_cluster_summary(clustered_servers)
+        # 使用全局变量
+        servers = processed_servers
         
-        cluster_count = len(set(server.cluster_id for server in clustered_servers if server.cluster_id is not None))
+        # 执行聚类
+        data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
+        clustering_service = ClusteringService(data_dir=data_dir)
+        clustered_servers = clustering_service.cluster_servers(servers)
+        
+        # 生成可视化数据
+        visualization_data = clustering_service.generate_visualization_data(servers)
+        
+        # 获取集群摘要
+        cluster_summaries = clustering_service.get_cluster_summary(servers)
+        
+        # 保存集群信息到数据库
+        for summary in cluster_summaries:
+            save_cluster(summary)
         
         return {
-            "message": "Entity linking clustering completed successfully",
-            "cluster_count": cluster_count,
             "visualization_data": visualization_data,
             "cluster_summaries": cluster_summaries
         }
     except Exception as e:
-        import traceback
-        error_details = traceback.format_exc()
-        print(f"Error clustering servers: {str(e)}\n{error_details}")
-        raise HTTPException(status_code=500, detail=f"Error clustering servers: {str(e)}")
+        logger.error(f"Error in cluster_servers: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/evaluate")
 async def evaluate_servers():
@@ -373,3 +453,47 @@ async def search_clusters(
         page=page,
         page_size=page_size
     )
+
+@router.post("/clean")
+async def clean_data(
+    clean_cache: bool = True,
+    clean_db: bool = True
+):
+    """
+    清理系统数据
+    
+    Args:
+        clean_cache: 是否清理缓存文件
+        clean_db: 是否清理数据库
+    """
+    try:
+        if clean_cache:
+            # 清理中间文件
+            logger.info("清理缓存文件...")
+            data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+            intermediate_dir = os.path.join(data_dir, "intermediate")
+            progress_file = os.path.join(data_dir, "processing_progress.json")
+            
+            if os.path.exists(intermediate_dir):
+                shutil.rmtree(intermediate_dir)
+                os.makedirs(intermediate_dir)
+            
+            if os.path.exists(progress_file):
+                os.remove(progress_file)
+        
+        if clean_db:
+            # 清理数据库
+            logger.info("清理数据库...")
+            clusters_collection.drop()
+            clusters_collection.create_index('cluster_id', unique=True)
+            clusters_collection.create_index('cluster_name')
+            servers_collection.update_many({}, {'$unset': {'cluster_id': "", 'cluster_name': ""}})
+        
+        return {
+            "message": "清理完成",
+            "cleaned_cache": clean_cache,
+            "cleaned_db": clean_db
+        }
+    except Exception as e:
+        logger.error(f"清理数据时出错: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

@@ -6,13 +6,18 @@ export interface APIClusterInfo {
   common_tags: string[];
 }
 
-export interface ClusterInfo extends APIClusterInfo {
+export interface ClusterInfo {
+  cluster_id: string;
+  name: string;
+  cluster_name: string;
+  common_tags: string[];
   server_count: number;
 }
 
 export interface ClusterSummary {
   cluster_id: string;
   cluster_name: string;
+  entity_name?: string;
   name?: string;
   common_tags: string[];
   server_count: number;

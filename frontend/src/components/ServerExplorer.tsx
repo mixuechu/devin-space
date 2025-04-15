@@ -15,11 +15,21 @@ import { cn } from '../lib/utils';
 import { ServerWithExtras, ClusterInfo, APIServer } from '../types/server';
 import { API_URL } from '../services/api';
 
-interface ClusterOption {
-  value: string;
-  label: string;
+interface ClusterMapInfo {
+  name: string;
   count: number;
   common_tags: string[];
+  avg_feature_count: number;
+  avg_tool_count: number;
+}
+
+interface ClusterOption {
+  value: string;
+  cluster_name: string;
+  count: number;
+  common_tags: string[];
+  avg_feature_count: number;
+  avg_tool_count: number;
   serverCount: number;
 }
 
@@ -66,6 +76,7 @@ const ServerExplorer: React.FC = () => {
     const cluster_info: ClusterInfo = {
       cluster_id: server.cluster_info.cluster_id,
       name: server.cluster_info.name,
+      cluster_name: server.cluster_info.name,
       common_tags: server.cluster_info.common_tags || [],
       server_count: (server.cluster_info as any).server_count || 1
     };
@@ -82,30 +93,24 @@ const ServerExplorer: React.FC = () => {
   }, [serversData]);
 
   const clusterOptions = useMemo(() => {
-    const clusterMap = new Map<string, { name: string; count: number }>();
+    // 获取集群数据
+    const clusteringData = staticData.getClustering();
     
-    allServers.forEach(server => {
-      if (server.cluster_info) {
-        const { cluster_id, name } = server.cluster_info;
-        const existing = clusterMap.get(cluster_id);
-        if (existing) {
-          existing.count++;
-        } else {
-          clusterMap.set(cluster_id, { name, count: 1 });
-        }
-      }
-    });
-
-    return Array.from(clusterMap.entries())
-      .map(([value, { name, count }]) => ({
-        value,
-        label: `${name} (${count})`,
-        count,
-        common_tags: [],
-        serverCount: count
-      }))
-      .sort((a, b) => b.count - a.count);
-  }, [allServers]);
+    const clusterSummaries = clusteringData?.cluster_summaries || [];
+    
+    // 从集群摘要构建选项
+    const options = clusterSummaries.map(summary => ({
+      value: summary.cluster_id.toString(),
+      cluster_name: summary.cluster_name,
+      count: summary.size,
+      common_tags: summary.common_tags,
+      avg_feature_count: summary.avg_feature_count,
+      avg_tool_count: summary.avg_tool_count,
+      serverCount: summary.size
+    })).sort((a, b) => b.count - a.count);
+    
+    return options;
+  }, []);
 
   const filteredServers = useMemo(() => {
     return allServers.filter(server => {
@@ -118,7 +123,7 @@ const ServerExplorer: React.FC = () => {
     setClusterFilter(value);
     setPage(1); // Reset to first page when changing filter
     setOpen(false);
-  }, []);
+  }, [clusterOptions]);
 
   // 处理搜索输入变化
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -166,40 +171,31 @@ const ServerExplorer: React.FC = () => {
         
         // 获取集群数据
         const clusteringData = staticData.getClustering();
-        console.log('Clustering Data:', clusteringData);
         
         // 确保使用字符串类型的 cluster_id
         const clusterMap = clusteringData?.cluster_summaries
           ? new Map(clusteringData.cluster_summaries.map(c => [c.cluster_id.toString(), {
               ...c,
-              name: c.cluster_name  // 直接使用 cluster_name 作为 name
+              name: c.cluster_name
             }]))
           : new Map();
-          
-        console.log('Cluster Map size:', clusterMap.size);
-        console.log('Cluster Map entries:', Array.from(clusterMap.entries()));
         
         // 转换 APIServer 到 ServerWithExtras
         const transformedServers: ServerWithExtras[] = (response.servers as APIServer[]).map(server => {
           const clusterIdStr = server.cluster_id?.toString();
           const clusterData = clusterIdStr ? clusterMap.get(clusterIdStr) : undefined;
           
-          console.log('Processing server:', {
-            server_id: server.server_id,
-            cluster_id: server.cluster_id,
-            cluster_id_str: clusterIdStr,
-            has_cluster_info: clusterIdStr ? clusterMap.has(clusterIdStr) : false,
-            cluster_info: clusterData
-          });
-          
-          const clusterInfo = clusterData
-            ? {
-                cluster_id: clusterIdStr!,
-                name: clusterData.name,
-                common_tags: clusterData.common_tags || [],
-                server_count: clusterData.server_count || 1
+          // 使用clusterOptions中的cluster_name作为name
+          const matchingOption = clusterOptions.find(opt => opt.value === clusterIdStr);
+          const clusterInfo = clusterData && matchingOption
+              ? {
+                  cluster_id: clusterIdStr!,
+                  name: matchingOption.cluster_name,
+                  cluster_name: matchingOption.cluster_name,
+                  common_tags: clusterData.common_tags || [],
+                  server_count: clusterData.size || 1
               }
-            : undefined;
+              : undefined;
 
           return {
             ...server,
@@ -236,7 +232,7 @@ const ServerExplorer: React.FC = () => {
     }
     
     const matchedClusters = clusterOptions.filter(option => 
-      option.label.toLowerCase().includes(normalizedQuery)
+      option.cluster_name.toLowerCase().includes(normalizedQuery)
     );
     
     return {
@@ -275,7 +271,7 @@ const ServerExplorer: React.FC = () => {
           // 如果搜索失败，回退到本地过滤
           const normalizedQuery = debouncedSearchValue.trim().toLowerCase();
           const filteredClusters = clusterOptions.filter(option => 
-            option.label.toLowerCase().includes(normalizedQuery)
+            option.cluster_name.toLowerCase().includes(normalizedQuery)
           );
           
           setSearchResults({
@@ -295,7 +291,7 @@ const ServerExplorer: React.FC = () => {
         // 如果发生错误，回退到本地过滤
         const normalizedQuery = debouncedSearchValue.trim().toLowerCase();
         const filteredClusters = clusterOptions.filter(option => 
-          option.label.toLowerCase().includes(normalizedQuery)
+          option.cluster_name.toLowerCase().includes(normalizedQuery)
         );
         
         setSearchResults({
@@ -325,7 +321,7 @@ const ServerExplorer: React.FC = () => {
     if (!searchResults) {
       const normalizedQuery = clusterSearchValue.toLowerCase().trim();
       const filteredClusters = clusterOptions.filter(option =>
-        option.label.toLowerCase().includes(normalizedQuery)
+        option.cluster_name.toLowerCase().includes(normalizedQuery)
       );
 
       return {
@@ -367,6 +363,12 @@ const ServerExplorer: React.FC = () => {
   const handleClusterDropdownPageChange = (newPage: number) => {
     setClusterDropdownPage(newPage);
   };
+
+  console.log('【9】当前选中的集群:', {
+    clusterFilter,
+    availableOptions: clusterOptions,
+    selectedOption: clusterFilter ? clusterOptions.find(option => option.value === clusterFilter) : null
+  });
 
   if (loading) {
     return (
@@ -411,8 +413,27 @@ const ServerExplorer: React.FC = () => {
                 role="combobox"
                 aria-expanded={open}
                 className="w-full justify-between"
+                onClick={() => {
+                  console.log('【10】点击下拉框时的数据:', {
+                    clusterFilter,
+                    selectedOption: clusterFilter ? clusterOptions.find(option => option.value === clusterFilter) : null,
+                    allOptions: clusterOptions
+                  });
+                }}
               >
-                {clusterFilter === null ? 'All Clusters' : clusterOptions.find(option => option.value === clusterFilter)?.label || 'Select Cluster'}
+                <div className="flex items-center gap-2 truncate">
+                  <span className="truncate">
+                    {clusterFilter === null 
+                      ? 'All Clusters' 
+                      : clusterOptions.find(option => option.value === clusterFilter)?.cluster_name || 'Select Cluster'
+                    }
+                  </span>
+                  {clusterFilter !== null && (
+                    <Badge variant="secondary" className="text-xs">
+                      {clusterOptions.find(option => option.value === clusterFilter)?.count || 0} servers
+                    </Badge>
+                  )}
+                </div>
                 <ChevronLeft className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -448,26 +469,67 @@ const ServerExplorer: React.FC = () => {
                         }}
                       >
                         <div className="flex items-center justify-between w-full">
-                          <span>All Clusters</span>
-                          <Badge variant="secondary">{clusterOptions.length} servers</Badge>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">All Clusters</span>
+                            <Badge variant="secondary" className="text-xs">
+                              {clusterOptions.length} clusters
+                            </Badge>
+                          </div>
+                          <Badge variant="outline" className="text-xs">
+                            {clusterOptions.reduce((sum, option) => sum + option.count, 0)} total servers
+                          </Badge>
                         </div>
                       </CommandItem>
-                      {filteredClusterOptions.items.map((option: ClusterOption) => (
-                        <CommandItem
-                          key={option.value}
-                          value={option.value}
-                          onSelect={() => {
-                            handleClusterFilterChange(option.value);
-                            setOpen(false);
-                          }}
-                        >
-                          <div className="flex items-center justify-between w-full">
-                            <div className="flex flex-col">
-                              <span>{option.label}</span>
-                            </div>
-                          </div>
-                        </CommandItem>
-                      ))}
+                      {filteredClusterOptions.items.map((option: ClusterOption) => {
+                        // 获取集群数据
+                        const clusteringData = staticData.getClustering();
+                        const clusterMap = clusteringData?.cluster_summaries
+                            ? new Map(clusteringData.cluster_summaries.map(c => [c.cluster_id.toString(), c]))
+                            : new Map();
+                        
+                        const clusterData = clusterMap.get(option.value);
+                        const clusterName = clusterData?.cluster_name || `Cluster ${option.value}`;
+                        
+                        return (
+                            <CommandItem
+                                key={option.value}
+                                value={option.value}
+                                onSelect={() => {
+                                    handleClusterFilterChange(option.value);
+                                    setOpen(false);
+                                }}
+                            >
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex flex-col gap-1">
+                                        <div className="flex items-center gap-2">
+                                            <span className="font-medium">{option.cluster_name || `Cluster ${option.value}`}</span>
+                                            <Badge variant="secondary" className="text-xs">
+                                                {option.count} servers
+                                            </Badge>
+                                        </div>
+                                        {option.common_tags.length > 0 && (
+                                            <div className="flex flex-wrap gap-1">
+                                                {option.common_tags.slice(0, 3).map((tag, index) => (
+                                                    <Badge key={index} variant="outline" className="text-xs py-0 px-1">
+                                                        {tag}
+                                                    </Badge>
+                                                ))}
+                                                {option.common_tags.length > 3 && (
+                                                    <Badge variant="outline" className="text-xs py-0 px-1">
+                                                        +{option.common_tags.length - 3}
+                                                    </Badge>
+                                                )}
+                                            </div>
+                                        )}
+                                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                            <span>Avg. Features: {option.avg_feature_count.toFixed(1)}</span>
+                                            <span>Avg. Tools: {option.avg_tool_count.toFixed(1)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CommandItem>
+                        );
+                      })}
                     </>
                   )}
                 </CommandGroup>
@@ -666,7 +728,7 @@ const ServerCard: React.FC<ServerCardProps> = React.memo(
           <div className="flex items-center gap-2 truncate">
             <FileText className="h-4 w-4 shrink-0" />
             <span className="truncate">
-              {server.cluster_info?.name || 'Uncategorized'}
+              {server.cluster_info?.cluster_name || server.cluster_info?.name || 'Uncategorized'}
             </span>
           </div>
           <div className="flex items-center gap-2 shrink-0">

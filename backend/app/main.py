@@ -8,6 +8,14 @@ from .core.database import init_db
 
 from app.api.endpoints import router as api_router, processed_servers, process_data
 from app.utils.progress_manager import ProgressManager
+import logging
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="MCP Server Analysis System")
 
@@ -56,16 +64,26 @@ async def get_status():
 @app.on_event("startup")
 async def startup_event():
     """Initialize database and process data on application startup"""
-    init_db()
-    
-    # Process initial data if no servers are loaded
-    if not processed_servers:
-        try:
-            await process_data()
-        except Exception as e:
-            print(f"Error processing initial data: {e}")
-            # Continue startup even if data processing fails
-            pass
+    try:
+        # 初始化数据库
+        init_db()
+        logger.info("数据库初始化完成")
+        
+        # 自动加载数据
+        if not processed_servers:
+            logger.info("开始自动加载数据...")
+            try:
+                await process_data()
+                logger.info("数据加载完成")
+            except Exception as e:
+                logger.error(f"自动加载数据失败: {e}")
+                # 继续启动，即使数据加载失败
+                pass
+        else:
+            logger.info("数据已加载，跳过自动加载")
+    except Exception as e:
+        logger.error(f"启动事件出错: {e}")
+        # 继续启动，不中断服务
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

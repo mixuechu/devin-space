@@ -12,6 +12,7 @@ from functools import lru_cache
 
 from app.models.server import ServerMetrics
 from app.utils.progress_manager import ProgressManager
+from app.core.database import save_cluster, get_cluster, get_all_clusters
 
 class OptimizedClusteringService:
     """
@@ -103,6 +104,67 @@ class OptimizedClusteringService:
         except Exception as e:
             print(f"计算批次相似度时出错: {str(e)}")
             return {}
+    
+    def extract_cluster_name(self, server_titles: List[str]) -> str:
+        """
+        Extract a meaningful cluster name from a list of server titles.
+        
+        Args:
+            server_titles: List of server titles in the cluster
+            
+        Returns:
+            A descriptive cluster name
+        """
+        if not server_titles:
+            return "Empty Cluster"
+            
+        # Clean and normalize titles
+        titles = [
+            title.split(' - ')[0].strip() if ' - ' in title else title 
+            for title in server_titles
+        ]
+        
+        # Common words to exclude from cluster names
+        stop_words = {
+            'server', 'mcp', 'helper', 'tools', 'api', 'service',
+            'platform', 'framework', 'library', 'sdk', 'client',
+            'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at',
+            'to', 'for', 'of', 'with', 'by'
+        }
+        
+        # Get word frequencies
+        word_freq = defaultdict(int)
+        for title in titles:
+            # Split on spaces and special characters
+            words = re.findall(r'\b\w+\b', title.lower())
+            for word in words:
+                if word not in stop_words and len(word) > 2:  # Only count meaningful words
+                    word_freq[word] = word_freq.get(word, 0) + 1
+        
+        # Find the most representative words
+        common_words = sorted(
+            word_freq.items(),
+            key=lambda x: (x[1], len(x[0]), x[0]),  # Sort by frequency, then word length, then alphabetically
+            reverse=True
+        )[:2]  # Take top 2 most common words
+        
+        if common_words:
+            # Create name from common words, capitalizing each word
+            name_parts = [word.title() for word, _ in common_words]
+            cluster_name = ' '.join(name_parts)
+            
+            # Add a descriptive suffix based on the cluster's main characteristic
+            suffixes = ['Services', 'Tools', 'Framework', 'Platform']
+            most_common_suffix = max(
+                suffixes,
+                key=lambda suffix: sum(1 for title in titles if suffix.lower() in title.lower())
+            )
+            
+            return f"{cluster_name} {most_common_suffix}"
+        
+        # Fallback: use the shortest, non-empty title as the cluster name
+        shortest_title = min((t for t in titles if t), key=len, default="Unknown Cluster")
+        return shortest_title.title()  # Capitalize the first letter of each word
     
     def cluster_servers(self, servers: List[ServerMetrics]) -> List[ServerMetrics]:
         """
@@ -198,17 +260,63 @@ class OptimizedClusteringService:
         
         # 6. 更新结果
         print("正在更新最终结果...")
+        cluster_servers_map = defaultdict(list)  # 用于收集每个集群的服务器
+        
         for i, server in enumerate(servers):
             cluster_id = clusters_map[i]
             self.clusters[server.server_id] = cluster_id
             server.cluster_id = cluster_id
+            cluster_servers_map[cluster_id].append(server)
+        
+        # 为每个集群生成名称并保存到数据库
+        for cluster_id, cluster_servers in cluster_servers_map.items():
+            # 获取集群中所有服务器的标题
+            titles = [server.title for server in cluster_servers]
+            cluster_name = self.extract_cluster_name(titles)
+            print(f"Cluster name: {cluster_name}")
+            # 计算集群的其他统计信息
+            avg_word_count = np.mean([server.word_count for server in cluster_servers])
+            avg_feature_count = np.mean([server.feature_count for server in cluster_servers])
+            avg_tool_count = np.mean([server.tool_count for server in cluster_servers])
             
-            if cluster_id not in self.cluster_data:
-                self.cluster_data[cluster_id] = {
-                    'entity_name': self.extract_entity_name(server.title).lower(),
-                    'servers': []
-                }
-            self.cluster_data[cluster_id]['servers'].append(server.server_id)
+            # 收集所有标签
+            all_tags = []
+            for server in cluster_servers:
+                all_tags.extend(server.tags)
+            
+            tag_counts = {}
+            for tag in all_tags:
+                tag_counts[tag] = tag_counts.get(tag, 0) + 1
+            
+            common_tags = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+            common_tags = [tag for tag, _ in common_tags]
+            
+            # 创建集群数据
+            cluster_data = {
+                'cluster_id': cluster_id,
+                'cluster_name': cluster_name,
+                'size': len(cluster_servers),
+                'servers': [{"id": server.server_id, "title": server.title} for server in cluster_servers],
+                'avg_word_count': float(avg_word_count),
+                'avg_feature_count': float(avg_feature_count),
+                'avg_tool_count': float(avg_tool_count),
+                'common_tags': common_tags
+            }
+            
+            # 保存到数据库
+            print(f"[Clustering] Saving cluster {cluster_id} ({cluster_name}) with {len(cluster_servers)} servers")  # Debug log
+            try:
+                save_cluster(cluster_data)
+                print(f"[Clustering] Successfully saved cluster {cluster_id}")  # Debug log
+            except Exception as e:
+                print(f"[Clustering] Error saving cluster {cluster_id}: {str(e)}")  # Debug log
+                raise
+            
+            # 更新内存中的数据
+            self.cluster_data[cluster_id] = {
+                'entity_name': cluster_name,
+                'servers': [server.server_id for server in cluster_servers]
+            }
         
         # 7. 保存结果
         self.progress_manager.save_intermediate_result('clustering', {
@@ -217,15 +325,6 @@ class OptimizedClusteringService:
             'next_cluster_id': self.next_cluster_id
         })
         self.progress_manager.complete_stage('clustering')
-        
-        # 8. 预先计算并缓存可视化数据和摘要
-        print("正在生成并缓存可视化数据...")
-        visualization_data = self._generate_visualization_data_internal(servers)
-        self.progress_manager.save_intermediate_result('visualization', visualization_data)
-        
-        print("正在生成并缓存聚类摘要...")
-        cluster_summaries = self._get_cluster_summary_internal(servers)
-        self.progress_manager.save_intermediate_result('summaries', cluster_summaries)
         
         print(f"聚类完成! 用时: {time.time() - start_time:.2f}秒")
         print(f"共生成 {len(self.cluster_data)} 个聚类")
@@ -261,10 +360,17 @@ class OptimizedClusteringService:
                 if count >= len(cluster_servers) * 0.5
             ]
             
-            summaries.append({
+            # 获取实体名称
+            entity_name = cluster_info['entity_name']
+            print(f"Generating summary for cluster {cluster_id}:")
+            print(f"  Entity name from cluster_info: {entity_name}")
+            print(f"  First server title: {cluster_servers[0].title if cluster_servers else 'No servers'}")
+            
+            summary = {
                 'cluster_id': cluster_id,
                 'size': len(cluster_servers),
-                'entity_name': cluster_info['entity_name'],
+                'entity_name': entity_name,
+                'cluster_name': entity_name.title() if entity_name else f"Cluster {cluster_id}",  # 添加 cluster_name
                 'servers': [
                     {'id': s.server_id, 'title': s.title}
                     for s in cluster_servers
@@ -273,7 +379,10 @@ class OptimizedClusteringService:
                 'avg_feature_count': round(avg_feature_count, 2),
                 'avg_tool_count': round(avg_tool_count, 2),
                 'common_tags': common_tags
-            })
+            }
+            
+            print(f"  Generated summary: {summary}")
+            summaries.append(summary)
         
         return summaries
 

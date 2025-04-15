@@ -163,7 +163,18 @@ export async function clusterServers(similarityThreshold: number = 0.7): Promise
     },
     body: JSON.stringify({ similarity_threshold: similarityThreshold }),
   });
-  return handleResponse<ClusteringResponse>(response);
+  const data = await handleResponse<ClusteringResponse>(response);
+  console.log('【API原始数据】Clustering API Response:', {
+    cluster_count: data.cluster_count,
+    cluster_summaries: data.cluster_summaries.map(summary => ({
+      cluster_id: summary.cluster_id,
+      cluster_name: summary.cluster_name,
+      size: summary.size,
+      servers: summary.servers.slice(0, 3),  // 只显示前3个服务器用于调试
+      common_tags: summary.common_tags
+    }))
+  });
+  return data;
 }
 
 export async function evaluateServers(): Promise<EvaluationResponse> {

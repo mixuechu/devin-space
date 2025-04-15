@@ -100,42 +100,91 @@ class ClusteringService:
     
     def get_cluster_summary(self, servers: List[ServerMetrics]) -> List[Dict[str, Any]]:
         """
-        Generate summary information for each cluster.
-        
-        Args:
-            servers: List of ServerMetrics objects.
-            
-        Returns:
-            List of dictionaries containing cluster summaries.
+        Generate summaries for each cluster including metrics and common characteristics
         """
-        if self.cluster_labels is None:
-            raise ValueError("Clustering has not been performed. Call cluster_servers() first.")
-        
         cluster_summaries = []
-        
-        for cluster_id in range(self.n_clusters):
-            cluster_servers = [server for server in servers if server.cluster_id == cluster_id]
-            
+        existing_names = set()  # 用于追踪已使用的名称
+
+        for cluster_id, cluster_servers in enumerate(self.clusters):
             if not cluster_servers:
                 continue
+
+            # 计算基础指标
+            titles = [server.title for server in cluster_servers]
+            word_counts = [len(server.title.split()) for server in cluster_servers]
+            avg_word_count = sum(word_counts) / len(word_counts)
             
-            avg_word_count = np.mean([server.word_count for server in cluster_servers])
-            avg_feature_count = np.mean([server.feature_count for server in cluster_servers])
-            avg_tool_count = np.mean([server.tool_count for server in cluster_servers])
+            feature_counts = [len(server.features) for server in cluster_servers]
+            avg_feature_count = sum(feature_counts) / len(feature_counts)
             
-            all_tags = []
-            for server in cluster_servers:
-                all_tags.extend(server.tags)
+            tool_counts = [len(server.tools) for server in cluster_servers]
+            avg_tool_count = sum(tool_counts) / len(tool_counts)
             
+            # 提取共同标签
             tag_counts = {}
-            for tag in all_tags:
-                tag_counts[tag] = tag_counts.get(tag, 0) + 1
+            for server in cluster_servers:
+                for tag in server.tags:
+                    tag_counts[tag] = tag_counts.get(tag, 0) + 1
             
-            common_tags = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)[:5]
-            common_tags = [tag for tag, count in common_tags]
-            
+            # 选择出现在至少50%服务器中的标签
+            threshold = len(cluster_servers) * 0.5
+            common_tags = [tag for tag, count in tag_counts.items() if count >= threshold]
+
+            # 确定集群复杂度
+            is_advanced = avg_tool_count > 5 or avg_feature_count > 10
+            complexity_prefix = "Advanced" if is_advanced else "Basic"
+
+            # 生成基础名称
+            base_name = ""
+            if len(titles) > 1:
+                # 尝试找到共同前缀
+                first_title = titles[0]
+                for i in range(len(first_title)):
+                    if all(title.startswith(first_title[:i+1]) for title in titles[1:]):
+                        common_prefix = first_title[:i+1].strip()
+                        if common_prefix:
+                            base_name = common_prefix
+                    else:
+                        break
+
+            # 如果没有找到有效的共同前缀，使用最常见的词
+            if not base_name:
+                words = []
+                for title in titles:
+                    words.extend(title.lower().split())
+                word_counts = {}
+                for word in words:
+                    if len(word) > 2:  # 跳过短词
+                        word_counts[word] = word_counts.get(word, 0) + 1
+                most_common_words = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)[:2]
+                if most_common_words:
+                    base_name = ' '.join(word.title() for word, _ in most_common_words)
+
+            # 如果还是没有名称，使用第一个标题
+            if not base_name:
+                base_name = titles[0][:30]
+
+            # 生成完整的集群名称
+            cluster_name = f"{complexity_prefix} {base_name} Services"
+
+            # 处理重名情况
+            original_name = cluster_name
+            counter = 1
+            while cluster_name in existing_names:
+                # 尝试添加统计信息
+                if counter == 1:
+                    cluster_name = f"{original_name} ({int(avg_tool_count)} Tools)"
+                elif counter == 2:
+                    cluster_name = f"{original_name} ({int(avg_feature_count)} Features)"
+                else:
+                    cluster_name = f"{original_name} (Group {cluster_id})"
+                counter += 1
+
+            existing_names.add(cluster_name)
+
             summary = {
                 "cluster_id": cluster_id,
+                "cluster_name": cluster_name,
                 "size": len(cluster_servers),
                 "servers": [{"id": server.server_id, "title": server.title} for server in cluster_servers],
                 "avg_word_count": avg_word_count,

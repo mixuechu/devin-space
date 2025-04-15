@@ -52,30 +52,42 @@ class EntityLinkingService:
     
     def extract_entity_name(self, title: str) -> str:
         """
-        Extract the main entity name from a server title.
+        Extract a descriptive entity name from a server title.
         
         Args:
             title: Server title.
             
         Returns:
-            Main entity name.
+            Descriptive entity name.
         """
+        # First try to split by ' - ' to get the main part
+        parts = title.split(' - ')
+        if len(parts) > 1:
+            return parts[0].strip()
+            
+        # If no ' - ' found, try to create a descriptive name
+        words = title.split()
+        
+        # Common suffixes to remove
         common_suffixes = [
             "server", "mcp", "helper", "tools", "api", "service", 
             "platform", "framework", "library", "sdk", "client"
         ]
         
-        title_lower = title.lower()
+        # Remove common suffixes from the end
+        while words and words[-1].lower() in common_suffixes:
+            words.pop()
+            
+        if not words:
+            return title
+            
+        # Join remaining words to create a descriptive name
+        descriptive_name = ' '.join(words)
         
-        for suffix in common_suffixes:
-            if title_lower.endswith(f" {suffix}"):
-                return title[:-len(suffix)-1].strip()
+        # Capitalize first letter of each word
+        descriptive_name = ' '.join(word.capitalize() for word in descriptive_name.split())
         
-        words = title.split()
-        if len(words) > 1:
-            return words[0]
-        
-        return title
+        return descriptive_name
     
     def calculate_title_similarity(self, title1: str, title2: str) -> float:
         """
@@ -337,7 +349,7 @@ class EntityLinkingService:
     
     def get_cluster_summary(self, servers: List[ServerMetrics]) -> List[Dict[str, Any]]:
         """
-        Generate summary information for each entity cluster.
+        Generate summary information for each cluster.
         
         Args:
             servers: List of ServerMetrics objects.
@@ -345,21 +357,14 @@ class EntityLinkingService:
         Returns:
             List of dictionaries containing cluster summaries.
         """
-        if any(server.cluster_id is None for server in servers):
-            self.cluster_servers(servers)
+        if self.entity_clusters is None:
+            raise ValueError("Entity linking has not been performed. Call link_entities() first.")
         
         cluster_summaries = []
         
-        clusters = defaultdict(list)
-        for server in servers:
-            if server.cluster_id is not None:
-                clusters[server.cluster_id].append(server)
-        
-        for cluster_id, cluster_servers in clusters.items():
+        for entity_name, cluster_servers in self.entity_clusters.items():
             if not cluster_servers:
                 continue
-            
-            entity_name = self.extract_entity_name(cluster_servers[0].title)
             
             avg_word_count = np.mean([server.word_count for server in cluster_servers])
             avg_feature_count = np.mean([server.feature_count for server in cluster_servers])
@@ -377,8 +382,8 @@ class EntityLinkingService:
             common_tags = [tag for tag, count in common_tags]
             
             summary = {
-                "cluster_id": cluster_id,
-                "entity_name": entity_name,
+                "cluster_id": hash(entity_name) % (2**32),  # Generate a stable cluster ID
+                "cluster_name": entity_name,  # Use entity_name as cluster_name
                 "size": len(cluster_servers),
                 "servers": [{"id": server.server_id, "title": server.title} for server in cluster_servers],
                 "avg_word_count": avg_word_count,

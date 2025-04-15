@@ -11,6 +11,7 @@ import { Button } from './components/ui/button';
 import { generateClusterNames } from './utils/clusterUtils';
 import { ServerWithExtras } from './types/server';
 import { Server as ServerType } from './types';
+import { ClearCacheButton } from './components/ClearCacheButton';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -111,6 +112,7 @@ const App: React.FC = () => {
           const clusterInfo = {
             cluster_id: cluster.cluster_id,
             name: cluster.cluster_name,
+            cluster_name: cluster.cluster_name,
             common_tags: cluster.common_tags,
             size: cluster.size
           };
@@ -235,6 +237,8 @@ const App: React.FC = () => {
           </TabsContent>
         </Tabs>
       </main>
+      
+      <ClearCacheButton />
       
       <footer className="border-t mt-auto">
         <div className="container mx-auto py-4">
