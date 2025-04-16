@@ -115,7 +115,7 @@ def get_all_clusters() -> List[Dict[str, Any]]:
 
 def get_servers(page: int = 1, page_size: int = 30, cluster_id: Optional[str] = None) -> Dict:
     """Get paginated servers with optional cluster filter"""
-    query = {'cluster_id': cluster_id} if cluster_id else {}
+    query = {'cluster_id': cluster_id} if cluster_id and cluster_id.strip() else {}
     
     # Get servers with pagination
     servers = list(servers_collection.find(

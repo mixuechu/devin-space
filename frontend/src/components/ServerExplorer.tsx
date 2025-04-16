@@ -24,13 +24,14 @@ interface ClusterMapInfo {
 }
 
 interface ClusterOption {
-  value: string;
+  cluster_id: number;
   cluster_name: string;
-  count: number;
+  size: number;
   common_tags: string[];
   avg_feature_count: number;
   avg_tool_count: number;
-  serverCount: number;
+  avg_word_count: number;
+  servers: Array<{ id: string; title: string; }>;
 }
 
 interface ClusterSearchResult {
@@ -96,18 +97,14 @@ const ServerExplorer: React.FC = () => {
     // 获取集群数据
     const clusteringData = staticData.getClustering();
     
+    console.log('【6】Clustering data:', clusteringData);
+    
     const clusterSummaries = clusteringData?.cluster_summaries || [];
     
-    // 从集群摘要构建选项
-    const options = clusterSummaries.map(summary => ({
-      value: summary.cluster_id.toString(),
-      cluster_name: summary.cluster_name,
-      count: summary.size,
-      common_tags: summary.common_tags,
-      avg_feature_count: summary.avg_feature_count,
-      avg_tool_count: summary.avg_tool_count,
-      serverCount: summary.size
-    })).sort((a, b) => b.count - a.count);
+    // 直接使用集群摘要数据，不需要转换
+    const options = clusterSummaries;
+    
+    console.log('【7】Cluster options:', options);
     
     return options;
   }, []);
@@ -120,10 +117,11 @@ const ServerExplorer: React.FC = () => {
   }, [allServers, clusterFilter]);
 
   const handleClusterFilterChange = useCallback((value: string | null) => {
+    console.log('【1】handleClusterFilterChange called with value:', value);
     setClusterFilter(value);
     setPage(1); // Reset to first page when changing filter
     setOpen(false);
-  }, [clusterOptions]);
+  }, []);
 
   // 处理搜索输入变化
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,6 +157,14 @@ const ServerExplorer: React.FC = () => {
   useEffect(() => {
     const fetchServers = async () => {
       try {
+        console.log('【2】fetchServers called with:', {
+          page,
+          pageSize,
+          clusterFilter,
+          debouncedSearchTerm,
+          totalPages,
+          totalServers
+        });
         setLoading(true);
         setError(null);
         
@@ -168,6 +174,14 @@ const ServerExplorer: React.FC = () => {
           clusterFilter || undefined,
           debouncedSearchTerm || undefined
         );
+        
+        console.log('【3】Server response:', {
+          receivedServers: response.servers.length,
+          total: response.total,
+          page: response.page,
+          pageSize: response.page_size,
+          calculatedPages: Math.ceil(response.total / response.page_size)
+        });
         
         // 获取集群数据
         const clusteringData = staticData.getClustering();
@@ -186,7 +200,7 @@ const ServerExplorer: React.FC = () => {
           const clusterData = clusterIdStr ? clusterMap.get(clusterIdStr) : undefined;
           
           // 使用clusterOptions中的cluster_name作为name
-          const matchingOption = clusterOptions.find(opt => opt.value === clusterIdStr);
+          const matchingOption = clusterOptions.find(opt => opt.cluster_id.toString() === clusterIdStr);
           const clusterInfo = clusterData && matchingOption
               ? {
                   cluster_id: clusterIdStr!,
@@ -348,6 +362,13 @@ const ServerExplorer: React.FC = () => {
   };
   
   const handlePageChange = (newPage: number) => {
+    console.log('【Page Change】', {
+      currentPage: page,
+      newPage,
+      totalPages,
+      totalServers,
+      currentServersLength: servers.length
+    });
     setPage(newPage);
   };
 
@@ -364,11 +385,6 @@ const ServerExplorer: React.FC = () => {
     setClusterDropdownPage(newPage);
   };
 
-  console.log('【9】当前选中的集群:', {
-    clusterFilter,
-    availableOptions: clusterOptions,
-    selectedOption: clusterFilter ? clusterOptions.find(option => option.value === clusterFilter) : null
-  });
 
   if (loading) {
     return (
@@ -413,24 +429,17 @@ const ServerExplorer: React.FC = () => {
                 role="combobox"
                 aria-expanded={open}
                 className="w-full justify-between"
-                onClick={() => {
-                  console.log('【10】点击下拉框时的数据:', {
-                    clusterFilter,
-                    selectedOption: clusterFilter ? clusterOptions.find(option => option.value === clusterFilter) : null,
-                    allOptions: clusterOptions
-                  });
-                }}
               >
                 <div className="flex items-center gap-2 truncate">
                   <span className="truncate">
                     {clusterFilter === null 
                       ? 'All Clusters' 
-                      : clusterOptions.find(option => option.value === clusterFilter)?.cluster_name || 'Select Cluster'
+                      : clusterOptions.find(option => option.cluster_id.toString() === clusterFilter)?.cluster_name || 'Select Cluster'
                     }
                   </span>
                   {clusterFilter !== null && (
                     <Badge variant="secondary" className="text-xs">
-                      {clusterOptions.find(option => option.value === clusterFilter)?.count || 0} servers
+                      {clusterOptions.find(option => option.cluster_id.toString() === clusterFilter)?.size || 0} servers
                     </Badge>
                   )}
                 </div>
@@ -463,7 +472,7 @@ const ServerExplorer: React.FC = () => {
                       <CommandItem
                         key="all"
                         value="all"
-                        onSelect={() => {
+                        onSelect={(currentValue) => {
                           handleClusterFilterChange(null);
                           setOpen(false);
                         }}
@@ -476,60 +485,50 @@ const ServerExplorer: React.FC = () => {
                             </Badge>
                           </div>
                           <Badge variant="outline" className="text-xs">
-                            {clusterOptions.reduce((sum, option) => sum + option.count, 0)} total servers
+                            {clusterOptions.reduce((sum, option) => sum + option.size, 0)} total servers
                           </Badge>
                         </div>
                       </CommandItem>
-                      {filteredClusterOptions.items.map((option: ClusterOption) => {
-                        // 获取集群数据
-                        const clusteringData = staticData.getClustering();
-                        const clusterMap = clusteringData?.cluster_summaries
-                            ? new Map(clusteringData.cluster_summaries.map(c => [c.cluster_id.toString(), c]))
-                            : new Map();
-                        
-                        const clusterData = clusterMap.get(option.value);
-                        const clusterName = clusterData?.cluster_name || `Cluster ${option.value}`;
-                        
-                        return (
-                            <CommandItem
-                                key={option.value}
-                                value={option.value}
-                                onSelect={() => {
-                                    handleClusterFilterChange(option.value);
-                                    setOpen(false);
-                                }}
-                            >
-                                <div className="flex items-center justify-between w-full">
-                                    <div className="flex flex-col gap-1">
-                                        <div className="flex items-center gap-2">
-                                            <span className="font-medium">{option.cluster_name || `Cluster ${option.value}`}</span>
-                                            <Badge variant="secondary" className="text-xs">
-                                                {option.count} servers
-                                            </Badge>
+                      {filteredClusterOptions.items.map((option: ClusterOption) => (
+                        <CommandItem
+                            key={option.cluster_id}
+                            value={option.cluster_name}
+                            onSelect={() => {
+                                console.log('【Selected】Cluster option:', option);
+                                handleClusterFilterChange(option.cluster_id.toString());
+                                setOpen(false);
+                            }}
+                        >
+                            <div className="flex items-center justify-between w-full">
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-medium">{option.cluster_name}</span>
+                                        <Badge variant="secondary" className="text-xs">
+                                            {option.size} servers
+                                        </Badge>
+                                    </div>
+                                    {option.common_tags?.length > 0 && (
+                                        <div className="flex flex-wrap gap-1">
+                                            {option.common_tags.slice(0, 3).map((tag, index) => (
+                                                <Badge key={index} variant="outline" className="text-xs py-0 px-1">
+                                                    {tag}
+                                                </Badge>
+                                            ))}
+                                            {option.common_tags.length > 3 && (
+                                                <Badge variant="outline" className="text-xs py-0 px-1">
+                                                    +{option.common_tags.length - 3}
+                                                </Badge>
+                                            )}
                                         </div>
-                                        {option.common_tags.length > 0 && (
-                                            <div className="flex flex-wrap gap-1">
-                                                {option.common_tags.slice(0, 3).map((tag, index) => (
-                                                    <Badge key={index} variant="outline" className="text-xs py-0 px-1">
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                                {option.common_tags.length > 3 && (
-                                                    <Badge variant="outline" className="text-xs py-0 px-1">
-                                                        +{option.common_tags.length - 3}
-                                                    </Badge>
-                                                )}
-                                            </div>
-                                        )}
-                                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                                            <span>Avg. Features: {option.avg_feature_count.toFixed(1)}</span>
-                                            <span>Avg. Tools: {option.avg_tool_count.toFixed(1)}</span>
-                                        </div>
+                                    )}
+                                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                        <span>Avg. Features: {option.avg_feature_count?.toFixed(1)}</span>
+                                        <span>Avg. Tools: {option.avg_tool_count?.toFixed(1)}</span>
                                     </div>
                                 </div>
-                            </CommandItem>
-                        );
-                      })}
+                            </div>
+                        </CommandItem>
+                      ))}
                     </>
                   )}
                 </CommandGroup>
@@ -568,7 +567,7 @@ const ServerExplorer: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        {servers.slice((page - 1) * pageSize, page * pageSize).map((server) => (
+        {servers.map((server) => (
           <ServerCard
             key={server.server_id}
             server={server}
@@ -593,14 +592,14 @@ const ServerExplorer: React.FC = () => {
             </Button>
             
             <div className="text-sm">
-              Page {page} of {totalPages}
+              Page {page} of {Math.ceil(totalServers / pageSize)}
             </div>
             
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
-              disabled={page >= totalPages}
+              onClick={() => handlePageChange(Math.min(Math.ceil(totalServers / pageSize), page + 1))}
+              disabled={page >= Math.ceil(totalServers / pageSize)}
             >
               <ChevronRight className="h-4 w-4" />
               <span className="sr-only">Next Page</span>

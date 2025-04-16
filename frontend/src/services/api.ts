@@ -140,11 +140,14 @@ export async function getServers(
     queryParams.append('search', searchTerm);
   }
   
+  console.log('【4】Sending request to:', `${API_URL}/api/servers?${queryParams}`);
   const response = await fetch(`${API_URL}/api/servers?${queryParams}`);
   if (!response.ok) {
     throw new Error('Failed to fetch servers');
   }
-  return response.json();
+  const data = await response.json();
+  console.log('【5】API response:', data);
+  return data;
 }
 
 export async function getServerDetails(serverId: string): Promise<Server> {

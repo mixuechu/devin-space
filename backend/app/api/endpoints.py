@@ -172,7 +172,7 @@ async def get_servers(
     page: Optional[int] = 1,
     page_size: Optional[int] = 30,
     search: Optional[str] = None,
-    cluster_id: Optional[int] = None
+    cluster_id: Optional[str] = None
 ):
     """
     获取服务器列表，支持分页和搜索
@@ -190,8 +190,8 @@ async def get_servers(
     filtered_servers = processed_servers
     
     # 应用集群过滤
-    if cluster_id is not None:
-        filtered_servers = [s for s in filtered_servers if s.cluster_id == cluster_id]
+    if cluster_id is not None and cluster_id.strip():
+        filtered_servers = [s for s in filtered_servers if str(s.cluster_id) == cluster_id]
     
     # 改进的搜索逻辑
     if search:
