@@ -1,0 +1,6333 @@
+[
+  {
+    "信息名": "github_personal_access_token",
+    "信息类型": "token",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "amap_maps_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$7.00/1000 requests（Dynamic Maps Essentials），$2.00/1000 requests（Static Maps Essentials），$0.60/1000 requests（2D Map Tiles Essentials）等，具体价格视API类型和用量分档",
+    "免费额度": "Essentials类API每月每SKU 10,000次免费（部分如2D Map Tiles为100,000次），Pro类API每月每SKU 5,000次免费，Enterprise类API每月每SKU 1,000次免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "baidu_map_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "未知",
+    "免费额度": "有免费额度，具体额度需根据调用类型和服务在百度地图开放平台控制台查看，不同API和服务有不同的免费调用量",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "baidu_maps_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "tavily_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.008/credit（按量付费）；套餐价格$30/4000 credits、$100/15000 credits、$220/38000 credits、$500/100000 credits，企业定制价格",
+    "免费额度": "1,000 credits/月，免费，无需信用卡",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "hyper3d.ai",
+    "信息类型": "API access（API Key 或 Token，结合上下文推断为API相关凭证）",
+    "是否找到价格": "有免费额度",
+    "价格": "基础功能免费，高级功能需付费（Pro/Enterprise Plan），具体价格未公开",
+    "免费额度": "Free Plan：基本AI模型生成和渲染，有限的导出格式和分辨率",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "fal.ai",
+    "信息类型": "API key/Session/Token（API调用计费，支持API集成）",
+    "是否找到价格": "有免费额度",
+    "价格": "GPU计费：如H100 $1.89/h，A100 $0.99/h，或按输出计费如$0.025/MP（图片），$0.095/秒（视频）等，具体视模型和用法而定",
+    "免费额度": "新用户有免费额度和免费API调用（free credits），可免费试用AI模型",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "auth0",
+    "信息类型": "api/身份认证平台/saas",
+    "是否找到价格": "有免费额度",
+    "价格": "免费；Essentials $35/月起，Professional $240/月起，Enterprise定制价格；B2C和B2B场景下价格不同，按月活跃用户数阶梯计费",
+    "免费额度": "免费计划：最多7,500月活跃用户，2个社交身份提供商",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google login",
+    "信息类型": "token/session",
+    "是否找到价格": "有免费额度",
+    "价格": "按月活跃用户（MAU）计费，0-49,999免费，50,000-99,999 $0.0055/MAU，100,000-999,999 $0.0046/MAU，1,000,000-9,999,999 $0.0032/MAU，10,000,000+ $0.0025/MAU；OpenID Connect/SAML 0-49免费，50+ $0.015/MAU；短信认证每条$0.01起，前10条/天免费",
+    "免费额度": "0-49,999 MAU免费（主流登录方式）；OpenID Connect/SAML 0-49 MAU免费；短信认证每天前10条免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ai provider api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "aws_access_key_id",
+    "信息类型": "id（用于AWS API身份认证）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "aws_secret_access_key",
+    "信息类型": "access key/secret，用于API鉴权，属于密钥类型（可推断为API key或secret）",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.40/secret/月，$0.05/10,000 API calls",
+    "免费额度": "30天免费试用（首次存储secret后），KMS加密可用aws/secretsmanager托管密钥免费，KMS API有20,000次/月免费额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "aws_region",
+    "信息类型": "region",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "perplexity_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.01 per query（Pay-As-You-Go）；或按模型不同，$1-$3/百万输入tokens，$1-$15/百万输出tokens，$5-$14/千次请求等；Pro订阅$10/月",
+    "免费额度": "有免费额度（Free Tier，提供基本功能和有限用量，具体额度未详述）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "agentql_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.02 per API call after免费额度（Starter）；$0.015 per API call after免费额度（Professional）",
+    "免费额度": "Starter: 50 free API calls/month；Professional: 10,000 API calls/month；注册试用有300 free API calls",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "openai",
+    "信息类型": "api pricing",
+    "是否找到价格": "是",
+    "价格": "GPT-4.1: Input: $2.00/1M tokens, Cached input: $0.50/1M tokens, Output: $8.00/1M tokens; GPT-4.1 mini: Input: $0.40/1M tokens, Cached input: $0.10/1M tokens, Output: $1.60/1M tokens; GPT-4.1 nano: Input: $0.10/1M tokens, Cached input: $0.025/1M tokens, Output: $0.40/1M tokens; OpenAI o3: Input: $10.00/1M tokens, Cached input: $2.50/1M tokens, Output: $40.00/1M tokens; OpenAI o4-mini: Input: $1.10/1M tokens, Cached input: $0.275/1M tokens, Output: $4.40/1M tokens; Fine-tuning GPT-4.1: $3.00/1M tokens, training $25.00/1M tokens",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "gemini",
+    "信息类型": "api key/session/token/region/id等，尽量从api_name或上下文推断",
+    "是否找到价格": "有免费额度",
+    "价格": "多种计费方式，具体如下：\n- 免费额度：免费试用部分模型和功能\n- 付费API（按百万tokens计费）：\n  - Gemini 1.5 Flash：输入$0.075/百万tokens，输出$0.30/百万tokens，缓存$0.01875/百万tokens\n  - Gemini 1.5 Flash-8B：输入$0.0375/百万tokens，输出$0.15/百万tokens，缓存$0.01/百万tokens\n  - Gemini 1.5 Pro：输入$1.25/百万tokens，输出$5.00/百万tokens，缓存$0.3125/百万tokens\n  - Gemini 2.5 Flash：输入$0.15/百万tokens（文本/图片/视频），$1.00/百万tokens（音频）；输出$0.60/百万tokens（非thinking），$3.50/百万tokens（thinking）\n  - Gemini 2.0 Flash：输入$0.10/百万tokens（文本/图片/视频），$0.70/百万tokens（音频）；输出$0.40/百万tokens\n  - Gemini 2.0 Flash-Lite：输入$0.075/百万tokens，输出$0.30/百万tokens\n  - Gemini 1.0 Pro：输入$0.50/百万tokens，输出$1.50/百万tokens\n- 个人/团队订阅：\n  - Gemini Advanced：$19.99/月（含2TB存储，首月免费）\n  - Gemini Business：$20/月/席（1年起）\n  - Gemini Enterprise：$30/月/席（1年起）",
+    "免费额度": "API有免费额度（免费层），可免费试用部分模型（如1.5 Flash、2.0 Flash等），Google AI Studio在所有可用国家免费。Gemini Advanced首月免费。",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "anthropic",
+    "信息类型": "api",
+    "是否找到价格": "是",
+    "价格": "Claude 3.5 Sonnet API: Input: $3.00 per million tokens, Output: $15.00 per million tokens；Claude Pro: $20 per month",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "claude",
+    "信息类型": "api/模型调用/计费",
+    "是否找到价格": "是",
+    "价格": "$3 per million input tokens, $15 per million output tokens",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "poe",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "openai api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "claude/openrouter api key",
+    "信息类型": "api key",
+    "是否找到价格": "是",
+    "价格": "$0.010/response（Claude Sonnet，通过OpenRouter）",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "qwen api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$1.6/百万输入tokens（qwen-max），$0.4/百万输入tokens（qwen-plus），$0.05/百万输入tokens（qwen-turbo）；输出tokens分别为$6.4/$1.2/$0.2/百万",
+    "免费额度": "新用户有免费额度，具体额度可在官方文档或控制台查看；Novita AI平台新用户可领取$10免费额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "deepseek api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "glm api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "¥0.05 / 1k tokens（GLM-4-Plus），¥0.1 / 1k tokens（GLM-4-0520）",
+    "免费额度": "新用户注册后享有2000免费Tokens的资源包以及400次图像和视频资源包的使用权",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ollama api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "openrouter api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "exa_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "Search: $5/1k requests (auto/neural), $2.5/1k requests (SERP); Contents: $1/1k pages; Answer: $5/1k answers",
+    "免费额度": "$10 in free credits",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "dify app key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$59/工作区/月（Professional），$159/工作区/月（Team），免费（Sandbox）",
+    "免费额度": "免费试用包含200条OpenAI调用或200条消息",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "openai-compatible api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "如gpt-4-0125-preview: $10.00/1M输入tokens, $30.00/1M输出tokens；gpt-3.5-turbo: $3.00/1M输入tokens, $6.00/1M输出tokens；Whisper: $0.006/分钟；DALL·E 3: $0.04-$0.12/图片；TTS: $15.00-$30.00/1M字符；Embedding: $0.02-$0.13/1M tokens",
+    "免费额度": "OpenAI允许一定量的免费API使用，具体额度未在文本中明确说明",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "openrouter",
+    "信息类型": "api key",
+    "是否找到价格": "是",
+    "价格": "如$0.001-$0.015/response，部分模型$0.035-$0.8/月",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "requesty",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "未知",
+    "免费额度": "$6 free credits",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "figma api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "企业版（Enterprise）每月每用户$75，包含REST API集成；Starter计划免费，Professional $15/月/用户，Organization $45/月/用户",
+    "免费额度": "Starter计划免费，学生和教育用户免费，部分API功能可能在免费计划下可用",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "firecrawl_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$16/月起，按套餐计费，部分API按消耗credits计价",
+    "免费额度": "免费计划：500 credits（可用于500次/scrape，每月），$0，无需信用卡",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "azure",
+    "信息类型": "api管理/region/价格查询api",
+    "是否找到价格": "有免费额度",
+    "价格": "API Management（Consumption层）0-1百万API操作免费，超出后按每1万次API操作计费；其他层按月/单位计费，具体价格需参考官网定价",
+    "免费额度": "API Management Consumption层每月0-1百万API操作免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "如$2.83/1000次（以Places API Autocomplete为例，具体价格因API和用量不同而异）",
+    "免费额度": "Essentials类API每月每SKU 10,000次免费，Pro类每月每SKU 5,000次免费，Enterprise类每月每SKU 1,000次免费；部分Essentials Map Tiles API每月每SKU 100,000次免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "baidu",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "0.3元/点（按量后付费）；资源包最低0.13元/点起",
+    "免费额度": "各API有免费额度，用完后需付费（具体额度未在文本中明确给出）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "mistral",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$1/1M input tokens, $3/1M output tokens（Mistral Small）；$8/1M input tokens, $24/1M output tokens（Mistral Large）；$0.0256/次调用（Mistral Large）",
+    "免费额度": "Mistral provides free trials for certain services，允许用户在做出财务承诺前测试模型能力",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "moonshot",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "moonshot-v1-8k￥12/1M tokens，moonshot-v1-32k￥24/1M tokens，moonshot-v1-128k￥60/1M tokens",
+    "免费额度": "注册送15元额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "doubao",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "Doubao-lite-32k: 输入0.3元/百万tokens，输出0.6元/百万tokens；Doubao-pro-32k: 输入0.8元/百万tokens，输出2元/百万tokens；Doubao-1.5-pro-256k: 输入5元/百万tokens，输出9元/百万tokens",
+    "免费额度": "每月50万tokens免费额度，部分活动可领取5亿tokens免费额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "grok",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "grok-3-beta: $3.00/百万tokens（文本输入），$15.00/百万tokens（图像输入输出）；grok-3-mini-beta: $0.30/百万tokens（文本输入），$0.50/百万tokens（图像输入输出）；grok-2-vision-1212: $2.00/百万tokens（文本输入），$10.00/百万tokens（图像输入输出）；grok-2-image-1212: $0.07/每张图片；SuperGrok订阅：$30/月或$300/年",
+    "免费额度": "每月$150免费API额度（需满足已消费$5且同意数据共享，部分国家可用）；X Premium+用户可免费获得标准版Grok 3",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "deepseek",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "标准时段（UTC 00:30-16:30）：deepseek-v3输入1M tokens（cache hit）$0.07，输入1M tokens（cache miss）$0.27，输出1M tokens $1.10；deepseek-r1输入1M tokens（cache hit）$0.14，输入1M tokens（cache miss）$0.55，输出1M tokens $2.19。优惠时段（UTC 16:30-00:30）：输入1M tokens（cache hit）$0.035，输入1M tokens（cache miss）$0.135，输出1M tokens $0.550。",
+    "免费额度": "通常提供免费额度（如免费试用token或API调用），具体额度请参考官方文档或注册后查看账户面板。",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ollama",
+    "信息类型": "软件/本地部署/推理服务（无API Key/Token/ID要求，主要为本地运行或自托管）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "flomo_api_url",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "everart_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "slack_bot_token",
+    "信息类型": "token（API认证用，通常为Bearer Token/OAuth Token）",
+    "是否找到价格": "有免费额度",
+    "价格": "免费（有免费额度），付费计划为$10.50/用户/月（Pro），$18/用户/月（Enterprise Grid）",
+    "免费额度": "免费计划可无限安装Bot并使用大部分API方法，但有数据保留和并发连接等限制",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "slack_team_id",
+    "信息类型": "id",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "gitlab_personal_access_token",
+    "信息类型": "token",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "sentry auth token",
+    "信息类型": "token（用于API认证，包括user/organization/internal integration三类）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "302ai_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "auth_token",
+    "信息类型": "token（用于身份认证和API访问，结合上下文推断为OAuth 2.0/OIDC token）",
+    "是否找到价格": "有免费额度",
+    "价格": "B2C Essential: $35/月起（500 MAU），B2C Pro: $240/月起（500 MAU）；B2B Essential: $150/月起（500 MAU），B2B Pro: $800/月起（500 MAU）；Startup计划首年免费，Enterprise需联系销售",
+    "免费额度": "B2C/B2B Free Plan：25,000 MAU免费；Startup Plan：100,000 MAU免费一年",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ngrok_auth_token",
+    "信息类型": "token（用于API认证，bearer token，通常在API key创建时返回）",
+    "是否找到价格": "有免费额度",
+    "价格": "免费（有免费额度），付费套餐起步$8/月，生产环境Pay-as-you-go起步$18/月",
+    "免费额度": "免费版每月20,000 HTTP请求、1GB流量、5,000 TCP连接、5个OAuth/OpenID Connect/SAML MAU",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google gemini",
+    "信息类型": "API、Workspace订阅、Cloud服务、API key/账号/订阅",
+    "是否找到价格": "有免费额度",
+    "价格": "API: 免费/有免费额度，超出后按用量计费（如$0.10-$1.25/1M tokens等）；Workspace: $6-$18/用户/月（基础），Gemini Business $20/用户/月，Gemini Enterprise $30/用户/月，教育版$18-$27/用户/月，Google One AI Premium $18.99/月；Cloud Code Assist: $19-$54/用户/月",
+    "免费额度": "API: 免费层有较低速率限制（如部分模型输入/输出免费，Grounding with Google Search每用户每日500-1500次免费）；Google AI Studio完全免费；Workspace Gemini app基础功能随Workspace订阅免费；Gemini Code Assist有免费版；BigQuery Gemini核心功能免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "aws bedrock",
+    "信息类型": "api, region, id, token（主要为API调用相关，涉及API Key、Region、Token、ID等，按API调用计费）",
+    "是否找到价格": "是",
+    "价格": "按模型和用量计费，常见为$0.000035-$0.0188/千token（输入或输出），部分模型如Stability AI SDXL1.0为$49.86/小时（1月承诺）或$46.18/小时（6月承诺），图片生成按每张计费，具体价格依模型、用量、模式（On-Demand/Batch/Provisioned Throughput）不同而异",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "gcp vertex",
+    "信息类型": "region, id, 计费项（如训练、预测、token、node hour等）",
+    "是否找到价格": "有免费额度",
+    "价格": [
+      "AutoML文本预测: $5.00/1,000 text records",
+      "Gemini Pro Text: $0.000125/1,000 input tokens, $0.000375/1,000 output tokens",
+      "Imagen Model for Image Generation: $0.0001/每张图片",
+      "Text, Chat, Code Generation: $0.0001/1,000字符",
+      "模型定制: $80/1,000,000训练token",
+      "Grounding requests: $35/1,000 queries",
+      "AutoML训练: $3.465/节点小时",
+      "AutoML部署与在线预测: $1.375/节点小时",
+      "AutoML批量预测: $2.222/节点小时",
+      "AutoML视频预测: $0.462/节点小时",
+      "AutoML表格预测: $0.2/1K数据点（0-1M），$0.1/1K数据点（1M-50M），$0.02/1K数据点（>50M）",
+      "自定义训练: 约$0.218499/小时起（按地区和配置）",
+      "Ray on Vertex AI: $0.227999/小时起",
+      "Vertex AI Workbench: $0.045564/vCPU/小时起"
+    ],
+    "免费额度": "新用户有$300免费试用额度（90天）；AutoML文本上传每月首1,000页PDF免费；部分功能有免费版",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "brave_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$3/1000 queries（Base 方案）",
+    "免费额度": "免费额度为1 query/second，2,000 queries/month",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google_maps_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "如$2.00/1000 requests（Static Maps），$7.00/1000 requests（Dynamic Maps），$5.00/1000 requests（Geocoding），$2.83/1000 requests（Autocomplete），具体价格视API种类和用量分级而定",
+    "免费额度": "Essentials类API每月每SKU 10,000次免费调用，Pro类API每月每SKU 5,000次免费调用，Enterprise类API每月每SKU 1,000次免费调用；部分API如Map Tiles有每月每SKU 100,000次免费调用",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "onspring api key (推测，需要访问onspring api)",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "planes_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$44.99/月起（Aviationstack）；$0.002/请求起（FlightAware AeroAPI）；AeroDataBox $0.99/月起",
+    "免费额度": "Aviationstack：100次请求免费；FlightAware AeroAPI：个人用途每分钟10次请求免费；AeroDataBox：API.Market有免费计划",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google_application_credentials",
+    "信息类型": "凭证/Token（用于Google Cloud API认证，通常为服务账号密钥文件）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "client_id",
+    "信息类型": "id（用于标识客户端或会话，通常在API调用或会话追踪中使用）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "client_secret",
+    "信息类型": "token（在Stripe中为单用途的API访问令牌，在OAuth 2.0中为密钥/secret）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "tenant_id",
+    "信息类型": "id（租户唯一标识符，UUID，通常用于API调用中指定租户）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "kagi_api_key": [
+      {
+        "信息名": "kagi_api_key",
+        "信息类型": "api key/token",
+        "是否找到价格": "是",
+        "价格": "$25/1000 queries (2.5 cents per search)",
+        "免费额度": ""
+      },
+      {
+        "信息名": "kagi_api_key",
+        "信息类型": "api key/token",
+        "是否找到价格": "有免费额度",
+        "价格": "$0.03/1000 tokens（Kagi Ultimate 计划为 $0.025/1000 tokens）；Muriel模型为$1/summary",
+        "免费额度": "注册Kagi账号后可免费试用Universal Summarizer（限10次摘要）和Kagi Search；访问同一URL的缓存摘要始终免费"
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "notion_api_key",
+    "信息类型": "api key（又称Internal Integration Token）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "kb_cloud_api_key_name",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "kb_cloud_api_key_secret",
+    "信息类型": "api key/secret（推断自Azure Key Vault存储API key为secret）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "obsidian local rest api plugin api key",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "domo_developer_token",
+    "信息类型": "token（用于API访问）",
+    "是否找到价格": "有免费额度",
+    "价格": "基于credit的计费，具体价格需联系销售",
+    "免费额度": "30天免费试用，功能齐全，用户数不限",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "有免费额度",
+        "价格": "$0/月（免费额度），Starter $19/月（5万封），Pro $49/月（5万封）",
+        "免费额度": "免费试用，有限制发送量（如最多5万封/月）"
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "有免费额度",
+        "价格": "$0/月（60天免费试用），Essentials $19.95/月，Pro $89.95/月，Premier定制价格",
+        "免费额度": "免费试用60天，部分计划有免费额度（如<3000封/月）"
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "发送1万封$15/月，30万封$245/月，100万封$695/月",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "发送1万封$19.95/月（Essentials），30万封$249/月（Pro），100万封$602/月（Pro+超额）",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "发送1万封$20/月（Starter），30万封$205/月（Premier+超额），100万封$525/月（Premier）",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "发送1万封$35/月（Foundation），30万封$255/月（Scale+超额），100万封$700/月（Scale）",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "极低价格，具体未列出（Amazon SES）",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ngrok_authtoken",
+    "信息类型": "token（用于ngrok身份认证和API访问）",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.01/100,000 HTTP requests，$0.05/100,000 TCP connections，$0.10/100,000 TLS connections，$0.10/GB数据传出，或按月套餐起步$8/$18/$20/$39等",
+    "免费额度": "免费计划：1个活跃端点，20,000 HTTP请求/月，5,000 TCP连接/月，1GB数据传出/月，5个MAU身份认证",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "roblox_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "roblox_open_cloud_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "authorize_net_api_login_id",
+    "信息类型": "id（用于API鉴权，标识账户）",
+    "是否找到价格": "是",
+    "价格": "$25.00/月 + $0.10/每笔交易（仅支付网关方案）或$25.00/月 + 2.9% + $0.30/每笔交易（全功能方案）",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "kagi_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.03/1,000 tokens（API）；$0.025/1,000 tokens（Kagi Ultimate 计划）；最大$0.30/次；Muriel为$1/summary",
+    "免费额度": "注册Kagi账号可免费试用Universal Summarizer（限10次）；网页端登录Kagi账号免费使用Universal Summarizer",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "有免费额度",
+        "价格": "Starter $19/月（5万封/月），Pro $49/月（5万封/月），有免费试用额度",
+        "免费额度": "免费试用，有限制发送量"
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "有免费额度",
+        "价格": "Essentials $19.95/月（1万封），Pro $89.95/月起，免费试用60天",
+        "免费额度": "免费试用60天"
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "1万封$15/月，30万封$245/月，100万封$695/月",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "1万封$19.95/月，30万封$249/月，100万封$602/月",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "1万封$20/月，30万封$205/月，100万封$525/月",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "1万封$35/月，30万封$255/月，100万封$700/月",
+        "免费额度": ""
+      },
+      {
+        "信息名": "email/password",
+        "信息类型": "Email API",
+        "是否找到价格": "是",
+        "价格": "极低（Amazon SES，具体价格未给出，但为市场最低）",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "jwt token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nap api config (in .env)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "loki_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ods_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "policer-token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "anthropic_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bing_search_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ydc_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gemini_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mongodb_uri",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "youtube_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "llm_api_key (openai or anthropic)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "yahoo finance api",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "spotify client id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "spotify client secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "anthropic (claude) api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kuma_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kuma_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kuma_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "search_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gmail_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gmail_password (app password if 2fa)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "outlook_tenant_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "outlook_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "outlook_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flyder_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flyder_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure subscription key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure openai api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure cli credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "upstage_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gmail_app_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "miro_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clarifai pat",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "razorpay api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "razorpay api key secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "doit_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "coze_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "coze_api_base",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smithery api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "自定义知识源 api key（如 sk-2123123）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "searchapi_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_refresh_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_aws_access_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_aws_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_role_arn",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_marketplace_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sp_api_region",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "harvest_account_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "harvest_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "harvest_base_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "other mcp server-specific api keys (as required)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mermaid_chart_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "enkryptai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "vapi_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "patsnap api credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "valid_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "c8y_base_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "c8y_tenant_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "c8y_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "c8y_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "neo4j_uri",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "neo4j_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "neo4j_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "neo4j_database",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openhab_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gitlab_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "serper_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "inkeep_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gas_web_app_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gas_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "juhe_news_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hologres_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hologres_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openweathermap_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "misp_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github oauth client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github oauth client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "x-access-token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "raindrop_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "quip_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth refresh token (squadcast)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ncbi/pubmed api key (optional for higher throughput)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clinicaltrials.gov api key (optional",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "if needed)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mymcpspace api token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "amap_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cassandra_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cassandra_contact_points",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cassandra_local_dc",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cassandra_keyspace",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cassandra_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ticktick api access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ticktick client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ticktick client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notepm_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mongodb atlas api key (implied",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "not explicitly documented)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google_refresh_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agent_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "通义千问api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openai api key（可选，视所用模型而定）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bitpin api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bitpin api secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "weather_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud service account key (未在文档中明确说明)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud iam/gcloud cli credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "keitaro_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "naver_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "naver_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "vercel_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "next_public_supabase_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "next_public_supabase_anon_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "n8n_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud oauth 2.0 credentials (credentials.json)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google calendar api token (token.json)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "esa_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "esa_team_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mcp_jobs_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pluggedin_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google ai api key (gemini)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sfcc_admin_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sfcc_admin_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qasphere_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira_base_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bluesky_handle",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bluesky_app_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rapidapi (可能需要)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "未明确说明",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws iam credentials (sigv4 signing)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zan_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "linear_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pocketbase_api_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pocketbase_admin_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "plex_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jwt secret (需自定义)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postgresql/sqlite配置",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "querypie_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "allora_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "slack_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "censys_api_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "censys_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "upcloud_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "upcloud_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "claude (可能需要)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unreal engine (无需apikey)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "surrealdb_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "surrealdb_pass",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hcloud_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "auth_secret (自生成)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "可能需要ollama相关密钥",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lv_session_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lv_site_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "todoist_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bing_webmaster_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "anthropic api key (claude)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "optional: amazon bedrock access",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud oauth credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "maestro_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clickhouse_api_key_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clickhouse_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth (未明确具体类型)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "contextual ai api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "morelogin api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud oauth credentials.json",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "wandb_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shopify-access-token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rime_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "logseq_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dodo_payments_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "news api",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "yahoo finance",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mcp_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "elevenlabs_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google search console api service account credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase_project_ref",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase_db_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase_region",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase_service_role_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "logseq authentication token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "untappd:clientid",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "untappd:clientsecret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bitrise_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ragflow-dhmzviyzjlmtm1njexzjbinwu5mdi0mm",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jwt_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "docketbird_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "wrike_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "telegram_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "chat_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agent_api_keys",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "custom_api_key_1",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "custom_api_key_2",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mcpo_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "amap-maps apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "brave-search apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tavily apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strava_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strava_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "your-secret-api-key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mqtt-user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mqtt-password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bybit_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bybit_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gaode_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dingtalk_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "alphavantage",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "newsdata.io",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "authorization (bearer token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "user-provided)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "steampipe插件token（如github token）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "serpapi_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "feishu_app_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "feishu_app_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google oauth 2.0 credentials (credentials.json)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openai（推测，未明确说明）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ycloud api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "wrike_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "resource",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "korea weather service api key (from data.go.kr)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twilio_account_sid",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twilio_auth_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twilio_number",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "authorize_net_transaction_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_enterprise_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "atlassian_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "alpaca_paper_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "alpaca_paper_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "usensedata_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "usensedata_api_userid",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "omni",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google_gemini_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "usda_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud service account json",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pinecone_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zhitu_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud service account json key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "stock_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "npm_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twenty_first_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azalea health fhir api client id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sendgrid_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "from_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openai_model",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "etherscan_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "circleci_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "deepmyst api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "braintree_merchant_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "braintree_public_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "braintree_private_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "private_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kaggle api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openrouter (可能需要)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "upsonic (未明确)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cloudautomator_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mistral_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notion database id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_org_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_project_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qb_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qb_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qb_realm_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qb_access_token (optional)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pco_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pco_application_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "freepik flux ai api (推测)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "quickbooks_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "quickbooks_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "quickbooks_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "quickbooks_realm_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "quickbooks_redirect_uri",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google calendar oauth 2.0 credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "freepik_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "llm_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "claude_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qdrant_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "fal_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notion_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tushare_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kibana_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kibana_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kibana_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strava_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strava_refresh_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mnemonic",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jfrog_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jfrog_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hcp_terraform_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hcp_terraform_org",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rcon_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smithery key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "evmprivatekey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gmail api credentials (oauth 2.0 credentials.json)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "anthropic_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ollama_model",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "wallet_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth2.1",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "results": [
+      {
+        "信息名": "Elastic Email Email API",
+        "信息类型": "email api",
+        "是否找到价格": "有免费额度",
+        "价格": "$0/月（有限发送量），$19/月（Starter，最多50,000封邮件），$49/月（Pro，最多50,000封邮件）",
+        "免费额度": "有限发送量免费试用"
+      },
+      {
+        "信息名": "SendGrid Email API",
+        "信息类型": "email api",
+        "是否找到价格": "有免费额度",
+        "价格": "$0/月（60天免费试用），Essentials $19.95/月，Pro $89.95/月，Premier自定义定价",
+        "免费额度": "60天免费试用"
+      },
+      {
+        "信息名": "Postmark Email API",
+        "信息类型": "email api",
+        "是否找到价格": "是",
+        "价格": "$15/月（10,000封邮件），$245/月（300,000封邮件），$695/月（1,000,000封邮件）",
+        "免费额度": ""
+      },
+      {
+        "信息名": "SparkPost Email API",
+        "信息类型": "email api",
+        "是否找到价格": "是",
+        "价格": "$20/月（10,000封邮件，Starter），$205/月（300,000封邮件，Premier+超额费用），$525/月（1,000,000封邮件，Premier）",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Mailgun Email API",
+        "信息类型": "email api",
+        "是否找到价格": "是",
+        "价格": "$35/月（10,000封邮件，Foundation），$255/月（300,000封邮件，Scale+超额费用），$700/月（1,000,000封邮件，Scale）",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Amazon SES Email API",
+        "信息类型": "email api",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "open",
+    "信息类型": "api key",
+    "是否找到价格": "是",
+    "价格": "如：gpt-4o, gpt-4.1, gpt-4o-search-preview search_context_size low: $30.00 / 1K calls；search_context_size medium (default): $35.00 / 1K calls；search_context_size high: $50.00 / 1K calls。GPT-4.1: Input: $2 | Output: $8 per 1M tokens；GPT-4.1 mini: Input: $0.40 | Output: $1.60 per 1M tokens；GPT-4.1 nano: Input: $0.10 | Output: $0.40 per 1M tokens；OpenAI o3: Input $10 | Output $40 per 1M tokens；OpenAI o4-mini: Input $1.10 | Output $4.40 per 1M tokens",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google oauth 2.0 credentials",
+    "信息类型": "client_id, client_secret, access_token, refresh_token",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "twitter_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "免费",
+    "免费额度": "500 Posts per month（部分文档为1500 Posts per month，具体以官方为准），100 reads per month，1 Project，1 App per Project，1 Environment（Development/Production/Staging）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "twitter_api_secret",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "Free: 免费；Basic: $100/月；Pro: $5000/月；Enterprise: 定制价格（如$42000/月）",
+    "免费额度": "免费版可通过API每月最多发1,500条推文（仅限推文创建，不能读取数据）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "twitter_access_token",
+    "信息类型": "token（API访问令牌）",
+    "是否找到价格": "有免费额度",
+    "价格": "Free（免费）/ $100/月（Basic）/ $5,000/月（Pro）/ 企业版定制价格",
+    "免费额度": "免费版：每月可通过API发布1,500条推文（仅写入，不可读取数据）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "twitter_access_token_secret",
+    "信息类型": "token/secret（API访问令牌密钥，结合上下文推断为OAuth访问令牌密钥）",
+    "是否找到价格": "有免费额度",
+    "价格": "Free（免费）/ $100/月（Basic）/ $5,000/月（Pro）/ $42,000/月起（Enterprise）",
+    "免费额度": "免费计划：每月可通过API发布最多1,500条推文，但无法读取数据",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "notion_token",
+    "信息类型": "token（API访问令牌，access token，integration token，属于认证/鉴权信息）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ebay_app_id",
+    "信息类型": "client_id（App ID）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ebay_client_id",
+    "信息类型": "id（OAuth client_id，App ID）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "mysql_user",
+    "信息类型": "数据库用户名/账号（user），但本例主要为MySQL软件/服务的license及订阅价格",
+    "是否找到价格": "有免费额度",
+    "价格": "MySQL Community Edition：免费；MySQL Standard Edition：$2,140/年/1-4 socket server，$4,280/年/5+ socket server；MySQL Enterprise Edition：$5,350/年/1-4 socket server，$10,700/年/5+ socket server；MySQL Cluster Carrier Grade Edition：$10,700/年/1-4 socket server，$21,400/年/5+ socket server",
+    "免费额度": "MySQL Community Edition免费，无需付费即可使用",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "mysql_pass",
+    "信息类型": "数据库密码/凭证（推断自信息名）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "byterover-public-api-key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "免费（Hobby计划），Pro $14.99/月，Team $59/月",
+    "免费额度": "Hobby计划免费，包含每月100次observations或1k memories，30天数据保留，支持最多2用户",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "user-id",
+        "信息类型": "id（Monthly Active User, MAU）",
+        "是否找到价格": "有免费额度",
+        "价格": "0-49,999 MAU免费，50,000-99,999 MAU $0.0055/MAU，100,000-999,999 MAU $0.0046/MAU，1,000,000-9,999,999 MAU $0.0032/MAU，10,000,000+ MAU $0.0025/MAU；Tier 2（OIDC/SAML）：0-49 MAU免费，50+ MAU $0.015/MAU；短信认证：前10条/天免费，超出后按地区计费（如美国$0.01/SMS）",
+        "免费额度": "0-49,999 MAU免费（Tier 1），0-49 MAU免费（Tier 2），短信认证前10条/天免费"
+      },
+      {
+        "信息名": "user-id",
+        "信息类型": "id（API请求数/单位/region）",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "user-id",
+        "信息类型": "id（API调用数/connected account）",
+        "是否找到价格": "有免费额度",
+        "价格": "按产品分为一次性、订阅、按请求计费，具体价格需联系销售；Limited Production服务每产品可用200次API调用免费",
+        "免费额度": "每个产品可用200次API调用免费（Limited Production）"
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "llm-key-name",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "GPT-4.1",
+        "信息类型": "model",
+        "是否找到价格": "是",
+        "价格": "Input: $2.00 / 1M tokens, Cached input: $0.50 / 1M tokens",
+        "免费额度": ""
+      },
+      {
+        "信息名": "mini reasoning model",
+        "信息类型": "model",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Pay-Per-Use / Pay-Per-Call",
+        "信息类型": "api pricing model",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Fixed API Pricing Model",
+        "信息类型": "api pricing model",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Tiered or Overage Pricing Model",
+        "信息类型": "api pricing model",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Free Trial",
+        "信息类型": "api pricing model",
+        "是否找到价格": "有免费额度",
+        "价格": "未知",
+        "免费额度": "试用期一周、两周或三十天，具体额度未定"
+      },
+      {
+        "信息名": "Overage Model (RapidAPI Benchmark)",
+        "信息类型": "api pricing model",
+        "是否找到价格": "有免费额度",
+        "价格": "Hobbyist: $9.08/月，Small Business: $76.00/月，Enterprise: $370.00/月，超额费用$0.01/次（Hobbyist），$0.007/次（Small Business），$0.02/次（Enterprise）",
+        "免费额度": "Free plan: $0.00/月，64,326次/月"
+      },
+      {
+        "信息名": "Pay As You Go (RapidAPI Benchmark)",
+        "信息类型": "api pricing model",
+        "是否找到价格": "是",
+        "价格": "$0.01/下载，$0.05/上传",
+        "免费额度": ""
+      },
+      {
+        "信息名": "Fixed Quotas (RapidAPI Benchmark)",
+        "信息类型": "api pricing model",
+        "是否找到价格": "是",
+        "价格": "500次下载/月，100次上传/月",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "mackerel_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "2,180日元/标准主机/月，660日元/微型主机/月，11日元/指标/月，330日元/1M spans/月",
+    "免费额度": "2周免费试用（标准计划功能），免费计划最多5个主机（标准+微型），最多500个指标，1天数据保留，最多10个监控规则，最多20个外部监控项免费，APM Trace spans每月最多5M spans免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "timetagger_api_key",
+    "信息类型": "api token / session token（通过 authtoken 字段，web-token 或 api-token）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "translation_api_key",
+        "信息类型": "api key（Google Cloud Translation API）",
+        "是否找到价格": "有免费额度",
+        "价格": "NMT模型：前500,000字符每月免费（$10额度），超出后$20/百万字符；Custom模型：前500,000字符每月免费（$40额度），超出后$80/百万字符起，分阶梯递减；LLM模型：$10或$25/百万字符（输入/输出）；文档翻译$0.08/页起",
+        "免费额度": "NMT模型和Basic/Advanced合计每月前500,000字符免费（$10额度）；Custom模型每月前500,000字符免费（$40额度）"
+      },
+      {
+        "信息名": "translation_api_key",
+        "信息类型": "api key（Microsoft Azure Translator API）",
+        "是否找到价格": "有免费额度",
+        "价格": "标准翻译：2百万字符/月免费，超出后按S1标准计费（具体价格页面未显示，需登录或联系销售）；自定义翻译训练$10/百万字符（训练数据，最多$300/次）",
+        "免费额度": "2百万字符/月免费（标准翻译和自定义训练合计）"
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "Google Cloud Translation": {
+      "信息名": "translation_model",
+      "信息类型": "api key, model type (NMT, custom, LLM), character count",
+      "是否找到价格": "有免费额度",
+      "价格": {
+        "NMT": "$20 per million characters (first 500,000 chars/month free as $10 credit)",
+        "Custom model": "$80 per million characters (first 500,000 chars/month free as $40 credit), tiered discounts for higher usage",
+        "LLM Text Translation": "$10 per million input characters + $10 per million output characters",
+        "LLM Adaptive Translation": "$25 per million input characters + $25 per million output characters",
+        "Document Translation (NMT)": "$0.08 per page",
+        "Document Translation (Custom)": "$0.25 per page"
+      },
+      "免费额度": "NMT和Custom模型每月前500,000字符免费（分别以$10和$40信用额度形式），新用户有$300 Google Cloud通用免费额度"
+    },
+    "Azure AI Translator": {
+      "信息名": "translation_model",
+      "信息类型": "api key, region, character count, model type (standard/custom)",
+      "是否找到价格": "有免费额度",
+      "价格": {
+        "Standard Translation": "价格未在正文明示，通常为$10-$15每百万字符（需查官网）",
+        "Custom Translation": "价格未在正文明示，通常为$40每百万字符（需查官网）",
+        "Custom model hosting": "价格未在正文明示，需查官网",
+        "Training": "$10 per million source + target characters (max $300/training)"
+      },
+      "免费额度": "每月2百万字符（标准翻译和自定义训练合计）免费"
+    },
+    "Amazon Translate": {
+      "信息名": "translation_model",
+      "信息类型": "api key, region, character count, translation type",
+      "是否找到价格": "有免费额度",
+      "价格": {
+        "Standard Text Translation": "$15.00 per million characters",
+        "Batch Document Translation": "$15.00 per million characters",
+        "Real-Time Document Translation (Text & HTML)": "$15.00 per million characters",
+        "Real-Time Document Translation (Docx)": "$30.00 per million characters",
+        "Active Custom Translation": "$60.00 per million characters"
+      },
+      "免费额度": "标准文本翻译每月2百万字符，持续12个月；Active Custom Translation每月50万字符，持续2个月"
+    },
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "translation_base_url": [
+      {
+        "信息名": "translation_base_url",
+        "信息类型": "api endpoint/url",
+        "是否找到价格": "有免费额度",
+        "价格": "$20 per million characters（NMT模型，超出免费额度后）",
+        "免费额度": "每月前500,000字符免费（以$10信用额度形式，每月刷新）"
+      },
+      {
+        "信息名": "translation_base_url",
+        "信息类型": "api endpoint/url",
+        "是否找到价格": "有免费额度",
+        "价格": "$10 per million characters（Microsoft Translator，超出免费额度后）",
+        "免费额度": "每月前2,000,000字符免费"
+      },
+      {
+        "信息名": "translation_base_url",
+        "信息类型": "api endpoint/url",
+        "是否找到价格": "有免费额度",
+        "价格": "$15 per million characters（Amazon Translate，超出免费额度后）",
+        "免费额度": "每月前2,000,000字符免费（前12个月）"
+      },
+      {
+        "信息名": "translation_base_url",
+        "信息类型": "api endpoint/url",
+        "是否找到价格": "有免费额度",
+        "价格": "$20 per million characters + $4.99/月订阅费（DeepL，超出免费额度后）",
+        "免费额度": "每月前500,000字符免费"
+      },
+      {
+        "信息名": "translation_base_url",
+        "信息类型": "api endpoint/url",
+        "是否找到价格": "有免费额度",
+        "价格": "$10 per million characters（Systran，超出免费额度后）",
+        "免费额度": "500,000字符免费（14天有效）"
+      },
+      {
+        "信息名": "translation_base_url",
+        "信息类型": "api endpoint/url",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "appid (entra app registration)",
+    "信息类型": "id（应用注册时分配的唯一标识符，也称为client id）",
+    "是否找到价格": "有免费额度",
+    "价格": "$6.00/user/month（P1），$9.00/user/month（P2），有免费版",
+    "免费额度": "Microsoft Entra ID Free 随 Microsoft 云订阅（如 Azure、Microsoft 365）免费提供",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "certificatebase64encoded",
+    "信息类型": "token/证书(base64编码)参数，用于CLI登录认证",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "certificatepassword",
+    "信息类型": "certificate password（证书口令，通常用于证书管理/下载/导入等API或控制台操作）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "tenantid",
+    "信息类型": "id（租户ID，通常用于标识Azure租户，部分场景也可通过JWT token中的tid字段获取）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "tenanturl",
+    "信息类型": "api endpoint/url",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "jama_client_id",
+    "信息类型": "client_id（用于OAuth认证，结合API使用场景推断）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "jama_client_secret",
+    "信息类型": "client secret（用于API认证，OAuth 2.0）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "jama_url",
+    "信息类型": "api url/endpoint",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "jama_aws_secret_path",
+    "信息类型": "secret path/API key/secret存储路径（推断为secret path或secret id，因Secrets Manager主要用于存储和检索secret）",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.40/secret/月，$0.05/10,000 API calls",
+    "免费额度": "30天免费试用，试用期内可免费存储、管理和检索secret",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "jama_aws_profile",
+    "信息类型": "profile（用于AWS SDK/CLI的认证配置，通常包含access key、secret key、region等信息）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "emacsclient",
+    "信息类型": "client/command/工具名",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "fmp_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$22.00/mo.（Starter，年付），$59.00/mo.（Premium，年付），$149.00/mo.（Ultimate，年付），免费（Basic）",
+    "免费额度": "Basic计划：250次/天，500MB/月流量；Starter计划：300次/分钟，20GB/月流量；Premium计划：750次/分钟，50GB/月流量；Ultimate计划：3,000次/分钟，150GB/月流量",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "sec-api.io",
+        "信息类型": "api key",
+        "是否找到价格": "有免费额度",
+        "价格": "$49/月（年付）或$55/月（月付）起，免费额度后$0.30/GB",
+        "免费额度": "前100次API调用免费"
+      },
+      {
+        "信息名": "datajockey.io",
+        "信息类型": "api key",
+        "是否找到价格": "免费",
+        "价格": "免费",
+        "免费额度": ""
+      },
+      {
+        "信息名": "SEC.gov EDGAR APIs",
+        "信息类型": "无认证/无api key",
+        "是否找到价格": "免费",
+        "价格": "免费",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "ct.data.gov app token",
+    "信息类型": "token（用于ct.data.gov或data.ct.gov开放数据API访问）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "alpha_vantage_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$29.99/月起，或$49.99/月起（不同来源有不同起步价，具体取决于套餐）",
+    "免费额度": "5 API请求/分钟，500请求/天（免费）；部分页面提及25请求/天为标准免费额度，超出需付费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "odoo_mcp_token",
+    "信息类型": "token（用于Odoo MCP Server的API认证，通常为Odoo密码或API key）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "odoo_username",
+    "信息类型": "id（用户名/账号）",
+    "是否找到价格": "有免费额度",
+    "价格": "标准版：Tier 1 $19.90/user/month，Tier 2 $13.50/user/month，Tier 3 $7.25/user/month；自定义版：Tier 1 $29.90/user/month，Tier 2 $20.40/user/month，Tier 3 $10.90/user/month",
+    "免费额度": "One App 免费，支持无限用户",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "odoo_password",
+    "信息类型": "数据库用户密码（用于API认证）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "claude ai api credentials",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "Claude 3.5 Sonnet: $3/百万输入tokens, $15/百万输出tokens；Claude 3.5 Haiku: $0.25/百万输入tokens, $1.25/百万输出tokens；Claude 3.5 Opus: $15/百万输入tokens, $75/百万输出tokens",
+    "免费额度": "Claude AI Chat有免费套餐（Free Plan），可免费使用claude.ai网页版/移动端，日用量有上限（具体额度随流量波动）；API部分未见明确免费额度说明，需注册后查看",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "rapidapp_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.01/request（超出免费额度后）",
+    "免费额度": "免费API计划每小时1000次请求、每月500,000次请求；部分Freemium API如BASIC计划每月500次请求免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "networksdb_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "免费",
+    "免费额度": "1,000 queries per month（每月1000次查询）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "azure_storage_account_name",
+    "信息类型": "id（存储账户名称，通常作为资源唯一标识）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "azure_storage_account_key (可选，可用azure cli登录替代)",
+    "信息类型": "access key（存储账户访问密钥）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "logseq_api_token",
+    "信息类型": "token",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "logseq_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "google api oauth 2.0 credentials",
+    "信息类型": "oauth2.0 client credentials (client_id, client_secret, access_token, refresh_token)",
+    "是否找到价格": "有免费额度",
+    "价格": "0-49,999 MAU免费，50,000-99,999 MAU $0.0055/MAU，100,000-999,999 MAU $0.0046/MAU，1,000,000-9,999,999 MAU $0.0032/MAU，10,000,000+ MAU $0.0025/MAU（Email/Anonymous/Social登录）；OIDC/SAML 0-49 MAU免费，50+ MAU $0.015/MAU",
+    "免费额度": "Email/Anonymous/Social登录每月0-49,999 MAU免费；OIDC/SAML每月0-49 MAU免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "serper api",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "未知",
+    "免费额度": "2,500 free queries",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "supabase_url",
+    "信息类型": "api url",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "supabase_service_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smithery bearer token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github personal access token (pat)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "real debrid account (token/apikey)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "news_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google_generative_ai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rapidapi_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "spotify",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lastfm",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agglayer_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smarthr_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google api credentials (oauth 2.0)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "groq_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "linkup_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "koreandict_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gmail api (oauth)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smithery에서 발급 받은 키",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openai-compatible embedding provider api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "privatekey（仅用于需要签名的链上写操作）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "figma账号",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "procesio_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "procesio_api_value",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "procesio_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "procesio_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "miro_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "defaultazurecredential (支持azure cli、环境变量、托管身份等)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kakao rest api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notion_token_v2",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notion_file_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_subscription_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_iothub_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "redirect_uri",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "database_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pg_mcp_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gridly_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "seoul_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "simplenote_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "simplenote_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nova_act_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google generative ai api key (google_api_key)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "binance-api-key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "binance-secret-key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dda23bec-caa6-4487-a1e9-eb74e22e33eb",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google app-specific password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "huggingface_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "claude 3.7 sonnet api key（未明确说明，但实际必需）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "operative_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "buildkite_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cwa_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "futuur_public_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "futuur_private_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "monday_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "monday_board_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud oauth 2.0 credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google api access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openmetadata_jwt_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openmetadata_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openmetadata_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure cli/defaultazurecredential",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "open_ai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bearer_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pg_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pg_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pg_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pg_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pg_database",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twitter_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twitter_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twitter_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twitter_api_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zoom_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zoom_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zoom_account_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "serp_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "token（可选）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zendesk_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "entrez.email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tg_api_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tg_api_hash",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "phone",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "canva_app_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "canva_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google gmail api oauth 2.0 credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kafka_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kafka_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kafka_rest_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kafka_cluster_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kafka_env_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_env_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_rest_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_env_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_database_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "flink_compute_pool_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "confluent_cloud_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "confluent_cloud_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "confluent_cloud_rest_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "schema_registry_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "schema_registry_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "schema_registry_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github cli (gh auth login)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bailian api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smtp_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smtp_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mailchimp api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mongodb atlas（未明确说明具体key名称）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "new_relic_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "new_relic_account_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_openai_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "meteostat api (未明确说明)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google_redirect_uri",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mailtrap_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rapidapi (for linkedin profile server)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_personal_access_token (optional",
+    "状态": "DuckDuckGo被block或超时，重试3次失败",
+    "错误信息": "DuckDuckGo search timed out, need to wait."
+  },
+  {
+    "信息名": "for some server configs)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "stay_ai_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$499 /month + 1% + ¢19 per transaction（Pro Plan）；Enterprise为定制价格",
+    "免费额度": "30天免费试用",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "trakt_client_id",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "trakt_client_secret",
+    "信息类型": "api key",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "bedrock llm access",
+    "信息类型": "api key/region/按token计费API",
+    "是否找到价格": "是",
+    "价格": "按输入和输出token计费，具体价格依模型和区域而异；Batch模式为On-Demand模式价格的50%；也有按小时计费的Provisioned Throughput模式，Marketplace模型可能按请求、按小时或按实例计费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "rds database credentials",
+    "信息类型": "credentials（数据库凭证，通常存储于AWS Secrets Manager）",
+    "是否找到价格": "有免费额度",
+    "价格": "按使用量计费（如$0.01/GB数据传输，具体依所用资源和实例类型而定）",
+    "免费额度": "新AWS用户可获得Amazon RDS免费套餐：每月750小时（指定数据库引擎），20GB通用SSD存储，20GB自动备份存储，有效期一年",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "openrouterapikey",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "每个模型有各自的定价和速率限制，按量计费，无月费或承诺，部分模型免费",
+    "免费额度": "部分免费模型（ID以:free结尾）每天限200次请求，每分钟限20次",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "zep_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "10,000 Messages Free / month then $1.25 / Thousand；5MB Business Data Free / month then $2.50 / MB",
+    "免费额度": "10,000条消息/月免费，5MB业务数据/月免费",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "moonshot api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "火山方舟 api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "未知",
+    "免费额度": "免费推理额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "阿里百炼 api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "qwen-turbo：输入0.0003元/千tokens，输出0.0006元/千tokens；qwen-plus：输入0.0008元/千tokens，输出0.002元/千tokens；qwen-max：输入0.02元/千tokens，输出0.06元/千tokens",
+    "免费额度": "每个模型100万tokens免费体验，新用户首次开通可享千万tokens免费额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "百度千帆 api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "0.008元/千tokens（ERNIE-Bot-turbo大模型公有云在线调用服务）；0.012元/千tokens（ERNIE-Bot调优大模型调用服务）",
+    "免费额度": "部分服务可免费开通试用，部分应用有免费额度，具体额度需在控制台查看（如部分服务体验全免费、0元试用一个月等）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "腾讯混元 api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "后付费日结，免费资源包优先扣除，超出后付费（具体价格未披露）",
+    "免费额度": "每个账号每天10万token免费额度",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "智谱 api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "未知",
+    "免费额度": "注册赠送100w token，实名认证后再送200w token，或初次登录赠送25M Tokens",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "open router api key",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "grok api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$2.00-$3.00/百万tokens（文本输入），$10.00-$15.00/百万tokens（输出），或€9.99/月（150次请求），€39.99/月（无限请求）",
+    "免费额度": "$150/月免费API额度（需满足条件：已消费$5且同意数据共享，限特定国家）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "硅基流动 api key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "￥4/百万Tokens（M Tokens）",
+    "免费额度": "新用户注册即赠送2000万Token",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "feishu_client_id",
+    "信息类型": "id（应用ID/App ID，通常用于API鉴权）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "feishu_client_secret",
+    "信息类型": "client_secret（用于API鉴权，结合上下文推断为OAuth2或API调用时的密钥）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "wecom_client_id",
+    "信息类型": "id（企业微信外部应用的client_id，通常用于API鉴权）",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "wecom_agent_id",
+    "信息类型": "id（企业微信AgentId，通常为整型，作为消息发送时的身份标识）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "wecom_client_secret",
+    "信息类型": "api key/secret（根据企业微信API习惯，client_secret通常用于获取access_token）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "dingding_client_id",
+    "信息类型": "id（客户端ID，通常用于API鉴权）",
+    "是否找到价格": "有免费额度",
+    "价格": "超出免费额度后需购买付费套餐，具体价格需咨询官方或销售，通常按调用次数计费",
+    "免费额度": "每个企业有一定的免费接口调用额度（如标准版为10000次/月，具体额度和政策因地区、套餐类型等因素不同）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "dingding_client_secret",
+    "信息类型": "client_secret（应用密钥/secret，通常与client_id配对用于API鉴权）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "auth_secret",
+    "信息类型": "token（如auth token）、api key（如apiKey）、session（如Bearer token）、id（如secret id）等，具体见下方说明",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "results": [
+      {
+        "信息名": "admin_code",
+        "信息类型": "角色权限/ID（如API Admin、API Editor等，推测为权限/角色ID）",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "admin_code",
+        "信息类型": "API管理平台区域/ID（如region/id，推测为region或服务ID）",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      },
+      {
+        "信息名": "admin_code",
+        "信息类型": "API密钥/项目ID（如api key/session/token/region/id等，推测为API密钥或项目ID）",
+        "是否找到价格": "否",
+        "价格": "未知",
+        "免费额度": ""
+      }
+    ],
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "claude api (anthropic)",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "Claude 3.5 Sonnet API: 输入$3/百万tokens，输出$15/百万tokens；Claude 3.7 Sonnet API: 输入$3/百万tokens，输出$15/百万tokens；Claude 3.5 Haiku API: 输入$0.80/百万tokens，输出$4/百万tokens；Claude 3 Opus API: 输入$15/百万tokens，输出$75/百万tokens",
+    "免费额度": "有免费试用额度（Free tier），可免费试用Claude（额度未明确标注）",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "orkl api",
+    "信息类型": "api，无需api key，基于公开REST接口",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "peaka_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "$0.25 per PCU / hour，$0.50 per GB / month（存储），或$199/月套餐",
+    "免费额度": "免费套餐：最多3个席位，10分钟共享PCU，100MB存储，2个连接器",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "microcms_api_key",
+    "信息类型": "api key",
+    "是否找到价格": "有免费额度",
+    "价格": "Hobby ¥0（免费），Team ¥4,900/月，Business ¥63,000/月，Advanced ¥150,000/月",
+    "免费额度": "Hobby 计划免费，无需信用卡，API调用无限制，最多3成员，最多3个API，小流量",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "bsky_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bsky_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bsky_backup_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bsky_backup_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nsec",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "membase_account",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "membase_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nifi api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "entra id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "wolfram_app_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "moodle_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jina_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "stripe_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "linux_do_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "linux_do_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jwt bearer token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "operative.sh api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qlik_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dd_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dd_app_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strava api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "其他mcp服务api key（如brave search、google search、weather等）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "publishable_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "medusa_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "medusa_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "w3_login_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "your_openai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "your_openrouter_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "your_gemini_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hubspot api access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sse api key (自定义验证服务)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mantis_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "plane_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "last9_auth_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "last9_base_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "last9_refresh_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "n8n api key (推测，未明确给出)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "trello_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "trello_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bochaai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dust_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dust_workspace_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dust_agent_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "onyx_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "personal_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "planetscale_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "planetscale_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "planetscale_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strapi_jwt_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "neon_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "intervals.icu api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "octagon_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "blogger_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "siyuan_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "paddle_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lnd_tls_cert_path",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lnd_macaroon_path",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lndconnect_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase project id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase database password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "vercel access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_key（可选，用户自定义环境变量中配置）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rivers_org_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clash_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "steam_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "brandfetch_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "brandfetch_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mysql_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "atlassian_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "atlassian_bitbucket_app_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tinypng_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "playfab_title_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "playfab_dev_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "redmine_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agentset_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agentset_namespace_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "alibaba_cloud_access_key_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "alibaba_cloud_access_key_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ftp_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ftp_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ftp_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ftp_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ftp_secure",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dappier_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "couchbase_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "couchbase_bucket",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "couchbase_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "couchbase_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bitrefill_api_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bitrefill_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bluesky_identifier",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bluesky_service_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "luma_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ynab_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "codelogic_server_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "codelogic_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "codelogic_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "codelogic_mv_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "confluence_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "server_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shodan_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "whoop_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "whoop_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "embedding_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ollama_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postgres_db",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postgres_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postgres_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postgres_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postgres_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "figma_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "onos_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "onos_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "binance_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "binance_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "coinbase_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "coinbase_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kraken_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kraken_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "weather api key (如openweathermap)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google search api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "可能的摄像头控制api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_key (quran.com api)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pocketbase_admin_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pocketbase_admin_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth2 provider credentials (如google oauth2)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clickup_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "team_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agentforce reliable server api key (generated during configuration)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "congress_gov_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hirebase_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openweathermap",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notion integration secret (bearer token)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github api",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "other service apis as configured in .env",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_auth",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jira api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ms teams api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "groq ai api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shopify_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nocodb_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nocodb_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nocodb_base_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "putio_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "heroku_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth2",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "token_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zerodha_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zerodha_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "https keys",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "refresh_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mysql_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mysql_database",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mysql_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mysql_allow_write_ops",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "fred_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "googleapikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tavily key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shared_access_token (optional)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws_profile",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "token_metrics_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "issuer_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "agentic_search_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "whatsapp_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "whatsapp_phone_number_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "whatsapp_business_account_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rad_security_access_key_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rad_security_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rad_security_account_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sk_app_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "neo4j_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tinkoff invest api key（推测，未明确列出）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure账号/凭证",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "webflow_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "xaiapi_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "novacv_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dummy",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "weread_cookie",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unifuncs_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "your_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bigmodel api",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "teams_app_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "teams_app_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "teams_app_type",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "teams_app_tenant_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "teams_channel_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "wordpress_application_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "linkding_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pixabay_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cloudflare workers account",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ai binding (cloudflare ai)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws_s3_bucket_name",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "typecast_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws api key (推测，但未明确说明)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qweather_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "functions-mcp-extension-system-key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "apple developer team id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "apple music key id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "apple music api key (.p8 file)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gallabox_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gallabox_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "channel_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ras_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ras_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "dashscope_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "promptql api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ddn url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "strava api key (未在content中明确说明)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "confluence_base_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "deepgram_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gladia_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "speechmatics_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "assemblyai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_token (confluence api token)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "username (atlassian账号邮箱)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "onepay.la apikey (推测，未明确说明)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "canvas_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "canvas_domain",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_tenant_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "coingecko_api_key (optional)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "twelvelabs_api_key",
+    "状态": "DuckDuckGo被block或超时，重试3次失败",
+    "错误信息": "DuckDuckGo search timed out, need to wait."
+  },
+  {
+    "信息名": "paypal_client_id",
+    "信息类型": "id（用于API身份认证，通常与client_secret配对使用）",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "paypal_client_secret",
+    "信息类型": "api key",
+    "是否找到价格": "否",
+    "价格": "未知",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "paypal_access_token",
+    "信息类型": "token",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "oauth2 code (如google code)",
+    "信息类型": "token/code (用于OAuth2授权流程，通常称为authorization code或access token)",
+    "是否找到价格": "免费",
+    "价格": "免费",
+    "免费额度": "",
+    "搜索来源": "duckduckgo_html+正文",
+    "状态": "成功"
+  },
+  {
+    "信息名": "slidespeak_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tacitbase_auth_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "typesense_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nf_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gong_access_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gong_access_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google cloud oauth client id/secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "spotify api credentials",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rapidapi (用于linkedin数据)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cloudstack api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "es_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "es_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "es_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "supabase api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "voyage_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "woocommerce_consumer_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "woocommerce_consumer_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "applicationcredentialid",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "applicationcredentialsecret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "prefect_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hana_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hana_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hana_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hana_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hana_schema",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure相关凭据（未明确字段名）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "meili_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "whoop_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "facebook_app_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "facebook_app_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "facebook_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "facebook_account_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "caiyun_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "powerdrill_user_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "powerdrill_project_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zionfhe_apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "vsegpt_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ai_webhook_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ordiscan_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "upstox access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unity_email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unity_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unity_license",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "anthropic claude api key（未在文档中明确给出，但集成时必需）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kagi api key (未在文档中明确说明，但实际必需)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "spotify_refresh_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kaggle_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kaggle_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "其他 llm api key（可选）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cloudflare api key (未在文档中明确说明，但部署必需)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins-username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins-password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "memos_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_key_header",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google drive",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "slack",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "stripe",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kagi search",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "notion",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "chargebee",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zbd",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "fathom analytics",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cloudflare",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sentry",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "raygun",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nytimes",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tavily",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bluesky",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tiktok",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qdrant",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mongodb",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "snowflake",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bigquery",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "airtable",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "postman",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "keycloak",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clicksend_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "clicksend_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qiniu_access_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "qiniu_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "email",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "email_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "imap_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "imap_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smtp_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smtp_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "anthropic api key (推测)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openweather_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ip_geolocation_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "asgardeo client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "asgardeo client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "futu openapi token/key（需在富途获取，文档未明确字段名）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shiphero_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shiphero_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shipbob_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "coinmarketcap_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ipinfo_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bugsnag_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "stackexchange_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "stackexchange_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "microsoft bing search api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "2af255ea5618467d914c67a8beeca31d",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "2af255ea5618467d914c67a8beeca51c",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shipstation_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "shipstation_api_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lara_access_key_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lara_access_key_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google oauth client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google oauth client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google oauth access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "puremd_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "自有api key（需邮件申请）",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "burp_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sec_api_user_agent",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "confluence_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_devops_org_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_devops_pat",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gumroad_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gumroad_base_url (optional",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "for self-hosted instances)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "googleclientid",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "googleclientsecret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "googlerefreshtoken",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "glama_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cursor_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "webhook_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azure_openai_model",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "riza_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "needle_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ramp_client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ramp_client_secret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oxylabs_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oxylabs_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "integration_app_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "integration_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "axiom_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "axiom_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "axiom_org_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "public_housing_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "apartment_list_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "apartment_info_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "lark api key (具体变量未列出)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "cosmosdb_account_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "audiense account authorization (token or api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "not explicitly named)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pushinator_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tg_app_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "linode_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "email_user",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "email_pass",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pop3_server",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "pop3_port",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "smtp_server",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "voyp_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "salesforce connected app consumer key (clientid)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "salesforce username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "salesforce private key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "salesforce login url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mem0_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "moralis_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nwc_connection_string",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "didlogic_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "deepseek v3 api密钥",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openai compatible api密钥",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sf_login_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sf_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sf_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "sf_security_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "redis_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "tandoor_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "goscry_security_apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google oauth credentials.json",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nessus_access_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nessus_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google api (gcp)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_cluster_arn",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "db_secret_arn",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unsplash_access_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unstructured_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "googledrive_service_account_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mongo_db_connection_string",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth 2.1",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "amap.key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "aws_access_secret_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "magento 2 admin api access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "alapi_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "secureannex_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "todoist api token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "your_github_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google search (推测需要，但未明确说明)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "greptile_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "abuseipdb api token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "google drive api key (推测)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "gitlab access token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bauplan_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "github_gist_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "<other service-specific api keys depending on the server>",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "limitless_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mysql credentials (in mysql.js)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "hubspot_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "zaico api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "openai.apikey",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "nasdaq_data_link_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "rapid_api_key_imdb",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "unifi_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "mcss_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "panos_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api-key (for cloud client)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kintone_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kintone_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "kintone_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ticktick_access_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "ollama_host",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "palo alto networks api key (未在content中明确说明如何配置)",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "api_gateway_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jwtsecret",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "chatwork_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azureopenai_api_key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azureopenai_endpoint",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azureopenai_api_version",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "azureopenai_model",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "riot games api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins_url",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins_username",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins_password",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "jenkins_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "bee_api_token",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "synapse api key",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  },
+  {
+    "信息名": "oauth2 client_id",
+    "状态": "未找到定价信息",
+    "搜索来源": "not_found"
+  }
+]
